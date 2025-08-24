@@ -246,12 +246,39 @@ button, .cta {
 .values{
   text-align: center;
   padding: 60px 30px;
-  background-color: var(--color-fondo);
 }
 
 .values h2{
-  font-size: 30px;
+  font-size: 45px;
+  font-weight: 300;
   margin-bottom: 30px;
+}
+
+.values-container{
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin: 60px 0;
+}
+
+.values-card{
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  padding: 10px 0;
+}
+
+.values-card h3{
+  margin: 5px auto;
+  width: 200px;
+  font-size: 25px;
+  font-weight: 500;
+}
+
+.values-card p{
+  margin: 0px auto;
+  margin-top: 20px;
+  width: 230px;
+  color: rgb(83, 82, 82);
 }
 
 
