@@ -53,47 +53,51 @@
       </nav>
     </header>
     <main>
-      <div>
-        <h2>Ponte en contacto con nosotros</h2>
-        <p>
-          ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario y
-          nos pondremos en contacto contigo lo antes posible.
-        </p>
-      </div>
+      <article class="contact">
+        <div class="contact-title">
+          <h2>Ponte en contacto con nosotros</h2>
+          <p>
+            ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario y
+            nos pondremos en contacto contigo lo antes posible.
+          </p>
+        </div>
 
-      <form action="" method="POST">
-        <div>
-          <label for="nombreUsuario">Nombre:</label>
-          <input
-            type="text"
-            id="nombreUsuario"
-            name="nombre"
-            placeholder="Nombre completo"
-            required
-          />
-        </div>
-        <div>
-          <label for="emailUsuario">Email:</label>
-          <input
-            type="email"
-            id="emailUsuario"
-            name="email"
-            placeholder="ejemplo@correo.com"
-            required
-          />
-        </div>
-        <div>
-          <label for="mensajeUsuario">Mensaje:</label>
-          <textarea
-            id="mensajeUsuario"
-            name="mensaje"
-            rows="5"
-            placeholder="Escribe tu mensaje aquí..."
-            required
-          ></textarea>
-        </div>
-        <button type="submit">Enviar consulta</button>
-      </form>
+        <form action="" method="POST" class="contact-form">
+          <div class="contact-form-input">
+            <label for="nombreUsuario">Nombre</label>
+            <input
+              type="text"
+              id="nombreUsuario"
+              name="nombre"
+              placeholder="Nombre completo"
+              required
+            />
+          </div>
+          <div class="contact-form-input">
+            <label for="emailUsuario">Email</label>
+            <input
+              type="email"
+              id="emailUsuario"
+              name="email"
+              placeholder="ejemplo@correo.com"
+              required
+            />
+          </div>
+          <div class="contact-form-input">
+            <label for="mensajeUsuario">Mensaje</label>
+            <textarea
+              id="mensajeUsuario"
+              name="mensaje"
+              rows="5"
+              placeholder="Escribe tu mensaje aquí..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="contact-form-button">
+            Enviar consulta
+          </button>
+        </form>
+      </article>
     </main>
     <footer>
       <ul>
