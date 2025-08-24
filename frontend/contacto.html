@@ -3,16 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto</title>
+    <meta
+      name="description"
+      content="Mueblería Hermanos Jota - Muebles de diseño contemporáneo, sostenibles y elegantes. Descubrí nuestra colección destacada."
+    />
+    <link rel="icon" href="./assets/img/logo.svg" type="image/svg+xml" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <title>Muebleria Hermanos Jota</title>
   </head>
   <body>
-    <header>
-      <nav>
-        <ul>
-          <li><a href="/frontend/index.html">Inicio</a></li>
-          <li><a href="/frontend/productos.html">Catálogo</a></li>
-          <li><a href="/frontend/contacto.html">Contacto</a></li>
+    <header class="index-header">
+      <nav class="index-navbar">
+        <div>
+          <a href="./index.html">
+            <img
+              src="./assets/img/logo.svg"
+              alt="Logotipo de Muebleria Hermanos Jota"
+              class="navbar-logo"
+            />
+          </a>
+        </div>
+        <ul class="navlink-container">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Catálogo</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
         </ul>
+        <div class="nav-actions">
+          <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" placeholder="Buscar muebles..." />
+          </div>
+          <div class="cart-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count">0</span>
+          </div>
+        </div>
       </nav>
     </header>
     <main>
@@ -37,6 +74,19 @@
         <button type="submit">Enviar Mensaje</button>
       </form>
     </main>
-    <footer></footer>
+    <footer>
+      <ul>
+        <li class="footer-link"><a href="#">Navegación</a></li>
+        <li class="footer-link"><a href="#">Legal</a></li>
+      </ul>
+      <ul>
+        <li class="footer-icon">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </li>
+        <li class="footer-icon">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </li>
+      </ul>
+    </footer>
   </body>
 </html>
