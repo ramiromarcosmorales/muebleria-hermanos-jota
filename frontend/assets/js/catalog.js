@@ -21,4 +21,4 @@ function initCatalog() {
     renderProducts(products, container);
 }
 
-document.addEventListener("DOMContentLoaded", initCatalog());
+document.addEventListener("DOMContentLoaded", initCatalog);
