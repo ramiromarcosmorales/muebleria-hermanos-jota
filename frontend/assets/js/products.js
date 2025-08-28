@@ -15,6 +15,7 @@ export const products = [
       "Sistema modular de estantes abierto que combina estructura de acero Sage Green y repisas en roble claro. Perfecta para colecciones y objetos de diseño, su diseño versátil se adapta a cualquier espacio contemporáneo con elegancia funcional.",
     precio: 83499,
     srcImg: "assets/img/biblioteca-recoleta.png",
+    destacado: false
   },
   {
     id: 3,
@@ -41,6 +42,7 @@ export const products = [
       "Mesa de centro con sobre circular de mármol Patagonia y base de tres patas en madera de nogal. Su diseño minimalista se convierte en el punto focal perfecto para cualquier sala de estar contemporánea, combinando la frialdad del mármol con la calidez de la madera.",
     precio: 249999,
     srcImg: "assets/img/mesa-de-centro-araucaria.png",
+    destacado: false
   },
   {
     id: 6,
@@ -49,6 +51,7 @@ export const products = [
       "Mesa de noche con cajón oculto y repisa inferior en roble certificado FSC®. Su diseño limpio y funcional permite convivir con diferentes estilos de dormitorio, ofreciendo almacenamiento discreto y elegante para objetos personales.",
     precio: 299999,
     srcImg: "assets/img/mesa-de-noche-aconcagua.png",
+    destacado: false
   },
   {
     id: 7,
@@ -57,6 +60,7 @@ export const products = [
       "Cama plataforma con cabecero flotante tapizado en lino natural y estructura de madera maciza. Su diseño minimalista y sofisticado crea un ambiente de serenidad y elegancia, perfecto para dormitorios contemporáneos que buscan paz y simplicidad.",
     precio: 124000,
     srcImg: "assets/img/cama-neuquen.png",
+    destacado: false
   },
   {
     id: 8,
@@ -65,6 +69,7 @@ export const products = [
       "Sofá de tres cuerpos tapizado en lino Warm Alabaster con patas cónicas de madera. Los cojines combinan espuma de alta resiliencia con plumón reciclado, ofreciendo comodidad duradera y sostenible para el hogar moderno.",
     precio: 59999,
     srcImg: "assets/img/sofa-patagonia.png",
+    destacado: false
   },
   {
     id: 9,
@@ -73,6 +78,7 @@ export const products = [
       "Mesa extensible de roble macizo con tablero biselado y sistema de apertura suave. Su diseño robusto y elegante se adapta perfectamente a reuniones íntimas o grandes celebraciones familiares, extendiéndose de 6 a 10 comensales.",
     precio: 133999,
     srcImg: "assets/img/mesa-comedor-pampa.png",
+    destacado: false
   },
   {
     id: 10,
@@ -81,6 +87,7 @@ export const products = [
       "Set de cuatro sillas apilables en contrachapado moldeado de nogal y estructura tubular pintada en Sage Green. Su diseño ergonómico y materiales de calidad garantizan comodidad y durabilidad en el uso diario, perfectas para comedores contemporáneos.",
     precio: 89999,
     srcImg: "assets/img/sillas-cordoba.png",
+    destacado: false
   },
   {
     id: 11,
@@ -89,6 +96,7 @@ export const products = [
       "Escritorio compacto con cajón organizado y tapa pasacables integrada en bambú laminado. Ideal para espacios de trabajo en casa, combina funcionalidad moderna con estética minimalista y sostenible, perfecto para el trabajo remoto.",
     precio: 19999,
     srcImg: "assets/img/escritorio-costa.png",
+    destacado: false
   },
   {
     id: 12,
@@ -97,5 +105,6 @@ export const products = [
       "Silla ergonómica regulable en altura con respaldo de malla transpirable y asiento tapizado en tejido reciclado. Diseñada para largas jornadas de trabajo con máximo confort y apoyo lumbar, ideal para oficinas en casa y espacios de coworking.",
     precio: 49899,
     srcImg: "assets/img/silla-de-trabajo-belgrano.png",
+    destacado: false
   },
 ];
