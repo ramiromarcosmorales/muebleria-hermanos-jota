@@ -224,6 +224,7 @@ button, .cta {
   overflow: hidden;
   width: 400px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: var(--padding-base)
 }
 
 .products-card:hover{
@@ -244,6 +245,20 @@ button, .cta {
 
 .products-card .productos-precio{
   font-weight: bold;
+}
+
+.featured-product-button{
+  background: transparent;
+  border: 1px solid #333;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.featured-product-button:hover{
+  background: #333;
+  color: #fff;
 }
 
 /* Section Values */

@@ -9,7 +9,7 @@ function renderProducts(products, container) {
                 <h3>${p.nombre}</h3>
                 <img src="${p.srcImg}" alt="${p.nombre}" />
                 <p>Precio: $${p.precio}</p>
-                <a href="#" class="product-button">Ver Producto</a>
+                <a href="producto.html?id=${p.id}" class="product-button">Ver Producto</a>
             </article>
         `;
     });
