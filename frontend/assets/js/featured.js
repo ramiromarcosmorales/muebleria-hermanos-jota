@@ -22,6 +22,7 @@ function renderProducts(products, container) {
                     <img src="${p.srcImg}" alt="${p.nombre}"/>
                     <p>${p.nombre}</p>
                     <p class="products-precio">$${p.precio}</p>
+                    <a href="producto.html?id=${p.id}" class="featured-product-button">Ver Producto</a>
                 </div>
             `
     });
