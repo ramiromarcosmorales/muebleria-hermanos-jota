@@ -9,21 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <script type="module" src="./assets/js/product-detail-routing.js"></script>
     <title>Detalle del Producto</title>
 </head>
 <body>
     <header class="index-header">
         <nav class="index-navbar">
-            <div>
+            <div class="left">
+                <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">☰</button>
                 <a href="./index.html">
                     <img src="./assets/img/logo.svg" alt="Logotipo de Muebleria Hermanos Jota" class="navbar-logo" />
                 </a>
             </div>
-            <ul class="navlink-container">
+            <ul id="site-nav" class="navlink-container">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="productos.html">Catálogo</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
+            <div class="backdrop" hidden></div>
             <div class="nav-actions">
                 <div class="search-box">
                     <i class="fa-solid fa-search"></i>
@@ -55,6 +58,6 @@
             </li>
         </ul>
     </footer>
-    <script type="module" src="./assets/js/product-detail-routing.js"></script>
+    <script src="./assets/js/menu.js"></script>
 </body>
 </html>
