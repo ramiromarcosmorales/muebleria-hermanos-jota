@@ -24,7 +24,7 @@
     <script type="module" src="assets/js/search.js"></script>
     <script type="module" src="assets/js/cart.js"></script>
     <script type="module" src="assets/js/contact-form.js"></script>
-    <title>Muebleria Hermanos Jota</title>
+    <title>Contacto</title>
   </head>
   <body>
     <header class="index-header">
@@ -46,37 +46,38 @@
         <div class="nav-actions">
           <div class="search-box">
             <i class="fa-solid fa-search"></i>
-            <input
-              id="search-input"
-              type="text"
-              placeholder="Buscar muebles..."
-            />
+            <input id="search-input" type="text" placeholder="Buscar muebles..." />
             <div id="search-results" class="search-results"></div>
           </div>
-          <div class="cart-icon">
-            <i class="fa-solid fa-cart-shopping"></i>
-            <span id="cart-count" class="cart-count">0</span>
-          </div>
-          <div id="cart-dropdown" class="cart-dropdown hidden">
-            <div id="cart-items"></div>
-            <div class="cart-total">
-              Total: $<span id="cart-total">0</span>
+
+          <!-- Carrito con dropdown -->
+          <div class="cart-container">
+            <div class="cart-icon">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span id="cart-count" class="cart-count">0</span>
+            </div>
+            <div id="cart-dropdown" class="cart-dropdown hidden">
+              <div id="cart-items"></div>
+              <div class="cart-total">
+                Total: $<span id="cart-total">0</span>
+              </div>
             </div>
           </div>
+          <!-- /carrito -->
         </div>
-      </div>
-    </nav>
-  </header>
-  <main>
-    <div class="contact">
-      <div class="contact-container">
-        <div class="contact-header">
-          <h2>Ponte en contacto con nosotros</h2>
-          <p>
-            ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario
-            y nos pondremos en contacto contigo lo antes posible.
-          </p>
-        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="contact">
+        <div class="contact-container">
+          <div class="contact-header">
+            <h2>Ponte en contacto con nosotros</h2>
+            <p>
+              ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario
+              y nos pondremos en contacto contigo lo antes posible.
+            </p>
+          </div>
 
           <form
             action=""
@@ -98,10 +99,16 @@
               />
             </div>
 
-          <div class="contact-field">
-            <label for="emailUsuario">Email</label>
-            <input type="email" id="emailUsuario" name="email" placeholder="ejemplo@correo.com" required />
-          </div>
+            <div class="contact-field">
+              <label for="emailUsuario">Email</label>
+              <input
+                type="email"
+                id="emailUsuario"
+                name="email"
+                placeholder="ejemplo@correo.com"
+                required
+              />
+            </div>
 
             <div class="contact-field">
               <label for="mensajeUsuario">Mensaje</label>
@@ -118,27 +125,27 @@
 
             <div id="status-message"></div>
 
-          <button type="submit" class="contact-button">
-            Enviar consulta
-          </button>
-        </form>
+            <button type="submit" class="contact-button">
+              Enviar consulta
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
-  </main>
-  <footer>
-    <ul>
-      <li class="footer-link"><a href="#">Navegación</a></li>
-      <li class="footer-link"><a href="#">Legal</a></li>
-    </ul>
-    <ul>
-      <li class="footer-icon">
-        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-      </li>
-      <li class="footer-icon">
-        <a href="#"><i class="fa-brands fa-facebook"></i></a>
-      </li>
-    </ul>
-  </footer>
-</body>
+    </main>
 
+    <footer>
+      <ul>
+        <li class="footer-link"><a href="#">Navegación</a></li>
+        <li class="footer-link"><a href="#">Legal</a></li>
+      </ul>
+      <ul>
+        <li class="footer-icon">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        </li>
+        <li class="footer-icon">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </li>
+      </ul>
+    </footer>
+  </body>
 </html>
