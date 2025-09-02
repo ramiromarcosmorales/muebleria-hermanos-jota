@@ -25,6 +25,15 @@ function renderProducts(products, container) {
                 <a href="producto.html?id=${
                   p.id
                 }" class="product-button">Ver Producto</a>
+                <button class="btn-cart"
+                        data-id="${p.id}"
+                        data-name="${p.nombre}"
+                        data-price="${p.precio}">
+                  <div class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">+</span>
+                  </div>
+                </button>
             </article>
         `;
   });
