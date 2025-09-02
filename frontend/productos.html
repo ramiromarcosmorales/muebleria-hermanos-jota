@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="stylesheet" href="./assets/css/products.css">
     <script type="module" src="assets/js/catalog.js"></script>
+    <script type="module" src="assets/js/search.js"></script>
     <script type="module" src="assets/js/cart.js"></script>
     <title>Productos</title>
 </head>
@@ -30,7 +31,8 @@
             <div class="nav-actions">
                 <div class="search-box">
                     <i class="fa-solid fa-search"></i>
-                    <input type="text" placeholder="Buscar muebles..." />
+                    <input id="search-input" type="text" placeholder="Buscar muebles..." />
+                    <div id="search-results" class="search-results"></div>
                 </div>
                 <div class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
