@@ -32,9 +32,17 @@
                     <input id="search-input" type="text" placeholder="Buscar muebles..." />
                     <div id="search-results" class="search-results"></div>
                 </div>
-                <div class="cart-icon">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-count" class="cart-count">0</span>
+                <div class="cart-container">
+                    <div class="cart-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </div>
+                    <div id="cart-dropdown" class="cart-dropdown hidden">
+                        <div id="cart-items"></div>
+                        <div class="cart-total">
+                            Total: $<span id="cart-total">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

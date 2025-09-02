@@ -20,7 +20,13 @@ if (product) {
             <p>Precio: ${formatPrice(product.precio)}</p>
             <p>En stock - Envío en 3-5 días hábiles</p>
             <p>${product.descripcion}</p>
-            <button class="btn-cart">Agregar al carrito</button>
+            <button class="btn-cart"
+                        data-id="${product.id}"
+                        data-name="${product.nombre}"
+                        data-price="${product.precio}"
+                        data-image="${product.srcImg}">
+                  Agregar al carrito
+              </button>
         </div>
       `;
 } else {
