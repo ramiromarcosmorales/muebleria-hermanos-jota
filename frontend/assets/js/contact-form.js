@@ -46,7 +46,7 @@ function resetStatusDisplay() {
 }
 
 function displayErrors(errorArray) {
-  statusMessageContainer.className = "errorStatus";
+  statusMessageContainer.className = "error-status";
 
   const errorPara = document.createElement("p");
   errorPara.textContent =
@@ -64,7 +64,7 @@ function displayErrors(errorArray) {
 }
 
 function displaySuccess() {
-  statusMessageContainer.className = "successStatus";
+  statusMessageContainer.className = "success-status";
   const successPara = document.createElement("p");
   successPara.textContent = "Formulario enviado exitosamente.";
   statusMessageContainer.appendChild(successPara);
