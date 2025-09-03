@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./assets/css/styles.css" />
     <script type="module" src="assets/js/search.js"></script>
     <script type="module" src="assets/js/cart.js"></script>
+    <script type="module" src="assets/js/contact-form.js"></script>
     <title>Muebleria Hermanos Jota</title>
   </head>
   <body>
@@ -45,7 +46,11 @@
         <div class="nav-actions">
           <div class="search-box">
             <i class="fa-solid fa-search"></i>
-            <input id="search-input" type="text" placeholder="Buscar muebles..." />
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Buscar muebles..."
+            />
             <div id="search-results" class="search-results"></div>
           </div>
           <div class="cart-icon">
@@ -66,7 +71,13 @@
             </p>
           </div>
 
-          <form action="" method="POST" class="contact-form">
+          <form
+            action=""
+            method="POST"
+            id="contact-form"
+            class="contact-form"
+            novalidate
+          >
             <div class="contact-field">
               <label for="nombreUsuario">Nombre</label>
               <input
@@ -103,6 +114,8 @@
                 required
               ></textarea>
             </div>
+
+            <div id="status-message"></div>
 
             <button type="submit" class="contact-button">
               Enviar consulta
