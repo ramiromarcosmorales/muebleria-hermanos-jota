@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="stylesheet" href="./assets/css/products.css">
     <script type="module" src="assets/js/catalog.js"></script>
     <script type="module" src="assets/js/search.js"></script>
     <script type="module" src="assets/js/cart.js"></script>
@@ -34,9 +33,17 @@
                     <input id="search-input" type="text" placeholder="Buscar muebles..." />
                     <div id="search-results" class="search-results"></div>
                 </div>
-                <div class="cart-icon">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span id="cart-count" class="cart-count">0</span>
+                <div class="cart-container">
+                    <div class="cart-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </div>
+                    <div id="cart-dropdown" class="cart-dropdown hidden">
+                        <div id="cart-items"></div>
+                        <div class="cart-total">
+                            Total: $<span id="cart-total">0</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>

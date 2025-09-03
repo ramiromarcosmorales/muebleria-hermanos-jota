@@ -28,7 +28,8 @@ function renderProducts(products, container) {
                 <button class="btn-cart"
                         data-id="${p.id}"
                         data-name="${p.nombre}"
-                        data-price="${p.precio}">
+                        data-price="${p.precio}"
+                        data-image="${p.srcImg}">
                   <div class="cart-icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span class="cart-count">+</span>
