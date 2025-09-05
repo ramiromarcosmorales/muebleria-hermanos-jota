@@ -45,7 +45,7 @@ async function initCatalog() {
   const container = document.getElementById("container");
   if (!container) return;
 
-  container.innerHTML = `<p role="status" aria-live="polite">Cargando productos...</p>`;
+  container.innerHTML = `<p role="status" aria-live="polite" class="loading-message">Cargando productos...</p>`;
 
   try {
     const data = await getProductsAsync();
