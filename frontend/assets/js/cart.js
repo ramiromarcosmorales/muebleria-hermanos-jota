@@ -74,7 +74,7 @@ const renderCartDropdown = () => {
     div.innerHTML = `
       <img src="${item.image}" alt="${item.name}">
       <div class="cart-item-details">
-        <span>${item.name}</span>
+        <span class="cart-item-name">${item.name}</span>
         <div class="cart-item-quantity">
           <span class="item-quantity">${item.quantity}</span>
           <button class="btn-decrease-quantity">-</button>
@@ -109,14 +109,9 @@ document.addEventListener("click", (e) => {
 // Funciones para vaciar carrito
 
 cleanCartButton.addEventListener("click", (e) => {
-  // Se vacia el array
   cart = [];
-  // Se actualiza el LocalStorage
-  localStorage.setItem("cart", JSON.stringify(cart));
-  // Se actualiza el CONTENIDO MOSTRADO EN EL CARRITO
-  cartItemsContainer.innerHTML = "";
-  // Se resetea el contador de carrito
-  document.getElementById("cart-count").innerText = 0;
+  updateCart(); 
+  renderCartDropdown();
 });
 
 
@@ -125,62 +120,56 @@ function cleanProduct(){
 
   button.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       // Se busca contenedor padre con la clase ".cart-item".
       const cartItem = e.target.closest(".cart-item");
       // Se le da a la constante id, el mismo valor que el data-id del div.
       const id = cartItem.dataset.id
-      // Se elimina contenedor del producto seleccionado.
-      cartItem.remove();
-      // Se crea un nuevo array con los productos que no igualen el id del podcuto eliminado
+      // Filtramos el producto eliminado
       cart = cart.filter((item) => item.id != id);
-      // Se actualiza el localStorage
-      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Actualizamos todo (contador, total, localStorage)
+      updateCart();
+      renderCartDropdown();
     });
   });
 }
 
-function editQuantity(){
+function editQuantity() {
   const btnDecrease = document.querySelectorAll(".btn-decrease-quantity");
   const btnIncrease = document.querySelectorAll(".btn-increase-quantity");
-  const cartCount = document.getElementById("cart-count");
 
   btnDecrease.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       const cartItem = e.target.closest(".cart-item");
       const id = cartItem.dataset.id;
-      const quantitySpan = cartItem.querySelector(".item-quantity");
 
       const product = cart.find((item) => item.id == id);
-  
-      if (product.quantity > 1){
+
+      if (product.quantity > 1) {
         product.quantity -= 1;
-        quantitySpan.textContent = `${product.quantity}`;
-        // Se actualica el contador del carrito
-        cartCount.innerText = parseInt(cartCount.innerText) - 1;
       } else {
         cart = cart.filter((item) => item.id != id);
-        cartItem.remove();
-        // Se actualiza el contador de carrito
-        cartCount.innerText = parseInt(cartCount.innerText) - 1;
       }
-      localStorage.setItem("cart", JSON.stringify(cart));
-    })
+
+      updateCart();
+      renderCartDropdown();
+    });
   });
 
   btnIncrease.forEach((btn) => {
     btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       const cartItem = e.target.closest(".cart-item");
       const id = cartItem.dataset.id;
-      const quantitySpan = cartItem.querySelector(".item-quantity");
 
       const product = cart.find((item) => item.id == id);
 
       product.quantity += 1;
-      quantitySpan.textContent = `${product.quantity}`
-      // Se actualiza el contador del carrito
-      cartCount.innerText = parseInt(cartCount.innerText) + 1;
 
-      localStorage.setItem("cart", JSON.stringify(cart));
-    })
+      updateCart();
+      renderCartDropdown();
+    });
   });
 }

@@ -676,6 +676,21 @@ footer ul {
   border-bottom: 1px solid var(--color-fondo);
 }
 
+#cart-items {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#cart-items::-webkit-scrollbar {
+  width: 6px;
+}
+
+#cart-items::-webkit-scrollbar-thumb {
+  background-color: var(--color-fondo);
+  border-radius: 4px;
+}
+
 .cart-item:last-child {
   border-bottom: none;
 }
@@ -696,16 +711,17 @@ footer ul {
   color: var(--color-texto);
 }
 
-.cart-item-details span:first-child {
+.cart-item-name {
   font-weight: 600;
   font-family: var(--fuente-titulos);
   color: var(--color-primario);
+  width: 80px;
 }
 
 .item-quantity{
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: var(--fuente-leyendas);
-  color: #000000;
+  color: var(--color-primario);
 }
 
 .cart-item-price {
@@ -740,16 +756,19 @@ footer ul {
 }
 
 .btn-clean-cart{
+  display: inline-block;
   background: transparent;
-  border: 1px solid #333;
-  padding: 0.2rem 0.5rem;
-  font-size: 1rem;
+  border: 1px solid var(--color-primario);
+  color: var(--color-primario);
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease;a
 }
 
 .btn-clean-cart:hover{
-  background: #333;
+  background: var(--color-primario);
   color: #fff;
 }
 
