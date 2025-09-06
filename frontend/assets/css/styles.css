@@ -702,10 +702,10 @@ footer ul {
   color: var(--color-primario);
 }
 
-.cart-item-quantity {
-  font-size: 0.8rem;
+.item-quantity{
+  font-size: 1.2rem;
   font-family: var(--fuente-leyendas);
-  color: var(--color-texto);
+  color: #000000;
 }
 
 .cart-item-price {
@@ -734,6 +734,23 @@ footer ul {
   text-align: right;
   color: var(--color-primario);
   font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-clean-cart{
+  background: transparent;
+  border: 1px solid #333;
+  padding: 0.2rem 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-clean-cart:hover{
+  background: #333;
+  color: #fff;
 }
 
 .cart-actions {
