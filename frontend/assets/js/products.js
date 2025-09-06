@@ -50,23 +50,6 @@ export const products = [
   {
     id: 4,
     nombre: "Sillón Copacabana",
-    descripcion:
-      "Sillón lounge en cuero cognac con base giratoria en acero Burnt Sienna. Inspirado en la estética brasilera moderna de los 60, combina comodidad excepcional con un diseño icónico que trasciende tendencias y épocas.",
-    precio: 99999,
-    srcImg: "assets/img/sillon-copacabana.png",
-    destacado: true,
-    dimensiones: "95x90x100 cm",
-    capacidad: "1 plaza",
-    estilo: "Moderno brasilero 60s",
-    material: "Cuero y madera de guatambú",
-    garantia: "2 años",
-    origen: "Brasil",
-    peso: "28 kg",
-    color: "Marrón Oscuro"
-  },
-  {
-    id: 4,
-    nombre: "Sillón Copacabana",
     descripcion: "Sillón lounge de estilo mid-century con una robusta estructura de madera oscura visible y un asiento amplio y profundo. Está tapizado en cuero genuino de color coñac, con cojines mullidos en el asiento y el respaldo que ofrecen un gran confort. Los reposabrazos y las patas de madera, con sus líneas limpias y anguladas, le dan un aire atemporal y elegante, perfecto para un rincón de lectura o descanso.",
     precio: 99999,
     srcImg: "assets/img/sillon-copacabana.png",

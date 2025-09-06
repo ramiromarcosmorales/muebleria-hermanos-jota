@@ -8,8 +8,10 @@ const cartTotalEl = document.getElementById("cart-total");
 const cartIcon = document.querySelector(".cart-icon");
 const cleanCartButton = document.getElementById("btn-clean-cart");
 
-cartCount();
+const calcCartTotal = (items = cart) => 
+  items.reduce((total, item) => total + item.price * item.quantity, 0);
 
+cartCount();
 
 document.addEventListener("click", (e) => {
     if (e.target.closest(".btn-cart")) {
@@ -27,6 +29,12 @@ document.addEventListener("click", (e) => {
     }
 })
 
+function updateCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  cartCount();
+  if (!cartDropdown.classList.contains("hidden")) renderCartDropdown();
+}
+
 
 function addToCart(product) {
     const existingProduct = cart.find(item => item.id === product.id);
@@ -37,19 +45,15 @@ function addToCart(product) {
         cart.push(product);
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-
-    cartCount();
+    updateCart();
 }
-
 
 function cartCount(){
     let count = cart.reduce((acc, item) => acc + item.quantity, 0);
-    document.getElementById("cart-count").innerText = count;
+    document.getElementById("cart-count").textContent = count;
 }
 
 window.addEventListener("storage", cartCount);
-
 
 
 /* Renderizado del desplegable */
@@ -59,7 +63,7 @@ const renderCartDropdown = () => {
 
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = "<p style='text-align:center; color:#777;'>Carrito vacío</p>";
-    cartTotalEl.innerText = "0";
+    cartTotalEl.textContent = formatPrice(0);
     return;
   }
 
@@ -82,15 +86,17 @@ const renderCartDropdown = () => {
     `;
     cartItemsContainer.appendChild(div);
   });
+
+  cartTotalEl.textContent = formatPrice(calcCartTotal());
   
   cleanProduct();
   editQuantity();
 }
 
-cartIcon.addEventListener("click", (e) => {
-  cartDropdown.classList.toggle("hidden");
-  renderCartDropdown();
-  e.stopPropagation();
+  cartIcon.addEventListener("click", (e) => {
+    cartDropdown.classList.toggle("hidden");
+    renderCartDropdown();
+    e.stopPropagation();
 });
 
 document.addEventListener("click", (e) => {

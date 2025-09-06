@@ -12,63 +12,42 @@ const characteristicsContainer = document.getElementById("product-characteristic
 
 if (product) {
   detailContainer.innerHTML = `
-        <div>
-            <img src=${product.srcImg} alt=${product.descripcion}>
+    <div class="product-detail-container">
+        <div class="product-image">
+            <img src="${product.srcImg}" alt="${product.descripcion}">
         </div>
-        <div>
-            <a href="productos.html">← Volver a productos</a>
-            <h2>${product.nombre}</h2>
-            <p>Precio: ${formatPrice(product.precio)}</p>
-            <p>En stock - Envío en 3-5 días hábiles</p>
-            <p>${product.descripcion}</p>
-            <button class="btn-cart"
+        <div class="product-info">
+            <a href="productos.html" class="back-link">← Volver a productos</a>
+            <h1 class="product-title">${product.nombre}</h1>
+            <p class="product-price">${formatPrice(product.precio)}</p>
+            <p class="product-stock">En stock - Envío en 3-5 días hábiles</p>
+            <p class="product-description">${product.descripcion}</p>
+            <button class="btn-cart add-to-cart"
                         data-id="${product.id}"
                         data-name="${product.nombre}"
                         data-price="${product.precio}"
                         data-image="${product.srcImg}">
                   Agregar al carrito
-              </button>
+            </button>
         </div>
-      `;
-    characteristicsContainer.innerHTML = `
-        <div>
-          <h2>Características del producto</h2>
-        </div>
-        <div>
-          <div>
-            <p>DIMENSIONES</p>
-            <p>${product.dimensiones}</p>
-          </div>
-          <div>
-            <p>MATERIAL</p>
-            <p>${product.material}</p>
-          </div>
-          <div>
-            <p>COLOR</p>
-            <p>${product.color}</p>
-          </div>
-          <div>
-            <p>PESO</p>
-            <p>${product.peso}</p>
-          </div>
-          <div>
-            <p>CAPACIDAD</p>
-            <p>${product.capacidad}</p>
-          </div>
-          <div>
-            <p>ESTILO</p>
-            <p>${product.estilo}</p>
-          </div>
-          <div>
-            <p>GARANTIA</p>
-            <p>${product.garantia}</p>
-          </div>
-          <div>
-            <p>ORIGEN</p>
-            <p>${product.origen}</p>
-          </div>
-        </div>
-      `;
+    </div>
+  `;
+
+  characteristicsContainer.innerHTML = `
+    <div class="product-characteristics">
+      <h2>Características del producto</h2>
+      <div class="characteristics-grid">
+        <div><p class="char-title">DIMENSIONES</p><p>${product.dimensiones}</p></div>
+        <div><p class="char-title">MATERIAL</p><p>${product.material}</p></div>
+        <div><p class="char-title">COLOR</p><p>${product.color}</p></div>
+        <div><p class="char-title">PESO</p><p>${product.peso}</p></div>
+        <div><p class="char-title">CAPACIDAD</p><p>${product.capacidad}</p></div>
+        <div><p class="char-title">ESTILO</p><p>${product.estilo}</p></div>
+        <div><p class="char-title">GARANTÍA</p><p>${product.garantia}</p></div>
+        <div><p class="char-title">ORIGEN</p><p>${product.origen}</p></div>
+      </div>
+    </div>
+  `;
 } else {
   detailContainer.innerHTML = `<p>Producto no encontrado</p>`;
 }
