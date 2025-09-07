@@ -24,47 +24,47 @@
     <script type="module" src="assets/js/search.js"></script>
     <script type="module" src="assets/js/cart.js"></script>
     <script type="module" src="assets/js/contact-form.js"></script>
+    <script type="module" src="assets/js/menuHeader.js"></script>
     <title>Contacto</title>
   </head>
   <body>
     <header class="index-header">
-      <nav class="index-navbar">
-        <div>
-          <a href="./index.html">
-            <img
-              src="./assets/img/logo.svg"
-              alt="Logotipo de Muebleria Hermanos Jota"
-              class="navbar-logo"
-            />
-          </a>
-        </div>
-        <ul class="navlink-container">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="productos.html">Catálogo</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-        <div class="nav-actions">
-          <div class="search-box">
-            <i class="fa-solid fa-search"></i>
-            <input id="search-input" type="text" placeholder="Buscar muebles..." />
-            <div id="search-results" class="search-results"></div>
-          </div>
-
-          <div class="cart-container">
-            <div class="cart-icon">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span id="cart-count" class="cart-count">0</span>
+        <nav class="index-navbar">
+            <div class="left">
+                <button class="menu-toggle">
+                  <i class="fa-solid fa-bars"></i>
+                </button>
+                <a href="./index.html">
+                    <img src="./assets/img/logo.svg" alt="Logotipo de Muebleria Hermanos Jota" class="navbar-logo" />
+                </a>
             </div>
-            <div id="cart-dropdown" class="cart-dropdown hidden">
-              <div id="cart-items"></div>
-              <div class="cart-total">
-                <button id="btn-clean-cart" class="btn-clean-cart">Vaciar Carrito</button>
-                Total: <span id="cart-total">0</span>
-              </div>
+            <ul id="primary-menu" class="navlink-container">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Catálogo</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+            <div class="backdrop" hidden></div>
+            <div class="nav-actions">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input id="search-input" type="text" placeholder="Buscar muebles..." />
+                    <div id="search-results" class="search-results"></div>
+                </div>
+                <div class="cart-container">
+                    <div class="cart-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span id="cart-count" class="cart-count">0</span>
+                    </div>
+                    <div id="cart-dropdown" class="cart-dropdown hidden">
+                        <div id="cart-items"></div>
+                        <div class="cart-total">
+                            <button id="btn-clean-cart" class="btn-clean-cart">Vaciar Carrito</button>
+                            <p>Total: <span id="cart-total">0</span></p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </nav>
+        </nav>
     </header>
 
     <main>

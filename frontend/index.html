@@ -12,21 +12,26 @@
     <script type="module" src="assets/js/featured.js"></script>
     <script type="module" src="assets/js/search.js"></script>
     <script type="module" src="assets/js/cart.js"></script>
+    <script type="module" src="assets/js/menuHeader.js"></script>
     <title>Muebleria Hermanos Jota</title>
 </head>
 <body>
     <header class="index-header">
         <nav class="index-navbar">
-            <div>
+            <div class="left">
+                <button class="menu-toggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <a href="./index.html">
                     <img src="./assets/img/logo.svg" alt="Logotipo de Muebleria Hermanos Jota" class="navbar-logo" />
                 </a>
             </div>
-            <ul class="navlink-container">
+            <ul id="primary-menu" class="navlink-container">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="productos.html">Catálogo</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
             </ul>
+            <div class="backdrop" hidden></div>
             <div class="nav-actions">
                 <div class="search-box">
                     <i class="fa-solid fa-search"></i>

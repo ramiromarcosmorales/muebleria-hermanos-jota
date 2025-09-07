@@ -1,3 +1,4 @@
+import { formatPrice } from "./format-price.js";
 import { products } from "./products.js";
 
 const searchInput = document.getElementById("search-input");
@@ -27,7 +28,7 @@ const renderResults = (filteredProducts) => {
     item.innerHTML = `
       <img src="${p.srcImg}" alt="${p.nombre}" class="search-result-img" />
       <span class="search-result-name">${p.nombre}</span>
-      <span class="search-result-price">$${p.precio}</span>
+      <span class="search-result-price">${formatPrice(p.precio)}</span>
     `;
 
     resultsContainer.appendChild(item);
