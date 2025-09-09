@@ -2,7 +2,7 @@
 name: Documentación
 about: Usá esta plantilla para agregar o actualizar documentación
 title: "[DOC] - "
-labels: documentation"
+labels: "documentation"
 assignees: ""
 ---
 
