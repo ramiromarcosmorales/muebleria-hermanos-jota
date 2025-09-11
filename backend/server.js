@@ -2,14 +2,14 @@ const express = require("express");
 require("dotenv").config();
 
 // Middleware imports
-const logger = require("./middleware/logger.js").logger;
+const logger = require("./middleware/logger.js");
 
 const app = express();
 const PORT = process.env.PORT;
 
 // Global middlewares
 app.use(express.json());
-app.use(logger);
+app.use(logger.log);
 
 // Routes
 
