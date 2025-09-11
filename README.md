@@ -33,8 +33,18 @@ El proyecto está dividido en dos directorios principales:
 
 ### Como levantar el servidor
 
-1. Al hacer clone del repositorio, moverse a la carpeta backend con **cd backend**.
-2. Una vez en la carpeta backend hacer ```npm i``` para instalar las dependencias necesarias para el proyecto.
-3. Existen dos comandos configurados en el package.json: 
-    - ```npm run dev```: Inicializa el proyecto en modo desarrollo.
-    - ```npm run start```: Inicializa el proyecto en modo producción.
+1. Al hacer clone del repositorio, moverse a la carpeta backend:
+   ```sh
+      cd backend
+   ```
+2. Una vez en la carpeta backend, instalar las dependencias necesarias para el proyecto:
+   ```sh
+      npm i
+   ```
+3. Instaladas las dependencias, hay que crear el archivo .env en la raíz de la carpeta backend, para ello renombrar el archivo de referencia .env.example con la guía de variables de entorno:
+   ```sh
+      mv .env.example .env
+   ```
+4. Existen dos comandos configurados en el package.json:
+   - `npm run dev`: Inicializa el proyecto en modo desarrollo.
+   - `npm run start`: Inicializa el proyecto en modo producción.
