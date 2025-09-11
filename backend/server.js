@@ -1,14 +1,14 @@
 const express = require("express");
 
 // Middleware imports
-const logger = require("./middleware/logger.js").logger;
+const logger = require("./middleware/logger.js");
 
 const app = express();
 const PORT = 3001;
 
 // Global middlewares
 app.use(express.json());
-app.use(logger);
+app.use(logger.log);
 
 // Routes
 
