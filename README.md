@@ -30,3 +30,11 @@ El proyecto está dividido en dos directorios principales:
 - **backend/**: Contiene todo el código del lado del servidor.
 
 - **client/**: Contiene el código del lado del cliente.
+
+### Como levantar el servidor
+
+1. Al hacer clone del repositorio, moverse a la carpeta backend con **cd backend**.
+2. Una vez en la carpeta backend hacer ```npm i``` para instalar las dependencias necesarias para el proyecto.
+3. Existen dos comandos configurados en el package.json: 
+    - ```npm run dev```: Inicializa el proyecto en modo desarrollo.
+    - ```npm run start```: Inicializa el proyecto en modo producción.
