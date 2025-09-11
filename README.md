@@ -30,3 +30,26 @@ El proyecto está dividido en dos directorios principales:
 - **backend/**: Contiene todo el código del lado del servidor.
 
 - **client/**: Contiene el código del lado del cliente.
+
+## Instrucciones Backend
+
+Para poder ejecutar el servidor backend es necesario realizar los siguientes pasos:
+
+1. Desde la carpeta raíz del proyecto, ingresar a la carpeta backend.
+   ```sh
+   cd backend
+   ```
+2. Una vez dentro de la carpeta backend, hay que instalar las dependencias del proyecto.
+   ```sh
+   npm i
+   ```
+3. Instaladas las dependencias, hay que crear el archivo .env en la raíz de la carpeta backend para ello tomar de referencia el archivo .env.example.
+4. Por último ejecutar el servidor con alguno de los siguientes comandos:
+
+```sh
+node server.js
+
+o
+
+npm start
+```
