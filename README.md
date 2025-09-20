@@ -48,3 +48,7 @@ El proyecto está dividido en dos directorios principales:
 4. Existen dos comandos configurados en el package.json:
    - `npm run dev`: Inicializa el proyecto en modo desarrollo.
    - `npm run start`: Inicializa el proyecto en modo producción.
+
+## 🌐 Backend desplegado
+
+API pública: [https://muebleria-jota-backend.onrender.com/api/productos](https://muebleria-jota-backend.onrender.com/api/productos)
