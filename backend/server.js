@@ -34,13 +34,13 @@ app.use('/api/productos', productsRouter);
 const statusRouter = require('./routes/status.js');
 app.use('/api/status', statusRouter);
 
-// Levanta el servidor en el puerto especificado
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
-
 //404 handler
 app.use(notFound);
 
 //Error handler
 app.use(errorHandler);
+
+// Levanta el servidor en el puerto especificado
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
