@@ -4,6 +4,8 @@ require("dotenv").config();
 // Importación de middlewares y utilidades
 const logger = require("./middleware/logger.js");
 const requestCounter = require("./middleware/request.js");
+const notFound = require("./middleware/notFound.js");
+const errorHandler = require("./middleware/errorHandler.js");
 
 // Importación de Swagger para documentación interactiva
 const swaggerUi = require('swagger-ui-express');
@@ -30,5 +32,11 @@ app.use('/api/productos', productsRouter);
 
 const statusRouter = require('./routes/status.js');
 app.use('/api/status', statusRouter);
+
+//404 handler
+app.use(notFound);
+
+//Error handler
+app.use(errorHandler);
 
 module.exports = app;
