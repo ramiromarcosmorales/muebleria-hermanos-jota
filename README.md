@@ -53,7 +53,7 @@ El proyecto está dividido en dos directorios principales:
 
 API pública: [https://muebleria-jota-backend.onrender.com/api/productos](https://muebleria-jota-backend.onrender.com/api/productos)
 
-## Como levantar el Frontend - Vite + React
+## ⚛️ Como levantar el Frontend - Vite + React
 
 Una vez hecho `git clone` del proyecto, moverse a la carpeta ./client y ejecutar el comando `npm install` para instalar las dependencias necesarias. Luego correr el comando `npm run dev` para levantar el proyecto.
 
@@ -69,4 +69,77 @@ npm run dev     # Ejecuta la app en modo desarrollo
 npm run build   # Genera build de producción
 npm run lint    # Corre ESLint
 npm run format  # Corre Prettier
+```
+
+## 📦 Integración Continua (CI) con GitHub Actions
+
+Este proyecto utiliza **GitHub Actions** para automatizar la ejecución de tests del backend y la construcción del frontend en cada push o pull request hacia las ramas principales. Esto permite garantizar que los cambios introducidos no rompan la aplicación antes de ser mergeados.
+
+### Flujo del pipeline
+
+- **Trigger del workflow:**
+
+  - Se ejecuta en **push** a cualquier rama.
+  - Se ejecuta en **pull requests** hacia `main` o `develop`.
+
+- **Jobs definidos:**
+
+  1. **Backend Tests**
+
+     - Directorio: `backend/`
+     - Node.js 20
+     - Instalación de dependencias con `npm ci`
+     - Ejecución de tests con `npm test` (Jest + Supertest)
+     - Caché de dependencias para acelerar ejecuciones futuras (`package-lock.json`)
+
+  2. **Frontend Build**
+     - Directorio: `client/`
+     - Node.js 20
+     - Instalación de dependencias con `npm ci`
+     - Build de producción con `npm run build`
+     - Caché de dependencias para acelerar ejecuciones futuras (`package-lock.json`)
+
+### Ejemplo del workflow (`.github/workflows/ci.yml`)
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: "**"
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  backend:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  frontend:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: client/package-lock.json
+      - run: npm ci
+      - run: npm run build
 ```
