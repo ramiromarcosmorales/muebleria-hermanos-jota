@@ -1,12 +1,14 @@
-import { getJSON } from "./utils/api";
-
-getJSON("/api/productos").then(console.log);
+import { useState } from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
+  const [cart] = useState([]);
+
   return (
     <>
-      <img src="/images/logo.svg" alt="Logo" />
-      <h1>Muebleria Hermanos Jota</h1>
+      <Navbar cartCount={cart.length} />
+      <Footer />
     </>
   );
 }
