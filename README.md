@@ -71,6 +71,18 @@ npm run lint    # Corre ESLint
 npm run format  # Corre Prettier
 ```
 
+## Configuración de variables de entorno
+
+El proyecto utiliza variables de entorno definidas en archivos `.env`.
+
+### Variables principales
+
+- `VITE_API_BASE`: URL base del backend.
+
+  ```env
+  VITE_API_BASE=http://localhost:3001
+  ```
+
 ## 📦 Integración Continua (CI) con GitHub Actions
 
 Este proyecto utiliza **GitHub Actions** para automatizar la ejecución de tests del backend y la construcción del frontend en cada push o pull request hacia las ramas principales. Esto permite garantizar que los cambios introducidos no rompan la aplicación antes de ser mergeados.
