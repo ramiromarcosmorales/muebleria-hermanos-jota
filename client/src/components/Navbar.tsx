@@ -1,4 +1,4 @@
-const Navbar = ({ cartCount }: any) => {
+const Navbar = ({ cartCount, goToPage }: any) => {
   return (
     <header className="index-header">
       <nav className="index-navbar">
@@ -16,13 +16,13 @@ const Navbar = ({ cartCount }: any) => {
         </div>
         <ul id="primary-menu" className="navlink-container">
           <li>
-            <a href="index.html">Inicio</a>
+            <a onClick={() => goToPage("home")}>Inicio</a>
           </li>
           <li>
-            <a href="productos.html">Catálogo</a>
+            <a onClick={() => goToPage("catalog")}>Catálogo</a>
           </li>
           <li>
-            <a href="contacto.html">Contacto</a>
+            <a onClick={() => goToPage("contact")}>Contacto</a>
           </li>
         </ul>
         <div className="backdrop" hidden></div>
