@@ -6,7 +6,7 @@ import { getJSON } from "./utils/api";
 getJSON("/api/productos").then(console.log);
 
 function App() {
-  const [cart] = useState([]);
+  const [cart, setCart] = useState([]);
   const [currentPage, setCurrentPage] = useState("home");
 
   const PAGES = {
@@ -15,6 +15,22 @@ function App() {
     productDetail: <h1>PRODUCT DETAIL</h1>,
     contact: <h1>CONTACT</h1>,
   };
+
+  function addToCart(product) {
+    let newCart = Array.from(cart);
+    newCart.push(product);
+    setCart(newCart);
+  }
+
+  function removeFromCart(id) {
+    let newCart = Array.from(cart);
+    newCart = newCart.filter((product) => product.id !== id);
+    setCart(newCart);
+  }
+
+  function clearCart() {
+    setCart([]);
+  }
 
   return (
     <>
