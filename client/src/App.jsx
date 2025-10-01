@@ -7,7 +7,7 @@ getJSON("/api/productos").then(console.log);
 
 function App() {
   const [cart] = useState([]);
-  const [currentPage, setCurrentPage] = useState("sdsadsadsadsa");
+  const [currentPage, setCurrentPage] = useState("home");
 
   const PAGES = {
     home: <h1>HOME</h1>,
@@ -18,13 +18,8 @@ function App() {
 
   return (
     <>
-      <Navbar
-        cartCount={cart.length}
-        goToHome={() => setCurrentPage("home")}
-        goToCatalog={() => setCurrentPage("catalog")}
-        goToContact={() => setCurrentPage("contact")}
-      />
-      {PAGES[currentPage] || <h1>HOME</h1>}
+      <Navbar cartCount={cart.length} goToPage={setCurrentPage} />
+      {PAGES[currentPage] || PAGES["home"]}
       <Footer />
     </>
   );
