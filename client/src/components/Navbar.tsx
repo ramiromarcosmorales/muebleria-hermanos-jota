@@ -1,16 +1,4 @@
-const Navbar = ({ cartCount, changePageFn }: any) => {
-  function goToHome() {
-    changePageFn("home");
-  }
-
-  function goToCatalog() {
-    changePageFn("catalog");
-  }
-
-  function goToContact() {
-    changePageFn("contact");
-  }
-
+const Navbar = ({ cartCount, goToHome, goToCatalog, goToContact }: any) => {
   return (
     <header className="index-header">
       <nav className="index-navbar">

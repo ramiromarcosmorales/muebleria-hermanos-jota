@@ -7,34 +7,24 @@ getJSON("/api/productos").then(console.log);
 
 function App() {
   const [cart] = useState([]);
-  const [currentPage, setCurrentPage] = useState("home");
+  const [currentPage, setCurrentPage] = useState("sdsadsadsadsa");
 
-  function renderPage() {
-    let pageToRender = null;
-    switch (currentPage) {
-      case "home":
-        pageToRender = <h1>HOME</h1>;
-        break;
-      case "catalog":
-        pageToRender = <h1>CATALOG</h1>;
-        break;
-      case "productDetail":
-        pageToRender = <h1>PRODUCT DETAIL</h1>;
-        break;
-      case "contact":
-        pageToRender = <h1>CONTACT</h1>;
-        break;
-      default:
-        pageToRender = <h1>HOME</h1>;
-        break;
-    }
-    return pageToRender;
-  }
+  const PAGES = {
+    home: <h1>HOME</h1>,
+    catalog: <h1>CATALOG</h1>,
+    productDetail: <h1>PRODUCT DETAIL</h1>,
+    contact: <h1>CONTACT</h1>,
+  };
 
   return (
     <>
-      <Navbar cartCount={cart.length} changePageFn={setCurrentPage} />
-      {renderPage()}
+      <Navbar
+        cartCount={cart.length}
+        goToHome={() => setCurrentPage("home")}
+        goToCatalog={() => setCurrentPage("catalog")}
+        goToContact={() => setCurrentPage("contact")}
+      />
+      {PAGES[currentPage] || <h1>HOME</h1>}
       <Footer />
     </>
   );
