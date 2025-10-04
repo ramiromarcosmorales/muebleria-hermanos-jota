@@ -2,43 +2,33 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ContactForm from "./components/ContactForm";
-import { getJSON } from "./utils/api";
-
-getJSON("/api/productos").then(console.log);
+import Home from "./pages/Home";
+import useProducts from "./hooks/useProducts";
+import useCart from "./hooks/useCart";
 
 function App() {
-  const [cart, setCart] = useState([]);
   const [currentPage, setCurrentPage] = useState("home");
+  const { productos, loading, error } = useProducts();
+  const { cart, addToCart, removeFromCart, clearCart } = useCart();
 
   const PAGES = {
-    home: <h1>HOME</h1>,
+    home: (
+      <Home
+        goToPage={setCurrentPage}
+        productos={productos}
+        loading={loading}
+        error={error}
+      />
+    ),
     catalog: <h1>CATALOG</h1>,
     productDetail: <h1>PRODUCT DETAIL</h1>,
     contact: <ContactForm />,
   };
 
-  function addToCart(product) {
-    let newCart = Array.from(cart);
-    newCart.push(product);
-    setCart(newCart);
-  }
-
-  function removeFromCart(id) {
-    let newCart = Array.from(cart);
-    newCart = newCart.filter((product) => product.id !== id);
-    setCart(newCart);
-  }
-
-  function clearCart() {
-    setCart([]);
-  }
-
   return (
     <>
       <Navbar cartCount={cart.length} goToPage={setCurrentPage} />
-      <main>
-        {PAGES[currentPage] || PAGES["home"]}
-      </main>
+      <main>{PAGES[currentPage] || PAGES["home"]}</main>
       <Footer />
     </>
   );
