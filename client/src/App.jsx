@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import ContactForm from "./components/ContactForm";
+import ContactForm from "./pages/ContactForm";
 import Home from "./pages/Home";
 import useProducts from "./hooks/useProducts";
 import useCart from "./hooks/useCart";
@@ -27,7 +27,11 @@ function App() {
 
   return (
     <>
-      <Navbar cartCount={cart.length} goToPage={setCurrentPage} />
+      <Navbar
+        cartCount={cart.length}
+        goToPage={setCurrentPage}
+        productos={productos}
+      />
       <main>{PAGES[currentPage] || PAGES["home"]}</main>
       <Footer />
     </>
