@@ -6,11 +6,10 @@ const MSG_MIN = 10;
 const MSG_MAX = 500;
 
 const EMAIL_REGEX =
+  // eslint-disable-next-line no-control-regex
   /(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
 
-
 const ContactForm = () => {
-
   const [form, setForm] = useState({
     nombre: "",
     email: "",
@@ -25,7 +24,7 @@ const ContactForm = () => {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
   };
-  
+
   const validate = ({ nombre, email, mensaje }) => {
     const errs = [];
 
@@ -56,16 +55,21 @@ const ContactForm = () => {
       return;
     }
     setStatus("ok");
-    console.log("Formulario enviado:", form); 
+    console.log("Formulario enviado:", form);
   };
 
   const nameInvalid =
     status === "error" &&
-    (!form.nombre || form.nombre.length < NAME_MIN || form.nombre.length > NAME_MAX);
-  const emailInvalid = status === "error" && (!form.email || !EMAIL_REGEX.test(form.email));
+    (!form.nombre ||
+      form.nombre.length < NAME_MIN ||
+      form.nombre.length > NAME_MAX);
+  const emailInvalid =
+    status === "error" && (!form.email || !EMAIL_REGEX.test(form.email));
   const msgInvalid =
     status === "error" &&
-    (!form.mensaje || form.mensaje.length < MSG_MIN || form.mensaje.length > MSG_MAX);
+    (!form.mensaje ||
+      form.mensaje.length < MSG_MIN ||
+      form.mensaje.length > MSG_MAX);
 
   return (
     <section className="contact">
@@ -73,12 +77,17 @@ const ContactForm = () => {
         <header className="contact-header">
           <h2>Ponte en contacto con nosotros</h2>
           <p>
-            ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario
-            y nos pondremos en contacto contigo lo antes posible.
+            ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario y
+            nos pondremos en contacto contigo lo antes posible.
           </p>
         </header>
 
-        <form id="contact-form" className="contact-form" noValidate onSubmit={onSubmit}>
+        <form
+          id="contact-form"
+          className="contact-form"
+          noValidate
+          onSubmit={onSubmit}
+        >
           <div className="contact-field">
             <label htmlFor="nombreUsuario">Nombre</label>
             <input
@@ -130,11 +139,19 @@ const ContactForm = () => {
             id="status-message"
             role="status"
             aria-live="polite"
-            className={status === "error" ? "error-status" : status === "ok" ? "success-status" : ""}
+            className={
+              status === "error"
+                ? "error-status"
+                : status === "ok"
+                  ? "success-status"
+                  : ""
+            }
           >
             {status === "error" && (
               <>
-                <p>No se pudo enviar el formulario por los siguientes errores:</p>
+                <p>
+                  No se pudo enviar el formulario por los siguientes errores:
+                </p>
                 <ul>
                   {errors.map((e, i) => (
                     <li key={i}>{e}</li>
