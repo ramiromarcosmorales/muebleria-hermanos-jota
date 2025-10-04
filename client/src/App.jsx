@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ContactForm from "./components/ContactForm";
 import { getJSON } from "./utils/api";
 
 getJSON("/api/productos").then(console.log);
@@ -13,7 +14,7 @@ function App() {
     home: <h1>HOME</h1>,
     catalog: <h1>CATALOG</h1>,
     productDetail: <h1>PRODUCT DETAIL</h1>,
-    contact: <h1>CONTACT</h1>,
+    contact: <ContactForm />,
   };
 
   function addToCart(product) {
@@ -35,7 +36,9 @@ function App() {
   return (
     <>
       <Navbar cartCount={cart.length} goToPage={setCurrentPage} />
-      {PAGES[currentPage] || PAGES["home"]}
+      <main>
+        {PAGES[currentPage] || PAGES["home"]}
+      </main>
       <Footer />
     </>
   );
