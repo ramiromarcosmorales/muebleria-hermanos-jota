@@ -1,8 +1,18 @@
 import { useState, useEffect, useRef } from "react";
 import SearchBox from "./SearchBox";
+import CartDropdown from "./CartDropdown";
 
-const Navbar = ({ cartCount, goToPage, productos }) => {
+const Navbar = ({
+  cart,
+  increaseQuantity,
+  removeFromCart,
+  decreaseQuantity,
+  clearCart,
+  goToPage,
+  productos,
+}) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const headerRef = useRef(null);
 
   // Calcula y setea la variable CSS --header-h
@@ -26,12 +36,26 @@ const Navbar = ({ cartCount, goToPage, productos }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  // cerrar dropdown si se clickea afuera
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest(".cart-container")) {
+        setCartOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   // Cierra el menú si se hace click fuera o en un link
   const handleBackdropClick = () => setMenuOpen(false);
   const handleLinkClick = (page) => {
     goToPage(page);
     setMenuOpen(false);
   };
+
+  //Numero en el navbar del carrito
+  const cartCount = cart.reduce((acc, i) => acc + i.quantity, 0);
 
   return (
     <header className="index-header" ref={headerRef}>
@@ -78,24 +102,28 @@ const Navbar = ({ cartCount, goToPage, productos }) => {
           <SearchBox productos={productos} goToPage={goToPage} />
 
           <div className="cart-container">
-            <div className="cart-icon">
+            <div
+              className="cart-icon"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCartOpen((prev) => !prev);
+              }}
+            >
               <i className="fa-solid fa-cart-shopping"></i>
               <span id="cart-count" className="cart-count">
                 {cartCount}
               </span>
             </div>
 
-            <div id="cart-dropdown" className="cart-dropdown hidden">
-              <div id="cart-items"></div>
-              <div className="cart-total">
-                <button id="btn-clean-cart" className="btn-clean-cart">
-                  Vaciar Carrito
-                </button>
-                <p>
-                  Total: <span id="cart-total">0</span>
-                </p>
-              </div>
-            </div>
+            {cartOpen && (
+              <CartDropdown
+                cart={cart}
+                onRemove={removeFromCart}
+                onIncrease={increaseQuantity}
+                onDecrease={decreaseQuantity}
+                onClear={clearCart}
+              />
+            )}
           </div>
         </div>
       </nav>

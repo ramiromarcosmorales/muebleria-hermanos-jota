@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import useProducts from "./hooks/useProducts";
 import useCart from "./hooks/useCart";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   const [currentPage, setCurrentPage] = useState(
@@ -14,15 +15,35 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("currentPage", currentPage);
+    if ("scrollBehavior" in document.documentElement.style) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [currentPage]);
 
   const { productos, loading, error, refetch } = useProducts();
-  const { cart, addToCart, removeFromCart, clearCart } = useCart();
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const {
+    cart,
+    removeFromCart,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity,
+    addToCart,
+  } = useCart();
+
+  const goToPage = (page, product = null) => {
+    setCurrentPage(page);
+    if (product) {
+      setSelectedProduct(product);
+    }
+  };
 
   const PAGES = {
     home: (
       <Home
-        goToPage={setCurrentPage}
+        goToPage={goToPage}
         productos={productos}
         loading={loading}
         error={error}
@@ -30,22 +51,34 @@ function App() {
     ),
     catalog: (
       <Catalog
-        goToPage={setCurrentPage}
+        goToPage={goToPage}
         productos={productos}
         loading={loading}
         error={error}
         refetch={refetch}
+        addToCart={addToCart}
       />
     ),
-    productDetail: <h1>PRODUCT DETAIL</h1>,
+    productDetail: (
+      <ProductDetail
+        product={selectedProduct}
+        goToPage={goToPage}
+        addToCart={addToCart}
+      />
+    ),
     contact: <ContactForm />,
   };
 
   return (
     <>
       <Navbar
-        cartCount={cart.length}
-        goToPage={setCurrentPage}
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
+        goToPage={goToPage}
         productos={productos}
       />
       <main>{PAGES[currentPage] || PAGES["home"]}</main>
