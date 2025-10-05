@@ -17,7 +17,9 @@ async function render() {
     const product = products.find((p) => p.id === productId);
 
     const detailContainer = document.getElementById("product-detail");
-    const characteristicsContainer = document.getElementById("product-characteristics");
+    const characteristicsContainer = document.getElementById(
+      "product-characteristics"
+    );
 
     if (!detailContainer) return;
 
