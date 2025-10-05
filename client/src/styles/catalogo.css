@@ -1,0 +1,42 @@
+/* Mueve el código React a un archivo .jsx o .js separado. Este archivo debe contener solo CSS. */
+
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .catalogo-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .catalogo-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.card:focus,
+.button:focus {
+  outline: 2px solid #005fcc;
+  outline-offset: 2px;
+}
+
+.error-block {
+  color: red;
+  margin: 1rem 0;
+}
+
+button {
+  background-color: #005fcc;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #004bbd;
+}
