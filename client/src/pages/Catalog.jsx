@@ -1,6 +1,13 @@
 import ProductCard from "../components/ProductCard";
 
-const Catalog = ({ goToPage, productos, loading, error, refetch }) => {
+const Catalog = ({
+  goToPage,
+  productos,
+  loading,
+  error,
+  refetch,
+  addToCart,
+}) => {
   return (
     <section className="products-section">
       <h1 className="products-title-section">Catálogo de Productos</h1>
@@ -29,7 +36,8 @@ const Catalog = ({ goToPage, productos, loading, error, refetch }) => {
             <ProductCard
               key={producto.id}
               product={producto}
-              onViewProduct={() => goToPage("catalog")} //MODIFICAR POR EL DETALLE DEL PRODUCTO Y ENVIAR EL PRODUCTO Y LA RUTA
+              onViewProduct={() => goToPage("productDetail", producto)}
+              onAddToCart={() => addToCart(producto)}
             />
           ))}
       </section>

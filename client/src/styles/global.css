@@ -899,6 +899,7 @@ footer ul {
   width: 100%;
   max-width: 800px;
   gap: 2rem;
+  margin-bottom: 3em;
 }
 
 .contact-header {
@@ -1038,7 +1039,7 @@ footer ul {
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.15);
   padding: var(--padding-base);
   z-index: 100;
-
+  width: 370px;
   font-family: var(--fuente-cuerpo);
   font-size: var(--tamaño-cuerpo);
   color: var(--color-texto);
@@ -1057,17 +1058,18 @@ footer ul {
   border-bottom: 1px solid var(--color-fondo);
 }
 
-#cart-items {
+.cart-items {
   max-height: 250px;
   overflow-y: auto;
   padding-right: 5px;
+  overflow-x: hidden;
 }
 
-#cart-items::-webkit-scrollbar {
+.cart-items::-webkit-scrollbar {
   width: 6px;
 }
 
-#cart-items::-webkit-scrollbar-thumb {
+.cart-items::-webkit-scrollbar-thumb {
   background-color: var(--color-fondo);
   border-radius: 4px;
 }
@@ -1391,6 +1393,7 @@ footer ul {
   border-radius: 6px;
   color: var(--color-texto);
   transition: background 0.2s;
+  cursor: pointer;
 }
 
 .search-result-item:hover {

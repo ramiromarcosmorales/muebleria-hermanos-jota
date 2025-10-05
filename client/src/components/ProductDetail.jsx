@@ -12,7 +12,6 @@ const ProductDetail = ({ addToCart, product }) => {
     color: "COLOR",
   };
 
-  console.log(product);
   if (!product) return <p>Producto no encontrado</p>;
 
   return (

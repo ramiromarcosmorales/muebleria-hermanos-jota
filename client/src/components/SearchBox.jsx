@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { formatPrice } from "../utils/format-price";
 
 const normalizeText = (text) =>
@@ -10,6 +10,7 @@ const normalizeText = (text) =>
 const SearchBox = ({ productos, goToPage }) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
+  const boxRef = useRef(null);
 
   const filtered = productos.filter((p) =>
     normalizeText(p.nombre).includes(normalizeText(query))
@@ -24,11 +25,25 @@ const SearchBox = ({ productos, goToPage }) => {
   const handleSelect = (producto) => {
     setQuery("");
     setOpen(false);
-    goToPage("catalog"); // Enviar producto cuando se implemente el detalle
+    goToPage("productDetail", producto);
+    console.log(producto);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="search-box">
+    <div className="search-box" ref={boxRef}>
       <i className="fa-solid fa-search"></i>
       <input
         type="text"

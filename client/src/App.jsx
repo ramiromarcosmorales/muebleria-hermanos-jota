@@ -15,23 +15,31 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("currentPage", currentPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentPage]);
 
   const { productos, loading, error, refetch } = useProducts();
-  const [selectProduct, setSelectProduct] = useState(null);
-  const { cart, addToCart, removeFromCart, clearCart } = useCart();
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const {
+    cart,
+    removeFromCart,
+    clearCart,
+    increaseQuantity,
+    decreaseQuantity,
+    addToCart,
+  } = useCart();
 
   const goToPage = (page, product = null) => {
     setCurrentPage(page);
     if (product) {
-      setSelectProduct(product);
+      setSelectedProduct(product);
     }
   };
 
   const PAGES = {
     home: (
       <Home
-        goToPage={setCurrentPage}
+        goToPage={goToPage}
         productos={productos}
         loading={loading}
         error={error}
@@ -39,15 +47,20 @@ function App() {
     ),
     catalog: (
       <Catalog
-        goToPage={setCurrentPage}
+        goToPage={goToPage}
         productos={productos}
         loading={loading}
         error={error}
         refetch={refetch}
+        addToCart={addToCart}
       />
     ),
     productDetail: (
-      <ProductDetail addToCart={addToCart} product={selectProduct} />
+      <ProductDetail
+        product={selectedProduct}
+        goToPage={goToPage}
+        addToCart={addToCart}
+      />
     ),
     contact: <ContactForm />,
   };
@@ -55,8 +68,13 @@ function App() {
   return (
     <>
       <Navbar
-        cartCount={cart.length}
-        goToPage={setCurrentPage}
+        cart={cart}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
+        goToPage={goToPage}
         productos={productos}
       />
       <main>{PAGES[currentPage] || PAGES["home"]}</main>
