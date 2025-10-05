@@ -3,7 +3,7 @@ import ProductCard from "../components/ProductCard";
 const Home = ({ goToPage, productos, loading, error }) => {
   const destacados = productos.filter((p) => p.destacado);
   return (
-    <main>
+    <>
       <section className="hero">
         <div className="hero-container">
           <div className="hero-badge">
@@ -106,7 +106,7 @@ const Home = ({ goToPage, productos, loading, error }) => {
           </div>
         </div>
       </section>
-    </main>
+    </>
   );
 };
 

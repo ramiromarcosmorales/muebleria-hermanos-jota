@@ -49,7 +49,7 @@ const ProductCard = ({
         onClick={handleAddToCart}
         aria-label={`Añadir ${product?.nombre} al carrito`}
       >
-        <div className="cart-icon">
+        <div className="cart-icon-catalog">
           <i className="fa-solid fa-cart-shopping"></i>
           <span className="cart-count">+</span>
         </div>
