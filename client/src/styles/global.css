@@ -221,6 +221,16 @@ video {
 .cart-icon:hover {
   background: #ddd;
 }
+
+.cart-icon-catalog {
+  position: relative;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  border-radius: 5px;
+  transition: background 0.3s;
+  cursor: pointer;
+}
+
 .cart-count {
   position: absolute;
   top: -8px;
