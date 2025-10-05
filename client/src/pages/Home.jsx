@@ -55,7 +55,9 @@ const Home = ({ goToPage, productos, loading, error }) => {
                   key={producto.id}
                   product={producto}
                   variant="home"
-                  onViewProduct={() => goToPage("catalog")} // cambiar luego por vista detalle
+                  onViewProduct={() => {
+                    goToPage("productDetail", producto);
+                  }}
                 />
               ))
             ) : (
