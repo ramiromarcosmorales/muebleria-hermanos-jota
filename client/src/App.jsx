@@ -15,7 +15,11 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("currentPage", currentPage);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if ("scrollBehavior" in document.documentElement.style) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo(0, 0);
+    }
   }, [currentPage]);
 
   const { productos, loading, error, refetch } = useProducts();

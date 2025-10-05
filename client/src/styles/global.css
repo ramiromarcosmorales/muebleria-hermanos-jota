@@ -162,6 +162,7 @@ video {
 .navbar-logo {
   height: 40px;
   width: auto;
+  cursor: pointer;
 }
 
 /* links centrados en desktop */
