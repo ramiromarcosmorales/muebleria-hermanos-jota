@@ -51,7 +51,7 @@ El proyecto está dividido en dos directorios principales:
 
 ### 🌐 Backend desplegado
 
-API pública: [https://muebleria-jota-backend.onrender.com/api/productos](https://muebleria-jota-backend.onrender.com/api/productos)
+API pública: [https://muebleria-hermanos-jota.onrender.com/api/docs/](https://muebleria-hermanos-jota.onrender.com/api/docs/)
 
 ## ⚛️ Como levantar el Frontend - Vite + React
 
