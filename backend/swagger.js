@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5173",
+        url: "https://muebleria-hermanos-jota.onrender.com",
         description: "Servidor local",
       },
     ],
