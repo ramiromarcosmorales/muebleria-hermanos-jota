@@ -1,3 +1,4 @@
+const path = require('path');
 const swaggerJSDoc = require("swagger-jsdoc");
 
 const options = {
@@ -10,12 +11,15 @@ const options = {
     },
     servers: [
       {
-        url: "https://muebleria-hermanos-jota.onrender.com",
-        description: "Servidor local",
+        url: "https://muebleria-hermanos-jota-backend.vercel.app",
+        description: "Producción",
       },
     ],
   },
-  apis: ["./routes/products.js", "./routes/status.js"],
+  apis: [
+    path.join(__dirname, "routes", "products.js"),
+    path.join(__dirname, "routes", "status.js"),
+  ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
