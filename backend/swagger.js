@@ -11,13 +11,13 @@ const options = {
     },
     servers: [
       {
-        url: "https://muebleria-hermanos-jota-backend.vercel.app/api",
+        url: "https://muebleria-hermanos-jota-backend.vercel.app",
         description: "Producción",
       },
     ],
   },
   apis: [
-    path.join(__dirname, "routes ", "products.js"),
+    path.join(__dirname, "routes", "products.js"),
     path.join(__dirname, "routes", "status.js"),
   ],
 };

@@ -28,7 +28,7 @@ app.use(requestCounter);
 
 // Documentación Swagger disponible en /api/docs
 app.use(
-  "/docs",
+  "/api/docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, {
     customCssUrl: "https://unpkg.com/swagger-ui-dist/swagger-ui.css",
