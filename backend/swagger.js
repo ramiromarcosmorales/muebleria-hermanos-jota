@@ -10,8 +10,8 @@ const options = {
     },
     servers: [
       {
-        url: "https://muebleria-hermanos-jota.onrender.com",
-        description: "Servidor local",
+        url: "https://muebleria-hermanos-jota-backend.vercel.app/api",
+        description: "Producción",
       },
     ],
   },

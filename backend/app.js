@@ -27,7 +27,7 @@ app.use(logger.log); // Middleware personalizado para logs
 app.use(requestCounter);
 
 // Documentación Swagger disponible en /api/docs
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /**
  * Importa y conecta el router de productos.
