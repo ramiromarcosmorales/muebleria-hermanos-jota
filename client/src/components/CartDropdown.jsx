@@ -7,7 +7,7 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
   );
 
   return (
-    <div className="cart-dropdown">
+    <div className="cart-dropdown" onClick={(e) => e.stopPropagation()}>
       <div className="cart-items">
         {cart.length === 0 ? (
           <p style={{ textAlign: "center", color: "#777" }}>Carrito vacío</p>
@@ -19,13 +19,39 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
                 <span className="cart-item-name">{item.nombre}</span>
                 <div className="cart-item-quantity">
                   <button
-                    onClick={() => onDecrease(item.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onDecrease(item.id);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onDecrease(item.id);
+                      }
+                    }}
                     disabled={item.quantity <= 1}
+                    aria-label="Reducir cantidad"
                   >
                     -
                   </button>
                   <span className="item-quantity">{item.quantity}</span>
-                  <button onClick={() => onIncrease(item.id)}>+</button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIncrease(item.id);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onIncrease(item.id);
+                      }
+                    }}
+                    aria-label="Incrementar cantidad"
+                  >
+                    +
+                  </button>
                 </div>
               </div>
               <span className="cart-item-price">
@@ -37,6 +63,14 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
                   e.stopPropagation();
                   onRemove(item.id);
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onRemove(item.id);
+                  }
+                }}
+                aria-label="Eliminar producto del carrito"
               >
                 ❌
               </button>
@@ -53,6 +87,14 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
               e.stopPropagation();
               onClear();
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.stopPropagation();
+                onClear();
+              }
+            }}
+            aria-label="Vaciar carrito"
           >
             Vaciar Carrito
           </button>

@@ -65,6 +65,7 @@ const Navbar = ({
             className="menu-toggle"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Abrir menú de navegación"
           >
             <i className="fa-solid fa-bars"></i>
           </button>
@@ -82,13 +83,28 @@ const Navbar = ({
           className={`navlink-container ${menuOpen ? "is-open" : ""}`}
         >
           <li>
-            <a onClick={() => handleLinkClick("home")}>Inicio</a>
+            <button
+              onClick={() => handleLinkClick("home")}
+              aria-label="Ir al inicio"
+            >
+              Inicio
+            </button>
           </li>
           <li>
-            <a onClick={() => handleLinkClick("catalog")}>Catálogo</a>
+            <button
+              onClick={() => handleLinkClick("catalog")}
+              aria-label="Ir al catálogo de productos"
+            >
+              Catálogo
+            </button>
           </li>
           <li>
-            <a onClick={() => handleLinkClick("contact")}>Contacto</a>
+            <button
+              onClick={() => handleLinkClick("contact")}
+              aria-label="Ir a contacto"
+            >
+              Contacto
+            </button>
           </li>
         </ul>
 
@@ -101,7 +117,19 @@ const Navbar = ({
         <div className="nav-actions">
           <SearchBox productos={productos} goToPage={goToPage} />
 
-          <div className="cart-container">
+          <div
+            className="cart-container"
+            role="button"
+            tabIndex={0}
+            aria-label="Abrir carrito de compras"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                e.stopPropagation();
+                setCartOpen((prev) => !prev);
+              }
+            }}
+          >
             <div
               className="cart-icon"
               onClick={(e) => {
