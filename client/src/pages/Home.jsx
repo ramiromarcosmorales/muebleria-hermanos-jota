@@ -17,9 +17,9 @@ const Home = ({ goToPage, productos, loading, error }) => {
             Transforma tu hogar en un santuario de elegancia y confort. Descubre
             muebles únicos que cuentan historias y crean momentos inolvidables.
           </p>
-          <a onClick={() => goToPage("catalog")} className="hero-btn">
+          <button onClick={() => goToPage("catalog")} className="hero-btn">
             Ver Colección →
-          </a>
+          </button>
         </div>
         <div className="hero-img">
           <img
@@ -32,7 +32,10 @@ const Home = ({ goToPage, productos, loading, error }) => {
         <h2>Productos Destacados</h2>
         {loading && (
           <div className="loading-state">
-            <div className="spinner" />
+            <div
+              className="spinner"
+              aria-label="Cargando productos destacados"
+            />
             <p>Cargando productos destacados...</p>
           </div>
         )}
