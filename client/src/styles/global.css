@@ -918,7 +918,7 @@ footer ul {
   max-width: 600px;
 }
 
-.contact-header h2 {
+.contact-header h1 {
   font-family: var(--fuente-titulos);
   font-size: var(--tamaño-titulos);
   font-weight: var(--peso-titulos);
