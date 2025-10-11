@@ -14,8 +14,11 @@ const Catalog = ({
       <section className="products-container">
         {loading && (
           <div className="loading-state">
-            <div className="spinner" />
-            <p>Cargando productos destacados...</p>
+            <div
+              className="spinner"
+              aria-label="Cargando catálogo de productos"
+            />
+            <p>Cargando catálogo de productos...</p>
           </div>
         )}
 
