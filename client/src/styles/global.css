@@ -1001,6 +1001,110 @@ footer ul {
   background: var(--color-acento);
 }
 
+/* Creación de producto */
+
+.create-product {
+  min-height: 100vh;
+  background-color: var(--color-fondo);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-base);
+}
+.create-product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  gap: 2rem;
+  margin-bottom: 3em;
+}
+.create-product-header {
+  text-align: center;
+  max-width: 600px;
+}
+
+.create-product-header h1 {
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamaño-titulos);
+  font-weight: var(--peso-titulos);
+  color: var(--color-primario);
+  margin-bottom: 0.5rem;
+  letter-spacing: var(--tracking-titulos);
+}
+
+.create-product-header p {
+  font-family: var(--fuente-cuerpo);
+  font-size: var(--tamaño-cuerpo);
+  color: var(--color-texto);
+  line-height: var(--line-height-cuerpo);
+}
+
+.create-product-form {
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.create-product-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.create-product-field label {
+  font-weight: 600;
+  color: var(--color-primario);
+  font-size: 0.95rem;
+}
+
+.create-product-field input {
+  border: 1px solid #ddd;
+  border-radius: 0.8rem;
+  padding: 0.9rem 1.2rem;
+  font-family: var(--fuente-cuerpo);
+  font-size: 0.95rem;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  resize: none;
+}
+
+.create-product-field input:focus {
+  outline: none;
+  border-color: var(--color-acento);
+  box-shadow: 0 0 0 3px rgba(196, 122, 109, 0.2);
+}
+
+.create-product-field input::placeholder {
+  color: #999;
+  opacity: 0.7;
+}
+
+.create-product-button {
+  background: var(--color-primario);
+  border: none;
+  border-radius: 1rem;
+  padding: 0.9rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+  font-family: var(--fuente-cta);
+  font-size: var(--tamaño-cta);
+  letter-spacing: var(--tracking-cta);
+  transition: background-color 0.3s ease;
+}
+
+.create-product-button:hover {
+  background: var(--color-acento);
+}
+
 /* Status message */
 #status-message {
   min-height: 2.5rem;
