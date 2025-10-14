@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
+import { useProductsContext } from "../context/ProductsContext";
 
-const Home = ({ goToPage, productos, loading, error }) => {
+const Home = () => {
+  const { productos, loading, error } = useProductsContext();
   const destacados = productos.filter((p) => p.destacado);
   return (
     <>
@@ -17,9 +20,9 @@ const Home = ({ goToPage, productos, loading, error }) => {
             Transforma tu hogar en un santuario de elegancia y confort. Descubre
             muebles únicos que cuentan historias y crean momentos inolvidables.
           </p>
-          <button onClick={() => goToPage("catalog")} className="hero-btn">
+          <Link to={"catalogo"} className="hero-btn">
             Ver Colección →
-          </button>
+          </Link>
         </div>
         <div className="hero-img">
           <img
@@ -58,9 +61,6 @@ const Home = ({ goToPage, productos, loading, error }) => {
                   key={producto.id}
                   product={producto}
                   variant="home"
-                  onViewProduct={() => {
-                    goToPage("productDetail", producto);
-                  }}
                 />
               ))
             ) : (

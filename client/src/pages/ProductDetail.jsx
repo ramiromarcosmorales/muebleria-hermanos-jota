@@ -1,4 +1,5 @@
 import { formatPrice } from "../utils/format-price";
+import { Link } from "react-router-dom";
 
 const ProductDetail = ({ addToCart, product }) => {
   const characteristicLabels = {
@@ -12,7 +13,21 @@ const ProductDetail = ({ addToCart, product }) => {
     color: "COLOR",
   };
 
-  if (!product) return <p>Producto no encontrado</p>;
+  if (!product)
+    return (
+      <div className="center-screen">
+        <div className="center-box">
+          <h2>Producto no encontrado</h2>
+          <p>
+            Lo sentimos, el producto que estás buscando no existe o fue
+            eliminado.
+          </p>
+          <Link className="featured-product-button" to={"/catalogo"}>
+            Volver al Catálogo
+          </Link>
+        </div>
+      </div>
+    );
 
   return (
     <section className="product-detail-section">

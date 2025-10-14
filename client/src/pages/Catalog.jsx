@@ -1,13 +1,9 @@
 import ProductCard from "../components/ProductCard";
+import { useProductsContext } from "../context/ProductsContext";
 
-const Catalog = ({
-  goToPage,
-  productos,
-  loading,
-  error,
-  refetch,
-  addToCart,
-}) => {
+const Catalog = () => {
+  const { productos, loading, error, refetch } = useProductsContext();
+
   return (
     <section className="products-section">
       <h1 className="products-title-section">Catálogo de Productos</h1>
@@ -36,12 +32,7 @@ const Catalog = ({
         {!loading &&
           !error &&
           productos.map((producto) => (
-            <ProductCard
-              key={producto.id}
-              product={producto}
-              onViewProduct={() => goToPage("productDetail", producto)}
-              onAddToCart={() => addToCart(producto)}
-            />
+            <ProductCard key={producto.id} product={producto} />
           ))}
       </section>
     </section>

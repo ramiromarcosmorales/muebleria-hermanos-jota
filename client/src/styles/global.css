@@ -1440,3 +1440,32 @@ footer ul {
   color: #666;
   font-size: 0.9rem;
 }
+
+.center-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84vh;
+  background-color: #f9fafb;
+}
+
+.center-box {
+  text-align: center;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.center-box h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 8px;
+  color: var(--color-primario);
+}
+
+.center-box p {
+  color: #6b7280;
+  font-size: 1rem;
+}

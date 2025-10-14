@@ -1,6 +1,14 @@
 import { formatPrice } from "../utils/format-price";
+import { useCartContext } from "../context/CartContext";
 
-const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
+const CartDropdown = () => {
+  const {
+    cart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    clearCart,
+  } = useCartContext();
   const total = cart.reduce(
     (sum, item) => sum + item.precio * item.quantity,
     0
@@ -21,13 +29,13 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onDecrease(item.id);
+                      decreaseQuantity(item.id);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         e.stopPropagation();
-                        onDecrease(item.id);
+                        decreaseQuantity(item.id);
                       }
                     }}
                     disabled={item.quantity <= 1}
@@ -39,13 +47,13 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      onIncrease(item.id);
+                      increaseQuantity(item.id);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         e.stopPropagation();
-                        onIncrease(item.id);
+                        increaseQuantity(item.id);
                       }
                     }}
                     aria-label="Incrementar cantidad"
@@ -61,13 +69,13 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
                 className="btn-clean-product"
                 onClick={(e) => {
                   e.stopPropagation();
-                  onRemove(item.id);
+                  removeFromCart(item.id);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     e.stopPropagation();
-                    onRemove(item.id);
+                    removeFromCart(item.id);
                   }
                 }}
                 aria-label="Eliminar producto del carrito"
@@ -85,13 +93,13 @@ const CartDropdown = ({ cart, onRemove, onIncrease, onDecrease, onClear }) => {
             className="btn-clean-cart"
             onClick={(e) => {
               e.stopPropagation();
-              onClear();
+              clearCart();
             }}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 e.stopPropagation();
-                onClear();
+                clearCart();
               }
             }}
             aria-label="Vaciar carrito"
