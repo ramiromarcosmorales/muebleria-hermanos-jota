@@ -22,7 +22,7 @@ const ProductDetail = ({ addToCart, product }) => {
             Lo sentimos, el producto que estás buscando no existe o fue
             eliminado.
           </p>
-          <Link className="featured-product-button" to={"/catalogo"}>
+          <Link className="featured-product-button" to={"/productos"}>
             Volver al Catálogo
           </Link>
         </div>
