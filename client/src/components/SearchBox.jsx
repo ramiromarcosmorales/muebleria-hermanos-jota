@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { formatPrice } from "../utils/format-price";
+import { useNavigate } from "react-router-dom";
 
 const normalizeText = (text) =>
   text
@@ -7,7 +8,7 @@ const normalizeText = (text) =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
-const SearchBox = ({ productos, goToPage }) => {
+const SearchBox = ({ productos }) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -15,6 +16,7 @@ const SearchBox = ({ productos, goToPage }) => {
   const resultsRef = useRef(null);
 
   const inputId = "searchbox-input";
+  const navigate = useNavigate();
 
   const filtered = productos.filter((p) =>
     normalizeText(p.nombre).includes(normalizeText(query))
@@ -30,8 +32,7 @@ const SearchBox = ({ productos, goToPage }) => {
     setQuery("");
     setOpen(false);
     setSelectedIndex(-1);
-    goToPage("productDetail", producto);
-    console.log(producto);
+    navigate(`/producto/${producto.id}`);
   };
 
   const handleKeyDown = (e) => {
