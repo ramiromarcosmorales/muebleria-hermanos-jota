@@ -29,148 +29,189 @@ function ProductForm() {
   }
 
   return (
-    <>
-      <h1>Crear producto</h1>
-      <form noValidate onSubmit={handleSubmit}>
-        <label htmlFor="nombreProducto">Nombre</label>
-        <input
-          type="text"
-          id="nombreProducto"
-          name="nombre"
-          placeholder="Nombre del producto"
-          value={formData.nombre}
-          onChange={handleChange}
-        />
+    <section className="create-product">
+      <div className="create-product-container">
+        <header className="create-product-header">
+          <h1>Crear producto</h1>
+          <p>Rellena el formulario y pulsa enviar para añadir un producto.</p>
+        </header>
 
-        <label htmlFor="descripcionProducto">Descripción</label>
-        <input
-          type="text"
-          id="descripcionProducto"
-          name="descripcion"
-          placeholder="Descripción del producto"
-          value={formData.descripcion}
-          onChange={handleChange}
-        />
+        <form
+          className="create-product-form"
+          noValidate
+          onSubmit={handleSubmit}
+        >
+          <div className="create-product-field">
+            <label htmlFor="nombreProducto">Nombre</label>
+            <input
+              type="text"
+              id="nombreProducto"
+              name="nombre"
+              placeholder="Nombre del producto"
+              value={formData.nombre}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="descripcionAltProducto">Descripción alt</label>
-        <input
-          type="text"
-          id="descripcionAltProducto"
-          name="altValue"
-          placeholder="Descripción del alt"
-          value={formData.altValue}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="descripcionProducto">Descripción</label>
+            <input
+              type="text"
+              id="descripcionProducto"
+              name="descripcion"
+              placeholder="Descripción del producto"
+              value={formData.descripcion}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="precioProducto">Precio</label>
-        <input
-          type="number"
-          id="precioProducto"
-          name="precio"
-          value={formData.precio}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="descripcionAltProducto">Descripción alt</label>
+            <input
+              type="text"
+              id="descripcionAltProducto"
+              name="altValue"
+              placeholder="Descripción del alt"
+              value={formData.altValue}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="imagenProducto">Imagen</label>
-        <input
-          type="image"
-          id="imagenProducto"
-          name="srcImg"
-          value={formData.srcImg}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="precioProducto">Precio</label>
+            <input
+              type="number"
+              id="precioProducto"
+              name="precio"
+              value={formData.precio}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="destacadoProducto">Destacado</label>
-        <input
-          type="checkbox"
-          id="destacadoProducto"
-          name="destacado"
-          value={formData.destacado}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="imagenProducto">Imagen</label>
+            <input
+              type="image"
+              id="imagenProducto"
+              name="srcImg"
+              value={formData.srcImg}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="dimensionesProducto">Dimensiones</label>
-        <input
-          type="text"
-          id="dimensionesProducto"
-          name="dimensiones"
-          placeholder="Dimensiones del producto"
-          value={formData.dimensiones}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="destacadoProducto">Destacado</label>
+            <input
+              type="checkbox"
+              id="destacadoProducto"
+              name="destacado"
+              value={formData.destacado}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="capacidadProducto">Capacidad</label>
-        <input
-          type="text"
-          id="capacidadProducto"
-          name="capacidad"
-          placeholder="Capacidad del producto"
-          value={formData.capacidad}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="dimensionesProducto">Dimensiones</label>
+            <input
+              type="text"
+              id="dimensionesProducto"
+              name="dimensiones"
+              placeholder="Dimensiones del producto"
+              value={formData.dimensiones}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="estiloProducto">Estilo</label>
-        <input
-          type="text"
-          id="estiloProducto"
-          name="estilo"
-          placeholder="Estilo del producto"
-          value={formData.estilo}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="capacidadProducto">Capacidad</label>
+            <input
+              type="text"
+              id="capacidadProducto"
+              name="capacidad"
+              placeholder="Capacidad del producto"
+              value={formData.capacidad}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="materialProducto">Material</label>
-        <input
-          type="text"
-          id="materialProducto"
-          name="material"
-          placeholder="Material del producto"
-          value={formData.material}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="estiloProducto">Estilo</label>
+            <input
+              type="text"
+              id="estiloProducto"
+              name="estilo"
+              placeholder="Estilo del producto"
+              value={formData.estilo}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="garantiaProducto">Garantía</label>
-        <input
-          type="text"
-          id="garantiaProducto"
-          name="garantia"
-          placeholder="Garantía del producto"
-          value={formData.garantia}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="materialProducto">Material</label>
+            <input
+              type="text"
+              id="materialProducto"
+              name="material"
+              placeholder="Material del producto"
+              value={formData.material}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="origenProducto">Origen</label>
-        <input
-          type="text"
-          id="origenProducto"
-          name="origen"
-          placeholder="Origen del producto"
-          value={formData.origen}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="garantiaProducto">Garantía</label>
+            <input
+              type="text"
+              id="garantiaProducto"
+              name="garantia"
+              placeholder="Garantía del producto"
+              value={formData.garantia}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="pesoProducto">Peso</label>
-        <input
-          type="text"
-          id="pesoProducto"
-          name="peso"
-          placeholder="Peso del producto"
-          value={formData.peso}
-          onChange={handleChange}
-        />
+          <div className="create-product-field">
+            <label htmlFor="origenProducto">Origen</label>
+            <input
+              type="text"
+              id="origenProducto"
+              name="origen"
+              placeholder="Origen del producto"
+              value={formData.origen}
+              onChange={handleChange}
+            />
+          </div>
 
-        <label htmlFor="colorProducto">Color</label>
-        <input
-          type="text"
-          id="colorProducto"
-          name="color"
-          placeholder="Color del producto"
-          value={formData.color}
-          onChange={handleChange}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-    </>
+          <div className="create-product-field">
+            <label htmlFor="pesoProducto">Peso</label>
+            <input
+              type="text"
+              id="pesoProducto"
+              name="peso"
+              placeholder="Peso del producto"
+              value={formData.peso}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="create-product-field">
+            <label htmlFor="colorProducto">Color</label>
+            <input
+              type="text"
+              id="colorProducto"
+              name="color"
+              placeholder="Color del producto"
+              value={formData.color}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="create-product-button">
+            Enviar
+          </button>
+        </form>
+      </div>
+    </section>
   );
 }
 
