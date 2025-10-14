@@ -91,10 +91,9 @@ function ProductForm() {
           <div className="create-product-field">
             <label htmlFor="imagenProducto">Imagen</label>
             <input
-              type="image"
+              type="file"
               id="imagenProducto"
               name="srcImg"
-              value={formData.srcImg}
               onChange={handleChange}
             />
           </div>
