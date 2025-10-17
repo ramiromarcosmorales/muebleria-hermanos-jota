@@ -3,20 +3,24 @@ const Footer = () => {
     <footer>
       <ul>
         <li className="footer-link">
-          <a href="#">Navegación</a>
+          <a href="#" aria-label="Ir a navegación">
+            Navegación
+          </a>
         </li>
         <li className="footer-link">
-          <a href="#">Legal</a>
+          <a href="#" aria-label="Ir a legal">
+            Legal
+          </a>
         </li>
       </ul>
       <ul>
         <li className="footer-icon">
-          <a href="#">
+          <a href="#" aria-label="Ir a instagram">
             <i className="fa-brands fa-instagram"></i>
           </a>
         </li>
         <li className="footer-icon">
-          <a href="#">
+          <a href="#" aria-label="Ir a facebook">
             <i className="fa-brands fa-facebook"></i>
           </a>
         </li>

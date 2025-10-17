@@ -75,7 +75,7 @@ const ContactForm = () => {
     <section className="contact">
       <div className="contact-container">
         <header className="contact-header">
-          <h2>Ponte en contacto con nosotros</h2>
+          <h1>Ponte en contacto con nosotros</h1>
           <p>
             ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario y
             nos pondremos en contacto contigo lo antes posible.
