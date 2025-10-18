@@ -1044,9 +1044,9 @@ footer ul {
 .create-product-form {
   background-color: #fff;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem 2rem;
   padding: 2rem;
   border-radius: 1.2rem;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
@@ -1099,6 +1099,8 @@ footer ul {
   font-size: var(--tamaño-cta);
   letter-spacing: var(--tracking-cta);
   transition: background-color 0.3s ease;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
 }
 
 .create-product-button:hover {
