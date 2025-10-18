@@ -19,8 +19,11 @@ function ProductForm() {
   });
 
   function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((f) => ({ ...f, [name]: value }));
+    const { name, value, type, checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   }
 
   function handleSubmit(e) {
@@ -104,7 +107,7 @@ function ProductForm() {
               type="checkbox"
               id="destacadoProducto"
               name="destacado"
-              value={formData.destacado}
+              checked={formData.destacado}
               onChange={handleChange}
             />
           </div>
