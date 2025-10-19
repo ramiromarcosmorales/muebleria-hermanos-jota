@@ -1,7 +1,25 @@
 import { formatPrice } from "../utils/format-price";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getJSON } from "../utils/api";
 
-const ProductDetail = ({ addToCart, product }) => {
+const ProductDetail = ({ addToCart }) => {
+  const { id } = useParams();
+  const [product, setProducto] = useState(null);
+
+  useEffect(() => {
+    async function fetchProducto() {
+      try {
+        const data = await getJSON(`/api/productos/${id}`);
+        setProducto(data);
+      } catch (error) {
+        console.error("Error al obtener el producto:", error);
+      }
+    }
+    fetchProducto();
+  }, [id]);
+
   const characteristicLabels = {
     dimensiones: "DIMENSIONES",
     capacidad: "CAPACIDAD",
@@ -11,6 +29,15 @@ const ProductDetail = ({ addToCart, product }) => {
     origen: "ORIGEN",
     peso: "PESO",
     color: "COLOR",
+  };
+
+  const handleDelete = () => {
+    const confirmDelete = window.confirm(
+      "¿Estas seguro de eliminar este producto?"
+    );
+    if (confirmDelete) {
+      alert("Producto Eliminado");
+    }
   };
 
   if (!product)
@@ -53,6 +80,9 @@ const ProductDetail = ({ addToCart, product }) => {
               aria-label={`Añadir ${product?.nombre} al carrito`}
             >
               Añadir al carrito
+            </button>
+            <button className="btn-cart btn-delete" onClick={handleDelete}>
+              Eliminar
             </button>
           </div>
         </div>
