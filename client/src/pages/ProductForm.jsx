@@ -88,6 +88,9 @@ function ProductForm() {
               name="precio"
               value={formData.precio}
               onChange={handleChange}
+              step="0.01"
+              min="0"
+              placeholder="0.00"
             />
           </div>
 
@@ -102,7 +105,7 @@ function ProductForm() {
           </div>
 
           <div className="create-product-field">
-            <label htmlFor="destacadoProducto">Destacado</label>
+            <label htmlFor="destacadoProducto">¿Destacar producto?</label>
             <input
               type="checkbox"
               id="destacadoProducto"
