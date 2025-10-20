@@ -1144,6 +1144,10 @@ footer ul {
   text-align: left;
 }
 
+.create-product-status {
+  grid-column: 1 / -1;
+}
+
 /* Desplegable Carrito */
 .cart-dropdown {
   position: absolute;
