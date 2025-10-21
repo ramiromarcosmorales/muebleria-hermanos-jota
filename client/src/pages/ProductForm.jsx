@@ -218,18 +218,18 @@ function ProductForm() {
     validatePeso(errors);
     validateColor(errors);
 
-    setErrorMessages(errors);
+    return errors;
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    validateForm();
+    const errors = validateForm();
 
-    if (status.errorMessages.length > 0) {
-      setStatus((prevAttributes) => ({
-        ...prevAttributes,
+    if (errors.length > 0) {
+      setStatus({
+        errorMessages: errors,
         className: STATUS_CLASSNAMES.ERROR,
-      }));
+      });
       return;
     }
 
