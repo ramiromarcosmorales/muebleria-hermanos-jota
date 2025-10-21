@@ -289,8 +289,8 @@ function ProductForm() {
               placeholder="Nombre del producto"
               value={formData.nombre}
               onChange={handleChange}
-              min={NAME_MIN_LENGTH}
-              max={NAME_MAX_LENGTH}
+              minLength={NAME_MIN_LENGTH}
+              maxLength={NAME_MAX_LENGTH}
             />
           </div>
 
@@ -303,8 +303,8 @@ function ProductForm() {
               placeholder="Descripción del producto"
               value={formData.descripcion}
               onChange={handleChange}
-              min={DESC_MIN_LENGTH}
-              max={DESC_MAX_LENGTH}
+              minLength={DESC_MIN_LENGTH}
+              maxLength={DESC_MAX_LENGTH}
             />
           </div>
 
@@ -317,8 +317,8 @@ function ProductForm() {
               placeholder="Descripción del alt"
               value={formData.altValue}
               onChange={handleChange}
-              min={ALTVALUE_MIN_LENGTH}
-              max={ALTVALUE_MAX_LENGTH}
+              minLength={ALTVALUE_MIN_LENGTH}
+              maxLength={ALTVALUE_MAX_LENGTH}
             />
           </div>
 
@@ -331,7 +331,7 @@ function ProductForm() {
               value={formData.precio}
               onChange={handleChange}
               step="0.01"
-              min="0"
+              minLength="0"
               placeholder="0.00"
             />
           </div>
@@ -366,8 +366,8 @@ function ProductForm() {
               placeholder="Dimensiones del producto"
               value={formData.dimensiones}
               onChange={handleChange}
-              min={DIMENSIONS_MIN_LENGTH}
-              max={DIMENSIONS_MAX_LENGTH}
+              minLength={DIMENSIONS_MIN_LENGTH}
+              maxLength={DIMENSIONS_MAX_LENGTH}
             />
           </div>
 
@@ -380,8 +380,8 @@ function ProductForm() {
               placeholder="Capacidad del producto"
               value={formData.capacidad}
               onChange={handleChange}
-              min={CAPACITY_MIN_LENGTH}
-              max={CAPACITY_MAX_LENGTH}
+              minLength={CAPACITY_MIN_LENGTH}
+              maxLength={CAPACITY_MAX_LENGTH}
             />
           </div>
 
@@ -394,8 +394,8 @@ function ProductForm() {
               placeholder="Estilo del producto"
               value={formData.estilo}
               onChange={handleChange}
-              min={STYLE_MIN_LENGTH}
-              max={STYLE_MAX_LENGTH}
+              minLength={STYLE_MIN_LENGTH}
+              maxLength={STYLE_MAX_LENGTH}
             />
           </div>
 
@@ -408,8 +408,8 @@ function ProductForm() {
               placeholder="Material del producto"
               value={formData.material}
               onChange={handleChange}
-              min={MATERIAL_MIN_LENGTH}
-              max={MATERIAL_MAX_LENGTH}
+              minLength={MATERIAL_MIN_LENGTH}
+              maxLength={MATERIAL_MAX_LENGTH}
             />
           </div>
 
@@ -422,8 +422,8 @@ function ProductForm() {
               placeholder="Garantía del producto"
               value={formData.garantia}
               onChange={handleChange}
-              min={WARRANTY_MIN_LENGTH}
-              max={WARRANTY_MAX_LENGTH}
+              minLength={WARRANTY_MIN_LENGTH}
+              maxLength={WARRANTY_MAX_LENGTH}
             />
           </div>
 
@@ -436,8 +436,8 @@ function ProductForm() {
               placeholder="Origen del producto"
               value={formData.origen}
               onChange={handleChange}
-              min={ORIGIN_MIN_LENGTH}
-              max={ORIGIN_MAX_LENGTH}
+              minLength={ORIGIN_MIN_LENGTH}
+              maxLength={ORIGIN_MAX_LENGTH}
             />
           </div>
 
@@ -450,8 +450,8 @@ function ProductForm() {
               placeholder="Peso del producto"
               value={formData.peso}
               onChange={handleChange}
-              min={WEIGHT_MIN_LENGTH}
-              max={WEIGHT_MAX_LENGTH}
+              minLength={WEIGHT_MIN_LENGTH}
+              maxLength={WEIGHT_MAX_LENGTH}
             />
           </div>
 
@@ -464,8 +464,8 @@ function ProductForm() {
               placeholder="Color del producto"
               value={formData.color}
               onChange={handleChange}
-              min={COLOR_MIN_LENGTH}
-              max={COLOR_MAX_LENGTH}
+              minLength={COLOR_MIN_LENGTH}
+              maxLength={COLOR_MAX_LENGTH}
             />
           </div>
 
