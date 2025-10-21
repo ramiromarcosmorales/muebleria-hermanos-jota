@@ -194,13 +194,6 @@ function ProductForm() {
     }
   }
 
-  function setErrorMessages(errors) {
-    setStatus({
-      className: STATUS_CLASSNAMES.NO_STATUS,
-      errorMessages: errors,
-    });
-  }
-
   function validateForm() {
     const errors = [];
 
@@ -336,6 +329,7 @@ function ProductForm() {
               type="file"
               id="imagenProducto"
               name="srcImg"
+              accept="image/*"
               onChange={handleChange}
             />
           </div>
