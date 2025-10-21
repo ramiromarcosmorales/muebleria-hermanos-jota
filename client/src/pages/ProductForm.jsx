@@ -105,11 +105,6 @@ function ProductForm() {
       errors.push("El producto debe tener adjunta una imagen.");
     }
   }
-  function validateDestacado(errors) {
-    if (formData.destacado === null) {
-      errors.push("Se debe especificar si el producto es destacado o no.");
-    }
-  }
   function validateDimensiones(errors) {
     if (
       !formData.dimensiones ||
@@ -214,7 +209,6 @@ function ProductForm() {
     validateAltValue(errors);
     validatePrecio(errors);
     validateSrcImg(errors);
-    validateDestacado(errors);
     validateDimensiones(errors);
     validateCapacidad(errors);
     validateEstilo(errors);
