@@ -6,7 +6,7 @@ function ProductForm() {
     descripcion: "",
     altValue: "",
     precio: 0,
-    srcImg: "",
+    srcImg: null,
     destacado: false,
     dimensiones: "",
     capacidad: "",
@@ -59,6 +59,15 @@ function ProductForm() {
       ...prevData,
       [name]: type === "checkbox" ? checked : value,
     }));
+  }
+
+  function handleFileChange(e) {
+    if (e.target.files && e.target.files.length > 0) {
+      setFormData((prevAttributes) => ({
+        ...prevAttributes,
+        srcImg: e.target.files[0],
+      }));
+    }
   }
 
   function validateNombre(errors) {
@@ -319,7 +328,7 @@ function ProductForm() {
               onChange={handleChange}
               step="0.01"
               minLength="0"
-              placeholder="0.00"
+              placeholder="0,00"
             />
           </div>
 
@@ -330,7 +339,7 @@ function ProductForm() {
               id="imagenProducto"
               name="srcImg"
               accept="image/*"
-              onChange={handleChange}
+              onChange={handleFileChange}
             />
           </div>
 
