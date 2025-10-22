@@ -1371,7 +1371,8 @@ footer ul {
   min-width: 0;
 }
 
-.add-to-cart {
+.add-to-cart,
+.btn-delete {
   display: inline-block;
   background: transparent;
   border: 1px solid var(--color-primario);
@@ -1381,9 +1382,11 @@ footer ul {
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-right: 1rem;
 }
 
-.add-to-cart:hover {
+.add-to-cart:hover,
+.btn-delete:hover {
   background: var(--color-primario);
   color: #fff;
 }
