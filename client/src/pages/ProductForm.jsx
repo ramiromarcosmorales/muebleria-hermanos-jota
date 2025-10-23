@@ -104,7 +104,7 @@ function ProductForm() {
   function validatePrecio(errors) {
     const precio = parseFloat(formData.precio);
     if (!formData.precio || isNaN(precio) || precio <= 0) {
-      errors.push("El precio debe existir y ser mayor a 0.");
+      errors.push("El precio debe ser un número mayor a 0.");
     }
   }
   function validateSrcImg(errors) {
