@@ -48,8 +48,6 @@ function ProductForm() {
   const WARRANTY_MAX_LENGTH = 100;
   const ORIGIN_MIN_LENGTH = 3;
   const ORIGIN_MAX_LENGTH = 100;
-  const WEIGHT_MIN_LENGTH = 3;
-  const WEIGHT_MAX_LENGTH = 100;
   const COLOR_MIN_LENGTH = 3;
   const COLOR_MAX_LENGTH = 100;
 
@@ -181,14 +179,9 @@ function ProductForm() {
     }
   }
   function validatePeso(errors) {
-    if (
-      !formData.peso ||
-      formData.peso.length < WEIGHT_MIN_LENGTH ||
-      formData.peso.length > WEIGHT_MAX_LENGTH
-    ) {
-      errors.push(
-        `Las descripción del peso debe tener entre ${WEIGHT_MIN_LENGTH} y ${WEIGHT_MAX_LENGTH} caracteres.`
-      );
+    const peso = parseFloat(formData.peso);
+    if (!formData.peso || isNaN(peso) || peso <= 0) {
+      errors.push("El peso debe ser un número mayor a 0.");
     }
   }
   function validateColor(errors) {
@@ -441,14 +434,13 @@ function ProductForm() {
           <div className="create-product-field">
             <label htmlFor="pesoProducto">Peso</label>
             <input
-              type="text"
+              type="number"
               id="pesoProducto"
               name="peso"
-              placeholder="Peso del producto"
+              placeholder="0,00"
               value={formData.peso}
               onChange={handleChange}
-              minLength={WEIGHT_MIN_LENGTH}
-              maxLength={WEIGHT_MAX_LENGTH}
+              min="0"
             />
           </div>
 
