@@ -12,6 +12,15 @@ const errorHandler = require("./middleware/errorHandler.js");
 const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./swagger");
 
+// Conexión con MongoDB usando Mongoose
+const mongoose = require("mongoose");
+const MONGO_URI = process.env.MONGO_URI;
+
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("¡Conexión exitosa a MongoDB!"))
+  .catch((err) => console.error("Error al conectar a MongoDB:", err));
+
 // Inicialización de la app de Express
 const app = express();
 
