@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import ContactForm from "./pages/ContactForm";
 import ProductDetail from "./pages/ProductDetail";
+import ProductForm from "./pages/ProductForm";
 import "./styles/global.css";
 
 const router = createBrowserRouter([
@@ -14,9 +15,10 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: "catalogo", element: <Catalog /> },
+      { path: "productos", element: <Catalog /> },
       { path: "contacto", element: <ContactForm /> },
       { path: "producto/:id", element: <ProductDetail /> },
+      { path: "admin/crear-producto", element: <ProductForm /> },
     ],
   },
 ]);

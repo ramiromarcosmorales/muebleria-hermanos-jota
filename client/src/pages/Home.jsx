@@ -20,7 +20,7 @@ const Home = () => {
             Transforma tu hogar en un santuario de elegancia y confort. Descubre
             muebles únicos que cuentan historias y crean momentos inolvidables.
           </p>
-          <Link to={"catalogo"} className="hero-btn">
+          <Link to={"productos"} className="hero-btn">
             Ver Colección →
           </Link>
         </div>
