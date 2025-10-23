@@ -320,7 +320,7 @@ function ProductForm() {
               value={formData.precio}
               onChange={handleChange}
               step="0.01"
-              minLength="0"
+              min="0"
               placeholder="0,00"
             />
           </div>
