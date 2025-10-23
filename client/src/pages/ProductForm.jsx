@@ -338,13 +338,16 @@ function ProductForm() {
 
           <div className="create-product-field">
             <label htmlFor="destacadoProducto">¿Destacar producto?</label>
-            <input
-              type="checkbox"
-              id="destacadoProducto"
-              name="destacado"
-              checked={formData.destacado}
-              onChange={handleChange}
-            />
+            <label className="switch">
+              <input
+                type="checkbox"
+                id="destacadoProducto"
+                name="destacado"
+                checked={formData.destacado}
+                onChange={handleChange}
+              />
+              <span class="slider round"></span>
+            </label>
           </div>
 
           <div className="create-product-field">
