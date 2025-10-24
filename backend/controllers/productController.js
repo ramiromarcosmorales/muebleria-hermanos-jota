@@ -1,46 +1,51 @@
-const fs = require("fs");
+const fs = require("fs").promises;
 const path = require("path");
 
 const getAllProducts = async (req, res) => {
   // Ruta al archivo de productos
   const productsPath = path.join(__dirname, "..", "data", "products.json");
 
-  // Leer el archivo de productos
-  fs.readFile(productsPath, "utf8", (err, data) => {
-    if (err) {
-      // Error al leer el archivo
-      return res.status(500).json({ error: "Error al leer productos" });
-    }
+  try {
+    // Leer el archivo de productos
+    const data = await fs.readFile(productsPath, "utf8");
     // Enviar la lista de productos como JSON
     res.json(JSON.parse(data));
-  });
+  } catch (error) {
+    // Error al leer el archivo o al parsear el JSON
+    return res.status(500).json({ error: "Error al leer productos" });
+  }
 };
 
 const getProductById = async (req, res) => {
   // Ruta al archivo de productos
   const productsPath = path.join(__dirname, "..", "data", "products.json");
 
-  // Leer el archivo de productos
-  fs.readFile(productsPath, "utf8", (err, data) => {
-    if (err) {
-      // Error al leer el archivo
-      return res.status(500).json({ error: "Error al leer productos" });
-    }
+  try {
+    // 1. Lectura del archivo (con await)
+    const data = await fs.readFile(productsPath, "utf8");
 
-    // Convertir el contenido a objeto
+    // 2. Convertir el contenido a objeto (dentro del try para manejar error de JSON.parse)
     const productos = JSON.parse(data);
 
-    // Buscar el producto por ID (comparando como string)
+    // 3. Buscar el producto por ID
     const producto = productos.find((p) => String(p.id) === req.params.id);
 
+    // 4. Manejo de producto no encontrado (IF, no requiere catch)
     if (!producto) {
-      // Si no se encuentra el producto, devolver 404
       return res.status(404).json({ error: "Producto no encontrado" });
     }
 
-    // Enviar el producto encontrado como JSON
+    // 5. Enviar el producto
     res.json(producto);
-  });
+  } catch (error) {
+    // Este catch manejará:
+    // a) Errores de lectura del archivo (fs.readFile)
+    // b) Errores al parsear el JSON (JSON.parse)
+    console.error("Error en la operación:", error);
+    return res
+      .status(500)
+      .json({ error: "Error interno al procesar productos" });
+  }
 };
 
 const createProduct = async (req, res) => {};
