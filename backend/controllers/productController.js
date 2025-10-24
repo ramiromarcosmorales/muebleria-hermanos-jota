@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-async function getAllProducts(req, res) {
+const getAllProducts = async (req, res) => {
   // Ruta al archivo de productos
   const productsPath = path.join(__dirname, "..", "data", "products.json");
 
@@ -14,9 +14,9 @@ async function getAllProducts(req, res) {
     // Enviar la lista de productos como JSON
     res.json(JSON.parse(data));
   });
-}
+};
 
-async function getProductById(req, res) {
+const getProductById = async (req, res) => {
   // Ruta al archivo de productos
   const productsPath = path.join(__dirname, "..", "data", "products.json");
 
@@ -41,13 +41,13 @@ async function getProductById(req, res) {
     // Enviar el producto encontrado como JSON
     res.json(producto);
   });
-}
+};
 
-async function createProduct(req, res) {}
+const createProduct = async (req, res) => {};
 
-async function updateProductById(req, res) {}
+const updateProductById = async (req, res) => {};
 
-async function deleteProductById(req, res) {}
+const deleteProductById = async (req, res) => {};
 
 module.exports = {
   getAllProducts,
