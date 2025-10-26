@@ -48,7 +48,18 @@ const getProductById = async (req, res) => {
   }
 };
 
-const createProduct = async (req, res) => {};
+const createProduct = async (req, res) => {
+  try {
+    const product = await productService.create(req.body);
+    res.status(201).json(product);
+  } catch (err) {
+    if (err.details) {
+      res.status(400).json({ message: err.message, errors: err.details });
+    } else {
+      res.status(500).json({ message: "Error interno del servidor" });
+    }
+  }
+};
 
 const updateProductById = async (req, res) => {};
 
