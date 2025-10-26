@@ -13,6 +13,7 @@ const productSchema = new mongoose.Schema(
     precio: {
       type: Number,
       required: true,
+      min: 0,
     },
     imagenUrl: {
       type: String,
