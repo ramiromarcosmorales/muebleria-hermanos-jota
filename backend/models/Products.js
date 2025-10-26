@@ -60,7 +60,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true } // crea automáticamente createdAt y updatedAt
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("Product", productSchema);
