@@ -20,7 +20,7 @@ const create = async (productData) => {
   return await newProduct.save();
 };
 
-const update = async (id, data) => {
+const update = async (id, productData) => {
   const errors = validateProduct(productData);
   if (errors.length > 0) {
     const error = new Error("Error de validación");
