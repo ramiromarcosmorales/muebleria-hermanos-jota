@@ -2,7 +2,7 @@ import { formatPrice } from "../utils/format-price";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getJSON } from "../utils/api";
+import { getProductById, deleteProduct } from "../services/productService";
 
 const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
@@ -11,7 +11,7 @@ const ProductDetail = ({ addToCart }) => {
   useEffect(() => {
     async function fetchProducto() {
       try {
-        const data = await getJSON(`/api/productos/${id}`);
+        const data = await getProductById(id);
         setProducto(data);
       } catch (error) {
         console.error("Error al obtener el producto:", error);
@@ -31,12 +31,22 @@ const ProductDetail = ({ addToCart }) => {
     color: "COLOR",
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "¿Estas seguro de eliminar este producto?"
     );
     if (confirmDelete) {
-      alert("Producto Eliminado");
+      try {
+        await deleteProduct(id);
+        alert("Producto Eliminado");
+        // Opcional: redirigir al catálogo después de eliminar
+        // window.location.href = '/productos';
+      } catch (error) {
+        console.error("Error al eliminar el producto:", error);
+        alert(
+          "No se pudo eliminar el producto. Por favor, intentá nuevamente."
+        );
+      }
     }
   };
 

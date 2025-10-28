@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { createProduct } from "../services/productService";
 
 function ProductForm() {
   const [formData, setFormData] = useState({
@@ -228,11 +229,44 @@ function ProductForm() {
       return;
     }
 
-    setStatus((prevAttributes) => ({
-      ...prevAttributes,
-      className: STATUS_CLASSNAMES.SUCCESS,
-    }));
-    console.log(formData);
+    // Intentar crear el producto usando el servicio
+    handleCreateProduct();
+  }
+
+  async function handleCreateProduct() {
+    try {
+      setStatus((prevAttributes) => ({
+        ...prevAttributes,
+        className: STATUS_CLASSNAMES.SUCCESS,
+      }));
+
+      await createProduct(formData);
+      console.log("Producto creado exitosamente:", formData);
+
+      // Opcional: limpiar el formulario después de crear el producto
+      // setFormData({
+      //   nombre: "",
+      //   descripcion: "",
+      //   altValue: "",
+      //   precio: 0,
+      //   srcImg: null,
+      //   destacado: false,
+      //   dimensiones: "",
+      //   capacidad: "",
+      //   estilo: "",
+      //   material: "",
+      //   garantia: "",
+      //   origen: "",
+      //   peso: "",
+      //   color: "",
+      // });
+    } catch (error) {
+      console.error("Error al crear el producto:", error);
+      setStatus({
+        errorMessages: [error.message],
+        className: STATUS_CLASSNAMES.ERROR,
+      });
+    }
   }
 
   function displaySuccess() {
