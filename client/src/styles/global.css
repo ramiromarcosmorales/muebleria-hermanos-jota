@@ -1679,6 +1679,18 @@ input:checked + .slider:before {
   line-height: 1;
 }
 
+.not-found-content h1 .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .not-found-content h2 {
   font-family: var(--fuente-titulos);
   font-size: 2rem;
@@ -1715,6 +1727,11 @@ input:checked + .slider:before {
   color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(160, 82, 45, 0.3);
+}
+
+.not-found-btn:focus-visible {
+  outline: 3px solid var(--color-acento);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {

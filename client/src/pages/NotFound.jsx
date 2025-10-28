@@ -11,7 +11,11 @@ const NotFound = () => {
             Lo sentimos, la página que estás buscando no existe o ha sido
             movida.
           </p>
-          <Link to="/" className="not-found-btn">
+          <Link
+            to="/"
+            className="not-found-btn"
+            aria-label="Volver a la página de inicio"
+          >
             Volver al inicio
           </Link>
         </div>
