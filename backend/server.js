@@ -1,4 +1,4 @@
-const app = require('./app');
+import { app } from "./app.js";
 
 // Inicialización de la app de Express
 const PORT = process.env.PORT || 3001;
@@ -15,4 +15,4 @@ if (!process.env.VERCEL) {
   });
 }
 
-module.exports = (req, res) => app(req, res);
+export const server = (req, res) => app(req, res);

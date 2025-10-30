@@ -1,13 +1,19 @@
-const fs = require("fs").promises;
-const path = require("path");
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const getAllProducts = async (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export const getAllProducts = async (req, res) => {
   // Ruta al archivo de productos
   const productsPath = path.join(__dirname, "..", "data", "products.json");
 
   try {
     // Leer el archivo de productos
     const data = await fs.readFile(productsPath, "utf8");
+    console.log(JSON.parse(data));
+
     // Enviar la lista de productos como JSON
     res.json(JSON.parse(data));
   } catch (error) {
@@ -16,7 +22,7 @@ const getAllProducts = async (req, res) => {
   }
 };
 
-const getProductById = async (req, res) => {
+export const getProductById = async (req, res) => {
   // Ruta al archivo de productos
   const productsPath = path.join(__dirname, "..", "data", "products.json");
 
@@ -48,7 +54,7 @@ const getProductById = async (req, res) => {
   }
 };
 
-const createProduct = async (req, res) => {
+export const createProduct = async (req, res) => {
   try {
     const product = await productService.create(req.body);
     res.status(201).json(product);
@@ -61,14 +67,6 @@ const createProduct = async (req, res) => {
   }
 };
 
-const updateProductById = async (req, res) => {};
+export const updateProductById = async (req, res) => {};
 
-const deleteProductById = async (req, res) => {};
-
-module.exports = {
-  getAllProducts,
-  getProductById,
-  createProduct,
-  updateProductById,
-  deleteProductById,
-};
+export const deleteProductById = async (req, res) => {};
