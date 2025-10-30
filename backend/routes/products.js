@@ -3,18 +3,14 @@
  * Utiliza express.Router() para organizar los endpoints relacionados a productos.
  */
 
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
-const {
-  createProduct,
-  updateProductById,
-  deleteProductById,
-  getAllProducts,
-  getProductById,
-} = require("../controllers/productController");
+import express from "express";
+import { createProduct } from "../controllers/productController.js";
+import { updateProductById } from "../controllers/productController.js";
+import { deleteProductById } from "../controllers/productController.js";
+import { getAllProducts } from "../controllers/productController.js";
+import { getProductById } from "../controllers/productController.js";
 
-const router = express.Router();
+export const productsRouter = express.Router();
 
 /**
  * @swagger
@@ -26,7 +22,7 @@ const router = express.Router();
  *       200:
  *         description: Lista de productos
  */
-router.get("/", getAllProducts);
+productsRouter.get("/", getAllProducts);
 
 /**
  * @swagger
@@ -47,12 +43,10 @@ router.get("/", getAllProducts);
  *       404:
  *         description: Producto no encontrado
  */
-router.get("/:id", getProductById);
+productsRouter.get("/:id", getProductById);
 
-router.post("/", createProduct);
+productsRouter.post("/", createProduct);
 
-router.put("/:id", updateProductById);
+productsRouter.put("/:id", updateProductById);
 
-router.delete("/:id", deleteProductById);
-
-module.exports = router;
+productsRouter.delete("/:id", deleteProductById);

@@ -1,14 +1,14 @@
-const Product = require("../models/Product");
+import { Product } from "../models/Products";
 
-const getAll = async () => {
+export const getAll = async () => {
   return await Product.find();
 };
 
-const getById = async (id) => {
+export const getById = async (id) => {
   return await Product.findById(id);
 };
 
-const create = async (productData) => {
+export const create = async (productData) => {
   const errors = validateProduct(productData);
   if (errors.length > 0) {
     const error = new Error("Error de validación");
@@ -20,7 +20,7 @@ const create = async (productData) => {
   return await newProduct.save();
 };
 
-const update = async (id, productData) => {
+export const update = async (id, productData) => {
   const errors = validateProduct(productData);
   if (errors.length > 0) {
     const error = new Error("Error de validación");
@@ -31,8 +31,6 @@ const update = async (id, productData) => {
   return await Product.findByIdAndUpdate(id, productData, { new: true });
 };
 
-const remove = async (id) => {
+export const remove = async (id) => {
   return await Product.findByIdAndDelete(id);
 };
-
-module.exports = { getAll, getById, create, update, remove };

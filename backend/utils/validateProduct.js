@@ -1,4 +1,4 @@
-function validateProduct(product) {
+export function validateProduct(product) {
   const errors = [];
 
   const NAME_MIN_LENGTH = 3;
@@ -138,5 +138,3 @@ function validateProduct(product) {
 
   return errors;
 }
-
-module.exports = validateProduct;
