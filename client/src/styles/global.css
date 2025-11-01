@@ -1001,7 +1001,7 @@ footer ul {
   background: var(--color-acento);
 }
 
-/* Creación de producto */
+/* === FORMULARIO DE CREACIÓN DE PRODUCTO === */
 
 .create-product {
   min-height: 100vh;
@@ -1011,6 +1011,7 @@ footer ul {
   justify-content: center;
   padding: var(--padding-base);
 }
+
 .create-product-container {
   display: flex;
   flex-direction: column;
@@ -1020,6 +1021,7 @@ footer ul {
   gap: 2rem;
   margin-bottom: 3em;
 }
+
 .create-product-header {
   text-align: center;
   max-width: 600px;
@@ -1050,6 +1052,7 @@ footer ul {
   padding: 2rem;
   border-radius: 1.2rem;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 .create-product-field {
@@ -1074,6 +1077,8 @@ footer ul {
     border-color 0.3s ease,
     box-shadow 0.3s ease;
   resize: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .create-product-field input:focus {
@@ -1085,6 +1090,26 @@ footer ul {
 .create-product-field input::placeholder {
   color: #999;
   opacity: 0.7;
+}
+
+.create-product-field input[type="file"] {
+  padding: 0.4rem;
+  border-radius: 0.6rem;
+  background-color: #fafafa;
+  font-size: 0.9rem;
+}
+
+.create-product-field input[type="file"]::-webkit-file-upload-button {
+  background-color: #e9e9e9;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create-product-field input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #d9d9d9;
 }
 
 .create-product-button {
@@ -1107,8 +1132,71 @@ footer ul {
   background: var(--color-acento);
 }
 
-/* Toggle slider */
+/* === MEDIA QUERIES === */
 
+/* TABLET */
+@media (max-width: 768px) {
+  .create-product-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+
+  .create-product-button,
+  .create-product-status {
+    grid-column: 1 / 1;
+  }
+
+  .create-product-container {
+    padding: 0 1rem;
+  }
+}
+
+/* MÓVILES PEQUEÑOS */
+@media (max-width: 480px) {
+  .create-product-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .create-product-container {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .create-product-form {
+    padding: 1rem;
+    gap: 0.8rem;
+  }
+
+  .create-product-field label {
+    font-size: 0.9rem;
+  }
+
+  .create-product-field input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .create-product-field input[type="file"] {
+    font-size: 0.85rem;
+    padding: 0.3rem;
+  }
+
+  .create-product-button {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.8rem;
+  }
+
+  /* Evitar desbordes horizontales */
+  .create-product-container,
+  .create-product-form {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* === SLIDER Y STATUS === */
 .switch {
   position: relative;
   display: inline-block;
@@ -1130,7 +1218,6 @@ footer ul {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -1142,7 +1229,6 @@ footer ul {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -1155,12 +1241,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }

@@ -346,7 +346,7 @@ function ProductForm() {
                 checked={formData.destacado}
                 onChange={handleChange}
               />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
           </div>
 
@@ -435,7 +435,7 @@ function ProductForm() {
           </div>
 
           <div className="create-product-field">
-            <label htmlFor="pesoProducto">Peso</label>
+            <label htmlFor="pesoProducto">Peso (en kg)</label>
             <input
               type="number"
               id="pesoProducto"
