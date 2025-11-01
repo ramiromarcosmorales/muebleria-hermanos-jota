@@ -435,7 +435,7 @@ function ProductForm() {
           </div>
 
           <div className="create-product-field">
-            <label htmlFor="pesoProducto">Peso</label>
+            <label htmlFor="pesoProducto">Peso (en kg)</label>
             <input
               type="number"
               id="pesoProducto"
