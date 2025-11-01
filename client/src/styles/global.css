@@ -1109,22 +1109,19 @@ footer ul {
 
 /* Media queries form responsive */
 @media (max-width: 768px) {
-  /* Ajusta el grid para que los campos se apilen */
   .create-product-form {
     grid-template-columns: 1fr;
     gap: 1.2rem;
     padding: 2rem;
   }
 
-  /* Asegura que el botón y el mensaje de estado sigan ocupando todo el ancho */
   .create-product-button,
   .create-product-status {
-    grid-column: 1 / 1; /* Ahora solo tienen una columna para ocupar */
+    grid-column: 1 / 1;
   }
 
-  /* Ajuste adicional para el contenedor principal */
   .create-product-container {
-    padding: 0 1rem; /* Añade un poco de padding horizontal para que no se pegue a los bordes */
+    padding: 0 1rem;
   }
 }
 
