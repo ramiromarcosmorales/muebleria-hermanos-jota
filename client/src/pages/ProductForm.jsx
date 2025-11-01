@@ -346,7 +346,7 @@ function ProductForm() {
                 checked={formData.destacado}
                 onChange={handleChange}
               />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
           </div>
 
