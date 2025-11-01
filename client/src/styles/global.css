@@ -1107,6 +1107,38 @@ footer ul {
   background: var(--color-acento);
 }
 
+/* Media queries form responsive */
+@media (max-width: 768px) {
+  /* Ajusta el grid para que los campos se apilen */
+  .create-product-form {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 2rem;
+  }
+
+  /* Asegura que el botón y el mensaje de estado sigan ocupando todo el ancho */
+  .create-product-button,
+  .create-product-status {
+    grid-column: 1 / 1; /* Ahora solo tienen una columna para ocupar */
+  }
+
+  /* Ajuste adicional para el contenedor principal */
+  .create-product-container {
+    padding: 0 1rem; /* Añade un poco de padding horizontal para que no se pegue a los bordes */
+  }
+}
+
+@media (max-width: 480px) {
+  .create-product-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .create-product-container {
+    width: 100vw;
+    padding: 0;
+  }
+}
+
 /* Toggle slider */
 
 .switch {
