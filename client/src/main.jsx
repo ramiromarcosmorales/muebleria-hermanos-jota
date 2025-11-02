@@ -1,10 +1,32 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "../src/styles/global.css";
-import App from "./App.jsx";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import App from "./App";
+import Home from "./pages/Home";
+import Catalog from "./pages/Catalog";
+import ContactForm from "./pages/ContactForm";
+import ProductDetail from "./pages/ProductDetail";
+import ProductForm from "./pages/ProductForm";
+import NotFound from "./pages/NotFound";
+import "./styles/global.css";
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "productos", element: <Catalog /> },
+      { path: "contacto", element: <ContactForm /> },
+      { path: "producto/:id", element: <ProductDetail /> },
+      { path: "admin/crear-producto", element: <ProductForm /> },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
 );

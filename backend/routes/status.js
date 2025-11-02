@@ -1,5 +1,6 @@
-const express = require('express');
-const router = express.Router();
+import express from "express";
+
+export const statusRouter = express.Router();
 
 /**
  * @swagger
@@ -24,11 +25,9 @@ const router = express.Router();
  *                   format: date-time
  */
 
-router.get('/', (req, res) => {
-    const uptime = process.uptime();
-    const requests = req.app.get('requestCount') ?? 0;
-    const timestamp = new Date().toISOString();
-    res.json({ uptime, requests, timestamp })
+statusRouter.get("/", (req, res) => {
+  const uptime = process.uptime();
+  const requests = req.app.get("requestCount") ?? 0;
+  const timestamp = new Date().toISOString();
+  res.json({ uptime, requests, timestamp });
 });
-
-module.exports = router;

@@ -1,19 +1,31 @@
-const express = require("express");
-require("dotenv").config();
-const cors = require("cors");
+import express from "express";
+import "dotenv/config";
+import cors from "cors";
 
 // Importación de middlewares y utilidades
-const logger = require("./middleware/logger.js");
-const requestCounter = require("./middleware/request.js");
-const notFound = require("./middleware/notFound.js");
-const errorHandler = require("./middleware/errorHandler.js");
+import { log } from "./middleware/logger.js";
+import { requestCounter } from "./middleware/request.js";
+import { notFound } from "./middleware/notFound.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 // Importación de Swagger para documentación interactiva
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./swagger");
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./swagger.js";
+
+// Conexión con MongoDB usando Mongoose
+import mongoose from "mongoose";
+
+const MONGO_URI = process.env.MONGO_URI;
+
+if (process.env.NODE_ENV !== "test" && MONGO_URI) {
+  mongoose
+    .connect(MONGO_URI)
+    .then(() => console.log("¡Conexión exitosa a MongoDB!"))
+    .catch((err) => console.error("Error al conectar a MongoDB:", err));
+}
 
 // Inicialización de la app de Express
-const app = express();
+export const app = express();
 
 // Middlewares globales
 app.use(
@@ -23,7 +35,7 @@ app.use(
   })
 );
 app.use(express.json()); // Permite recibir JSON en las peticiones
-app.use(logger.log); // Middleware personalizado para logs
+app.use(log); // Middleware personalizado para logs
 app.use(requestCounter);
 
 // Documentación Swagger disponible en /api/docs
@@ -44,10 +56,10 @@ app.use(
  * Todas las rutas relacionadas a productos están centralizadas en routes/products.js
  * Esto mantiene el código modular y fácil de mantener.
  */
-const productsRouter = require("./routes/products");
+import { productsRouter } from "./routes/products.js";
 app.use("/api/productos", productsRouter);
 
-const statusRouter = require("./routes/status.js");
+import { statusRouter } from "./routes/status.js";
 app.use("/api/status", statusRouter);
 
 //404 handler
@@ -55,5 +67,3 @@ app.use(notFound);
 
 //Error handler
 app.use(errorHandler);
-
-module.exports = app;

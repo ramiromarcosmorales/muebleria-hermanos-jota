@@ -3,11 +3,14 @@
  * Utiliza express.Router() para organizar los endpoints relacionados a productos.
  */
 
-const express = require("express");
-const fs = require("fs");
-const path = require("path");
+import express from "express";
+import { createProduct } from "../controllers/productController.js";
+import { updateProductById } from "../controllers/productController.js";
+import { deleteProductById } from "../controllers/productController.js";
+import { getAllProducts } from "../controllers/productController.js";
+import { getProductById } from "../controllers/productController.js";
 
-const router = express.Router();
+export const productsRouter = express.Router();
 
 /**
  * @swagger
@@ -19,20 +22,7 @@ const router = express.Router();
  *       200:
  *         description: Lista de productos
  */
-router.get("/", (req, res) => {
-  // Ruta al archivo de productos
-  const productsPath = path.join(__dirname, "..", "data", "products.json");
-
-  // Leer el archivo de productos
-  fs.readFile(productsPath, "utf8", (err, data) => {
-    if (err) {
-      // Error al leer el archivo
-      return res.status(500).json({ error: "Error al leer productos" });
-    }
-    // Enviar la lista de productos como JSON
-    res.json(JSON.parse(data));
-  });
-});
+productsRouter.get("/", getAllProducts);
 
 /**
  * @swagger
@@ -53,31 +43,10 @@ router.get("/", (req, res) => {
  *       404:
  *         description: Producto no encontrado
  */
-router.get("/:id", (req, res) => {
-  // Ruta al archivo de productos
-  const productsPath = path.join(__dirname, "..", "data", "products.json");
+productsRouter.get("/:id", getProductById);
 
-  // Leer el archivo de productos
-  fs.readFile(productsPath, "utf8", (err, data) => {
-    if (err) {
-      // Error al leer el archivo
-      return res.status(500).json({ error: "Error al leer productos" });
-    }
+productsRouter.post("/", createProduct);
 
-    // Convertir el contenido a objeto
-    const productos = JSON.parse(data);
+productsRouter.put("/:id", updateProductById);
 
-    // Buscar el producto por ID (comparando como string)
-    const producto = productos.find((p) => String(p.id) === req.params.id);
-
-    if (!producto) {
-      // Si no se encuentra el producto, devolver 404
-      return res.status(404).json({ error: "Producto no encontrado" });
-    }
-
-    // Enviar el producto encontrado como JSON
-    res.json(producto);
-  });
-});
-
-module.exports = router;
+productsRouter.delete("/:id", deleteProductById);

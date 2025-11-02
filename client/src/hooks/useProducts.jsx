@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getJSON } from "../utils/api";
+import { getAllProducts } from "../services/productService";
 
 const useProducts = () => {
   const [productos, setProductos] = useState([]);
@@ -10,7 +10,7 @@ const useProducts = () => {
     setLoading(true);
     setError(null);
 
-    getJSON("/api/productos")
+    getAllProducts()
       .then((data) => {
         setProductos(data);
       })
