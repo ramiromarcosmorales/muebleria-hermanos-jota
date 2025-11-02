@@ -1,20 +1,28 @@
 import { formatPrice } from "../utils/format-price";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getJSON } from "../utils/api";
+import { getProductById, deleteProduct } from "../services/productService";
 
 const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProducto] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProducto() {
       try {
-        const data = await getJSON(`/api/productos/${id}`);
+        setLoading(true);
+        setError(null);
+        const data = await getProductById(id);
         setProducto(data);
       } catch (error) {
         console.error("Error al obtener el producto:", error);
+        setError(error.message || "Error al cargar el producto");
+      } finally {
+        setLoading(false);
       }
     }
     fetchProducto();
@@ -31,23 +39,39 @@ const ProductDetail = ({ addToCart }) => {
     color: "COLOR",
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     const confirmDelete = window.confirm(
       "¿Estas seguro de eliminar este producto?"
     );
     if (confirmDelete) {
-      alert("Producto Eliminado");
+      try {
+        await deleteProduct(id);
+        alert("Producto Eliminado");
+        navigate("/productos");
+      } catch (error) {
+        console.error("Error al eliminar producto:", error);
+        alert(error.message || "Error al eliminar el producto");
+      }
     }
   };
 
-  if (!product)
+  if (loading)
+    return (
+      <div className="center-screen">
+        <div className="center-box">
+          <h2>Cargando producto...</h2>
+        </div>
+      </div>
+    );
+
+  if (error || !product)
     return (
       <div className="center-screen">
         <div className="center-box">
           <h2>Producto no encontrado</h2>
           <p>
-            Lo sentimos, el producto que estás buscando no existe o fue
-            eliminado.
+            {error ||
+              "Lo sentimos, el producto que estás buscando no existe o fue eliminado."}
           </p>
           <Link className="featured-product-button" to={"/productos"}>
             Volver al Catálogo

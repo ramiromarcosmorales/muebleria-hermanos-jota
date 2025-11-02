@@ -1,4 +1,5 @@
-import { Product } from "../models/Products";
+import { Product } from "../models/Products.js";
+import { validateProduct } from "../utils/validateProduct.js";
 
 export const getAll = async () => {
   return await Product.find();

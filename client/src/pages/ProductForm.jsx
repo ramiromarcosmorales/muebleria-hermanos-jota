@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { createProduct } from "../services/productService";
+import { useNavigate } from "react-router-dom";
 
 function ProductForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
     altValue: "",
     precio: 0,
-    srcImg: null,
+    srcImg: "",
     destacado: false,
     dimensiones: "",
     capacidad: "",
@@ -59,13 +62,13 @@ function ProductForm() {
     }));
   }
 
+  // Función mantenida por compatibilidad, pero ahora el campo acepta URLs
   function handleFileChange(e) {
-    if (e.target.files && e.target.files.length > 0) {
-      setFormData((prevAttributes) => ({
-        ...prevAttributes,
-        srcImg: e.target.files[0],
-      }));
-    }
+    // Cambiamos para aceptar URL de imagen en lugar de archivo
+    setFormData((prevAttributes) => ({
+      ...prevAttributes,
+      srcImg: e.target.value,
+    }));
   }
 
   function validateNombre(errors) {
@@ -216,7 +219,7 @@ function ProductForm() {
     return errors;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const errors = validateForm();
 
@@ -228,11 +231,49 @@ function ProductForm() {
       return;
     }
 
-    setStatus((prevAttributes) => ({
-      ...prevAttributes,
-      className: STATUS_CLASSNAMES.SUCCESS,
-    }));
-    console.log(formData);
+    try {
+      setStatus((prevAttributes) => ({
+        ...prevAttributes,
+        className: STATUS_CLASSNAMES.NO_STATUS,
+      }));
+
+      // Preparar los datos para enviar
+      const productData = {
+        nombre: formData.nombre,
+        descripcion: formData.descripcion,
+        altValue: formData.altValue,
+        precio: parseFloat(formData.precio),
+        destacado: formData.destacado,
+        dimensiones: formData.dimensiones,
+        capacidad: formData.capacidad,
+        estilo: formData.estilo,
+        material: formData.material,
+        garantia: formData.garantia,
+        origen: formData.origen,
+        peso: parseFloat(formData.peso),
+        color: formData.color,
+        // El backend espera 'imagenUrl', no 'srcImg'
+        imagenUrl: formData.srcImg || "",
+      };
+
+      await createProduct(productData);
+
+      setStatus({
+        className: STATUS_CLASSNAMES.SUCCESS,
+        errorMessages: [],
+      });
+
+      // Opcional: redirigir después de un tiempo o dejar que el usuario vea el mensaje
+      setTimeout(() => {
+        navigate("/productos");
+      }, 2000);
+    } catch (error) {
+      console.error("Error al crear producto:", error);
+      setStatus({
+        errorMessages: [error.message || "Error al crear el producto"],
+        className: STATUS_CLASSNAMES.ERROR,
+      });
+    }
   }
 
   function displaySuccess() {
@@ -326,13 +367,14 @@ function ProductForm() {
           </div>
 
           <div className="create-product-field">
-            <label htmlFor="imagenProducto">Imagen</label>
+            <label htmlFor="imagenProducto">URL de Imagen</label>
             <input
-              type="file"
+              type="text"
               id="imagenProducto"
               name="srcImg"
-              accept="image/*"
-              onChange={handleFileChange}
+              placeholder="/images/nombre-imagen.png"
+              value={formData.srcImg || ""}
+              onChange={handleChange}
             />
           </div>
 
