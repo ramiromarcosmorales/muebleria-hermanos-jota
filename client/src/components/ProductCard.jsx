@@ -8,11 +8,11 @@ const ProductCard = ({ product, variant = "catalog" }) => {
   if (variant === "home") {
     return (
       <div className="products-card">
-        <img src={product.srcImg} alt={product.altValue} />
+        <img src={product.imagenUrl} alt={product.altValue} />
         <p>{product.nombre}</p>
         <p className="products-precio">{formatPrice(product.precio)}</p>
         <Link
-          to={`/producto/${product.id}`}
+          to={`/producto/${product._id}`}
           className="featured-product-button"
           aria-label="Ver producto"
         >
@@ -26,10 +26,10 @@ const ProductCard = ({ product, variant = "catalog" }) => {
   return (
     <article>
       <h2>{product.nombre}</h2>
-      <img src={product.srcImg} alt={product.altValue} />
+      <img src={product.imagenUrl} alt={product.altValue} />
       <p>Precio: {formatPrice(product.precio)}</p>
       <Link
-        to={`/producto/${product.id}`}
+        to={`/producto/${product._id}`}
         className="product-button"
         aria-label="Ver producto"
       >

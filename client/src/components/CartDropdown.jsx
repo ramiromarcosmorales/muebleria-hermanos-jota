@@ -21,21 +21,21 @@ const CartDropdown = () => {
           <p style={{ textAlign: "center", color: "#777" }}>Carrito vacío</p>
         ) : (
           cart.map((item) => (
-            <div key={item.id} className="cart-item">
-              <img src={item.srcImg} alt={item.nombre} />
+            <div key={item._id} className="cart-item">
+              <img src={item.imagenUrl} alt={item.nombre} />
               <div className="cart-item-details">
                 <span className="cart-item-name">{item.nombre}</span>
                 <div className="cart-item-quantity">
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      decreaseQuantity(item.id);
+                      decreaseQuantity(item._id);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         e.stopPropagation();
-                        decreaseQuantity(item.id);
+                        decreaseQuantity(item._id);
                       }
                     }}
                     disabled={item.quantity <= 1}
@@ -47,13 +47,13 @@ const CartDropdown = () => {
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      increaseQuantity(item.id);
+                      increaseQuantity(item._id);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         e.stopPropagation();
-                        increaseQuantity(item.id);
+                        increaseQuantity(item._id);
                       }
                     }}
                     aria-label="Incrementar cantidad"
@@ -69,13 +69,13 @@ const CartDropdown = () => {
                 className="btn-clean-product"
                 onClick={(e) => {
                   e.stopPropagation();
-                  removeFromCart(item.id);
+                  removeFromCart(item._id);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
                     e.stopPropagation();
-                    removeFromCart(item.id);
+                    removeFromCart(item._id);
                   }
                 }}
                 aria-label="Eliminar producto del carrito"
