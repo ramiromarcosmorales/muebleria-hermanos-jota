@@ -1,4 +1,5 @@
 import request from "supertest";
+import { describe, test, beforeEach, expect, jest } from "@jest/globals";
 import { mockProduct } from "./setup.js";
 
 // Importar app después de configurar los mocks
@@ -44,7 +45,7 @@ describe("API de Productos", () => {
 
   test("GET /api/productos/:id debe responder con status 200 y un JSON con el objeto del producto", async () => {
     const mockProductId = "507f1f77bcf86cd799439011";
-    const mockProduct = {
+    const mockProductData = {
       _id: mockProductId,
       nombre: "Producto Test",
       descripcion: "Descripción del producto",
@@ -63,7 +64,7 @@ describe("API de Productos", () => {
     };
 
     // Mock de Product.findById() para devolver un producto
-    mockProduct.findById.mockResolvedValue(mockProduct);
+    mockProduct.findById.mockResolvedValue(mockProductData);
 
     const res = await request(app)
       .get(`/api/productos/${mockProductId}`)
@@ -71,7 +72,7 @@ describe("API de Productos", () => {
       .expect(200);
 
     expect(res.body).toHaveProperty("_id", mockProductId);
-    expect(res.body.nombre).toBe(mockProduct.nombre);
+    expect(res.body.nombre).toBe(mockProductData.nombre);
   });
 
   test("GET /api/productos/:id debe responder con status 404 cuando el producto no existe", async () => {

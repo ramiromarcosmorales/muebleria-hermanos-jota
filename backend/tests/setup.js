@@ -1,5 +1,6 @@
 // Setup para tests - Mock de mongoose antes de que se importe app.js
 import mongoose from "mongoose";
+import { jest } from "@jest/globals";
 
 // Mock de los métodos de mongoose que se usan en el código
 const mockFind = jest.fn();
