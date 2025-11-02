@@ -85,7 +85,7 @@ const ProductDetail = ({ addToCart }) => {
       <section id="product-detail">
         <div className="product-detail-container">
           <div className="product-image">
-            <img src={product.srcImg} alt={product.altValue} />
+            <img src={product.imagenUrl} alt={product.altValue} />
           </div>
           <div className="product-info">
             <h1 className="product-title">{product.nombre}</h1>
@@ -96,10 +96,10 @@ const ProductDetail = ({ addToCart }) => {
             <p className="product-description">{product.descripcion}</p>
             <button
               className="btn-cart add-to-cart"
-              data-id={product.id}
+              data-id={product._id}
               data-name={product.nombre}
               data-price={product.precio}
-              data-image={product.srcImg}
+              data-image={product.imagenUrl}
               onClick={() => addToCart(product)}
               aria-label={`Añadir ${product?.nombre} al carrito`}
             >

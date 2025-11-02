@@ -9,7 +9,7 @@ function ProductForm() {
     descripcion: "",
     altValue: "",
     precio: 0,
-    srcImg: "",
+    imagenUrl: "",
     destacado: false,
     dimensiones: "",
     capacidad: "",
@@ -67,7 +67,7 @@ function ProductForm() {
     // Cambiamos para aceptar URL de imagen en lugar de archivo
     setFormData((prevAttributes) => ({
       ...prevAttributes,
-      srcImg: e.target.value,
+      imagenUrl: e.target.value,
     }));
   }
 
@@ -110,8 +110,8 @@ function ProductForm() {
       errors.push("El precio debe ser un número mayor a 0.");
     }
   }
-  function validateSrcImg(errors) {
-    if (!formData.srcImg) {
+  function validateImagenUrl(errors) {
+    if (!formData.imagenUrl) {
       errors.push("El producto debe tener adjunta una imagen.");
     }
   }
@@ -206,7 +206,7 @@ function ProductForm() {
     validateDescripcion(errors);
     validateAltValue(errors);
     validatePrecio(errors);
-    validateSrcImg(errors);
+    validateImagenUrl(errors);
     validateDimensiones(errors);
     validateCapacidad(errors);
     validateEstilo(errors);
@@ -252,8 +252,7 @@ function ProductForm() {
         origen: formData.origen,
         peso: parseFloat(formData.peso),
         color: formData.color,
-        // El backend espera 'imagenUrl', no 'srcImg'
-        imagenUrl: formData.srcImg || "",
+        imagenUrl: formData.imagenUrl || "",
       };
 
       await createProduct(productData);
@@ -371,9 +370,9 @@ function ProductForm() {
             <input
               type="text"
               id="imagenProducto"
-              name="srcImg"
+              name="imagenUrl"
               placeholder="/images/nombre-imagen.png"
-              value={formData.srcImg || ""}
+              value={formData.imagenUrl || ""}
               onChange={handleChange}
             />
           </div>

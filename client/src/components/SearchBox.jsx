@@ -32,7 +32,7 @@ const SearchBox = ({ productos }) => {
     setQuery("");
     setOpen(false);
     setSelectedIndex(-1);
-    navigate(`/producto/${producto.id}`);
+    navigate(`/producto/${producto._id}`);
   };
 
   const handleKeyDown = (e) => {
@@ -98,7 +98,7 @@ const SearchBox = ({ productos }) => {
           ) : (
             filtered.map((p, index) => (
               <div
-                key={p.id}
+                key={p._id}
                 className={`search-result-item ${
                   index === selectedIndex ? "selected" : ""
                 }`}
@@ -108,7 +108,7 @@ const SearchBox = ({ productos }) => {
                 tabIndex={-1}
               >
                 <img
-                  src={p.srcImg}
+                  src={p.imagenUrl}
                   alt={p.nombre}
                   className="search-result-img"
                 />
