@@ -38,6 +38,17 @@ app.use(express.json()); // Permite recibir JSON en las peticiones
 app.use(log); // Middleware personalizado para logs
 app.use(requestCounter);
 
+//allowOnly: middleware sencillo para devolver 405 en rutas conocidas
+//  Ajustar métodos permitidos según sea necesario.
+
+const allowOnly = (methods) => (req, res, next) => {
+  if (methods.includes(req.method)) return next();
+  return res.status(405).json({ message: "Method Not Allowed", code: 405 });
+};
+
+// Aplicar regla antes de montar las rutas de productos
+app.use("/api/productos", allowOnly(["GET", "HEAD"]));
+
 // Documentación Swagger disponible en /api/docs
 app.use(
   "/api/docs",
@@ -67,3 +78,5 @@ app.use(notFound);
 
 //Error handler
 app.use(errorHandler);
+
+module.exports = { app };
