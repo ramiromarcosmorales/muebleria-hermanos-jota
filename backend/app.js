@@ -67,3 +67,14 @@ app.use(notFound);
 
 //Error handler
 app.use(errorHandler);
+
+const PORT = process.env.PORT || 3001;
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Servidor local en http://localhost:${PORT}`);
+  });
+}
+
+export default function handler(req, res) {
+  return app(req, res);
+}
