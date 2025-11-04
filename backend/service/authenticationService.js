@@ -1,5 +1,6 @@
-import { User } from "../models/Users";
-import { validateUser } from "../utils/validateUser";
+import { User } from "../models/Users.js";
+import { validateUser } from "../utils/validateUser.js";
+import bcrypt from "bcrypt";
 
 export default async function registerUser(userData) {
   const errors = validateUser(userData);
@@ -18,6 +19,10 @@ export default async function registerUser(userData) {
     error.details = ["Ya existe un usuario con ese correo electrónico."];
     throw error;
   }
+
+  // Hasheo de contraseña
+  const salt = await bcrypt.genSalt(10);
+  userData.password = await bcrypt.hash(userData.password, salt);
 
   const newUser = new User(userData);
 
