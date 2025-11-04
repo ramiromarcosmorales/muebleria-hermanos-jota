@@ -59,6 +59,8 @@ export default function Registration() {
             required
           ></input>
         </div>
+
+        <button type="submit">Finalizar registro</button>
       </form>
     </section>
   );
