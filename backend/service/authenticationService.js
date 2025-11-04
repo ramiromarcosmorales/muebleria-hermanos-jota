@@ -1,1 +1,1 @@
-export default function registerUser() {}
+export default async function registerUser(userData) {}
