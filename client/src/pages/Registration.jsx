@@ -7,8 +7,17 @@ export default function Registration() {
     password: "",
   });
 
-  function handleSubmit() {
-    return;
+  const STATUS_CLASSNAMES_ENUM = {
+    SUCCESS: "success-status",
+    ERROR: "error-status",
+    NO_STATUS: "",
+  };
+  const [status, setStatus] = useState(STATUS_CLASSNAMES_ENUM.NO_STATUS);
+
+  const [errors, setErrors] = useState([]);
+
+  function handleSubmit(event) {
+    event.preventDefault();
   }
 
   function handleChange(event) {
@@ -59,6 +68,8 @@ export default function Registration() {
             required
           ></input>
         </div>
+
+        <div className={status}></div>
 
         <button type="submit">Finalizar registro</button>
       </form>
