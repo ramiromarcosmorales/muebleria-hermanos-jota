@@ -3,15 +3,12 @@ import registerUser from "../service/authenticationService.js";
 export default async function register(request, response) {
   try {
     const user = await registerUser(request.body);
-    res.status(201).json({
+    response.status(201).json({
       _id: user._id,
       username: user.nombreDeUsuario,
       email: user.correoElectronico,
     });
-  } catch {
-    error;
-  }
-  {
+  } catch (error) {
     console.error("Error al crear el usuario:", error);
     if (error.details) {
       response

@@ -65,7 +65,14 @@ export default function Registration() {
     }
 
     try {
-      await registerUser(form);
+      // Preparar los datos para enviar
+      const userData = {
+        nombreDeUsuario: form.username,
+        correoElectronico: form.email,
+        passwordUsuario: form.password,
+      };
+
+      await registerUser(userData);
 
       setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
 
@@ -74,7 +81,7 @@ export default function Registration() {
       }, 2000);
     } catch (error) {
       console.error("Error al crear el usuario:", error);
-      setErrors([error.message || "Error al crear el producto"]);
+      setErrors([error.message || "Error al crear el usuario."]);
       setStatus(STATUS_CLASSNAMES_ENUM.ERROR);
     }
   }

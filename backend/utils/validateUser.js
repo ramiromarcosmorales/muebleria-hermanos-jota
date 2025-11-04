@@ -10,20 +10,23 @@ export function validateUser(user) {
     /(?:[a-z0-9+!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
 
   if (
-    !user.username ||
-    user.username.length < NAME_MIN_LENGTH ||
-    user.username.length > NAME_MAX_LENGTH
+    !user.nombreDeUsuario ||
+    user.nombreDeUsuario.length < NAME_MIN_LENGTH ||
+    user.nombreDeUsuario.length > NAME_MAX_LENGTH
   ) {
     errors.push(
       `El nombre de usuario debe tener entre ${NAME_MIN_LENGTH} y ${NAME_MAX_LENGTH} caracteres.`
     );
   }
 
-  if (!user.email || !EMAIL_REGEX.test(user.email)) {
+  if (!user.correoElectronico || !EMAIL_REGEX.test(user.correoElectronico)) {
     errors.push("El correo electrónico debe cumplir con el formato adecuado.");
   }
 
-  if (!user.password || user.password.length < PASSWORD_MIN_LENGTH) {
+  if (
+    !user.passwordUsuario ||
+    user.passwordUsuario.length < PASSWORD_MIN_LENGTH
+  ) {
     errors.push(
       `La contraseña debe tener al menos ${PASSWORD_MIN_LENGTH} caracteres.`
     );

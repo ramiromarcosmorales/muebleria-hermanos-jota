@@ -12,7 +12,7 @@ export default async function registerUser(userData) {
 
   // Se busca si hay un usuario registrado con el mismo email
   const userAlreadyExists = await User.findOne({
-    correoElectronico: userData.email,
+    correoElectronico: userData.correoElectronico,
   });
   if (userAlreadyExists) {
     const error = new Error("El usuario ya existe");
@@ -22,7 +22,7 @@ export default async function registerUser(userData) {
 
   // Hasheo de contraseña
   const salt = await bcrypt.genSalt(10);
-  userData.password = await bcrypt.hash(userData.password, salt);
+  userData.passwordUsuario = await bcrypt.hash(userData.passwordUsuario, salt);
 
   const newUser = new User(userData);
 
