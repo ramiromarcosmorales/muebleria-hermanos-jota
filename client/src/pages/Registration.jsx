@@ -11,8 +11,9 @@ export default function Registration() {
     return;
   }
 
-  function handleChange() {
-    return;
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setForm((f) => ({ ...f, [name]: value }));
   }
 
   return (
