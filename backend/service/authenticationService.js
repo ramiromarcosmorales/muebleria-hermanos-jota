@@ -14,9 +14,8 @@ export default async function registerUser(userData) {
     correoElectronico: userData.email,
   });
   if (userAlreadyExists) {
-    const error = new Error(
-      "Existe un usuario registrado con ese correo electrónico."
-    );
+    const error = new Error("El usuario ya existe");
+    error.details = ["Ya existe un usuario con ese correo electrónico."];
     throw error;
   }
 
