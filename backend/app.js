@@ -62,6 +62,9 @@ app.use("/api/productos", productsRouter);
 import { statusRouter } from "./routes/status.js";
 app.use("/api/status", statusRouter);
 
+import { authenticationRouter } from "./routes/authentication.js";
+app.use("/api/auth", authenticationRouter);
+
 //404 handler
 app.use(notFound);
 
