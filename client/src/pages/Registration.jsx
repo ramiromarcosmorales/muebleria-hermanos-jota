@@ -1,6 +1,9 @@
 import { useState } from "react";
+import registerUser from "../services/userService";
+import { useNavigate } from "react-router-dom";
 
 export default function Registration() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -52,7 +55,7 @@ export default function Registration() {
     return errors;
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const errors = validateForm();
     if (errors.length > 0) {
@@ -60,8 +63,20 @@ export default function Registration() {
       setStatus(STATUS_CLASSNAMES_ENUM.ERROR);
       return;
     }
-    setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
-    console.log("Formulario enviado:", form);
+
+    try {
+      await registerUser(form);
+
+      setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (error) {
+      console.error("Error al crear el usuario:", error);
+      setErrors([error.message || "Error al crear el producto"]);
+      setStatus(STATUS_CLASSNAMES_ENUM.ERROR);
+    }
   }
 
   function displayErrors() {
