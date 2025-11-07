@@ -9,6 +9,7 @@ import ProductDetail from "./pages/ProductDetail";
 import ProductForm from "./pages/ProductForm";
 import NotFound from "./pages/NotFound";
 import "./styles/global.css";
+import Registration from "./pages/Registration";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "contacto", element: <ContactForm /> },
       { path: "producto/:id", element: <ProductDetail /> },
       { path: "admin/crear-producto", element: <ProductForm /> },
+      { path: "registro", element: <Registration /> },
       { path: "*", element: <NotFound /> },
     ],
   },
