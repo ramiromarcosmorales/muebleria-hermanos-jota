@@ -32,7 +32,42 @@ export const getProductById = async (req, res) => {
 
 export const createProduct = async (req, res) => {
   try {
-    const product = await productService.create(req.body);
+    const {
+      nombre,
+      descripcion,
+      altValue,
+      precio,
+      destacado,
+      dimensiones,
+      capacidad,
+      estilo,
+      material,
+      garantia,
+      origen,
+      peso,
+      color,
+    } = req.body;
+
+    const imagenUrl = `/uploads/${req.file.filename}`;
+
+    const producto = {
+      nombre: nombre,
+      descripcion: descripcion,
+      altValue: altValue,
+      imagenUrl: imagenUrl,
+      precio: precio,
+      destacado: destacado,
+      dimensiones: dimensiones,
+      capacidad: capacidad,
+      estilo: estilo,
+      material: material,
+      garantia: garantia,
+      origen: origen,
+      peso: peso,
+      color: color,
+    };
+
+    const product = await productService.create(producto);
     res.status(201).json(product);
   } catch (error) {
     console.error("Error al crear producto:", error);

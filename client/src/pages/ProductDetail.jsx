@@ -11,6 +11,10 @@ const ProductDetail = ({ addToCart }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
+  const imagePath = API_BASE + product.imagenUrl;
+
   useEffect(() => {
     async function fetchProducto() {
       try {
@@ -85,7 +89,7 @@ const ProductDetail = ({ addToCart }) => {
       <section id="product-detail">
         <div className="product-detail-container">
           <div className="product-image">
-            <img src={product.imagenUrl} alt={product.altValue} />
+            <img src={imagePath} alt={product.altValue} />
           </div>
           <div className="product-info">
             <h1 className="product-title">{product.nombre}</h1>
@@ -99,7 +103,7 @@ const ProductDetail = ({ addToCart }) => {
               data-id={product._id}
               data-name={product.nombre}
               data-price={product.precio}
-              data-image={product.imagenUrl}
+              data-image={imagePath}
               onClick={() => addToCart(product)}
               aria-label={`Añadir ${product?.nombre} al carrito`}
             >
