@@ -237,22 +237,23 @@ function ProductForm() {
       }));
 
       // Preparar los datos para enviar
-      const productData = {
-        nombre: formData.nombre,
-        descripcion: formData.descripcion,
-        altValue: formData.altValue,
-        precio: parseFloat(formData.precio),
-        destacado: formData.destacado,
-        dimensiones: formData.dimensiones,
-        capacidad: formData.capacidad,
-        estilo: formData.estilo,
-        material: formData.material,
-        garantia: formData.garantia,
-        origen: formData.origen,
-        peso: parseFloat(formData.peso),
-        color: formData.color,
-        imagenUrl: formData.imagen || "",
-      };
+
+      const productData = new FormData();
+
+      productData.append("nombre", formData.nombre);
+      productData.append("descripcion", formData.descripcion);
+      productData.append("altValue", formData.altValue);
+      productData.append("precio", parseFloat(formData.precio));
+      productData.append("destacado", formData.destacado);
+      productData.append("dimensiones", formData.dimensiones);
+      productData.append("capacidad", formData.capacidad);
+      productData.append("estilo", formData.estilo);
+      productData.append("material", formData.material);
+      productData.append("garantia", formData.garantia);
+      productData.append("origen", formData.origen);
+      productData.append("peso", parseFloat(formData.peso));
+      productData.append("color", formData.color);
+      productData.append("imagen", formData.imagen);
 
       await createProduct(productData);
 
