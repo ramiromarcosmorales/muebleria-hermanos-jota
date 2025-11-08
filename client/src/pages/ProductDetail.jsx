@@ -11,10 +11,6 @@ const ProductDetail = ({ addToCart }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE = import.meta.env.VITE_API_BASE;
-
-  const imagePath = API_BASE + product.imagenUrl;
-
   useEffect(() => {
     async function fetchProducto() {
       try {
@@ -31,6 +27,10 @@ const ProductDetail = ({ addToCart }) => {
     }
     fetchProducto();
   }, [id]);
+
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
+  const imagePath = API_BASE + product.imagenUrl;
 
   const characteristicLabels = {
     dimensiones: "DIMENSIONES",
