@@ -9,7 +9,7 @@ function ProductForm() {
     descripcion: "",
     altValue: "",
     precio: 0,
-    imagenUrl: "",
+    imagen: null,
     destacado: false,
     dimensiones: "",
     capacidad: "",
@@ -55,20 +55,19 @@ function ProductForm() {
   const COLOR_MAX_LENGTH = 100;
 
   function handleChange(e) {
-    const { name, value, type, checked } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  }
+    const { name, value, type, checked, files } = e.target;
 
-  // Función mantenida por compatibilidad, pero ahora el campo acepta URLs
-  function handleFileChange(e) {
-    // Cambiamos para aceptar URL de imagen en lugar de archivo
-    setFormData((prevAttributes) => ({
-      ...prevAttributes,
-      imagenUrl: e.target.value,
-    }));
+    if (type === "file") {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files[0],
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: type === "checkbox" ? checked : value,
+      }));
+    }
   }
 
   function validateNombre(errors) {
@@ -110,8 +109,8 @@ function ProductForm() {
       errors.push("El precio debe ser un número mayor a 0.");
     }
   }
-  function validateImagenUrl(errors) {
-    if (!formData.imagenUrl) {
+  function validateImagen(errors) {
+    if (!formData.imagen) {
       errors.push("El producto debe tener adjunta una imagen.");
     }
   }
@@ -206,7 +205,7 @@ function ProductForm() {
     validateDescripcion(errors);
     validateAltValue(errors);
     validatePrecio(errors);
-    validateImagenUrl(errors);
+    validateImagen(errors);
     validateDimensiones(errors);
     validateCapacidad(errors);
     validateEstilo(errors);
@@ -252,7 +251,7 @@ function ProductForm() {
         origen: formData.origen,
         peso: parseFloat(formData.peso),
         color: formData.color,
-        imagenUrl: formData.imagenUrl || "",
+        imagenUrl: formData.imagen || "",
       };
 
       await createProduct(productData);
@@ -366,13 +365,12 @@ function ProductForm() {
           </div>
 
           <div className="create-product-field">
-            <label htmlFor="imagenProducto">URL de Imagen</label>
+            <label htmlFor="imagenProducto">Imagen</label>
             <input
-              type="text"
+              type="file"
               id="imagenProducto"
-              name="imagenUrl"
-              placeholder="/images/nombre-imagen.png"
-              value={formData.imagenUrl || ""}
+              name="imagen"
+              accept="image/*"
               onChange={handleChange}
             />
           </div>
