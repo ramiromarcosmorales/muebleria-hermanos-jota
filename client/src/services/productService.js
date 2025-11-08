@@ -1,4 +1,4 @@
-import { getJSON, postJSON, deleteJSON } from "../utils/api";
+import { getJSON, postFormData, deleteJSON } from "../utils/api";
 
 export async function getAllProducts() {
   try {
@@ -26,7 +26,7 @@ export async function getProductById(id) {
 
 export async function createProduct(data) {
   try {
-    const producto = await postJSON("/api/productos", data);
+    const producto = await postFormData("/api/productos", data);
     return producto;
   } catch (error) {
     console.error("Error al crear producto:", error);
