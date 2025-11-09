@@ -31,7 +31,7 @@ export const app = express();
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
-    methods: "GET",
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use(express.json()); // Permite recibir JSON en las peticiones

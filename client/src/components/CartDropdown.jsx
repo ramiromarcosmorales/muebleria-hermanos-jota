@@ -22,7 +22,7 @@ const CartDropdown = () => {
         ) : (
           cart.map((item) => (
             <div key={item._id} className="cart-item">
-              <img src={item.imagenUrl} alt={item.nombre} />
+              <img src={item.imagenUrl} alt={item.altValue} />
               <div className="cart-item-details">
                 <span className="cart-item-name">{item.nombre}</span>
                 <div className="cart-item-quantity">
