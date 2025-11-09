@@ -1,4 +1,4 @@
-export function validateProduct(product) {
+export function validateProduct(product, isUpdate = false) {
   const errors = [];
 
   const NAME_MIN_LENGTH = 3;
@@ -57,7 +57,7 @@ export function validateProduct(product) {
     errors.push("El precio debe ser un número mayor a 0.");
   }
 
-  if (!product.imagenUrl) {
+  if (!isUpdate && !product.imagen) {
     errors.push("El producto debe tener adjunta una imagen.");
   }
 

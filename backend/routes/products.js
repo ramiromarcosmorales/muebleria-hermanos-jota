@@ -4,30 +4,23 @@
  */
 
 import express from "express";
-import { createProduct } from "../controllers/productController.js";
-import { updateProductById } from "../controllers/productController.js";
-import { deleteProductById } from "../controllers/productController.js";
-import { getAllProducts } from "../controllers/productController.js";
-import { getProductById } from "../controllers/productController.js";
+import {
+  createProduct,
+  updateProductById,
+  deleteProductById,
+  getAllProducts,
+  getProductById,
+  getProductImage,
+} from "../controllers/productController.js";
 
 // Importación de multer y asociados a multer
 import multer from "multer";
-import path from "path";
 
 // Configuración de multer
 
 // Path donde se guardarán las imágenes
-export const uploadPath = path.join(process.cwd(), "uploads");
-
-// Configurar almacenamiento físico
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, uploadPath),
-  filename: (req, file, cb) => {
-    const uniqueName = Date.now() + "-" + file.originalname;
-    cb(null, uniqueName);
-  },
-});
-export const upload = multer({ storage });
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
 export const productsRouter = express.Router();
 
@@ -64,8 +57,10 @@ productsRouter.get("/", getAllProducts);
  */
 productsRouter.get("/:id", getProductById);
 
+productsRouter.get("/:id/imagen", getProductImage);
+
 productsRouter.post("/", upload.single("imagen"), createProduct);
 
-productsRouter.put("/:id", updateProductById);
+productsRouter.put("/:id", upload.single("imagen"), updateProductById);
 
 productsRouter.delete("/:id", deleteProductById);

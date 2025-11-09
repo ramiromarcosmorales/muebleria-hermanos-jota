@@ -48,13 +48,10 @@ export const createProduct = async (req, res) => {
       color,
     } = req.body;
 
-    const imagenUrl = `/uploads/${req.file.filename}`;
-
     const producto = {
       nombre: nombre,
       descripcion: descripcion,
       altValue: altValue,
-      imagenUrl: imagenUrl,
       precio: precio,
       destacado: destacado,
       dimensiones: dimensiones,
@@ -66,6 +63,13 @@ export const createProduct = async (req, res) => {
       peso: peso,
       color: color,
     };
+
+    if (req.file) {
+      producto.imagen = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      };
+    }
 
     const product = await productService.create(producto);
     res.status(201).json(product);
@@ -84,7 +88,16 @@ export const createProduct = async (req, res) => {
 export const updateProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedProduct = await productService.update(id, req.body);
+    const productData = { ...req.body };
+
+    if (req.file) {
+      productData.imagen = {
+        data: req.file.buffer,
+        contentType: req.file.mimetype,
+      };
+    }
+
+    const updatedProduct = await productService.update(id, productData);
 
     if (!updatedProduct) {
       return res.status(404).json({ error: "Producto no encontrado" });
@@ -100,6 +113,21 @@ export const updateProductById = async (req, res) => {
         error: "Error interno del servidor al actualizar el producto",
       });
     }
+  }
+};
+
+export const getProductImage = async (req, res) => {
+  try {
+    const producto = await productService.getById(req.params.id);
+    if (!producto || !producto.imagen?.data) {
+      return res.status(404).send("Imagen no encontrada");
+    }
+
+    res.set("Content-Type", producto.imagen.contentType);
+    res.send(producto.imagen.data);
+  } catch (error) {
+    console.error("Error al obtener imagen:", error);
+    res.status(500).send("Error interno del servidor");
   }
 };
 

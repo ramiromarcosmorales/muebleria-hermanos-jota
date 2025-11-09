@@ -1,4 +1,4 @@
-import { getJSON, postFormData, deleteJSON } from "../utils/api";
+import { getJSON, postFormData, deleteJSON, putFormData } from "../utils/api";
 
 export async function getAllProducts() {
   try {
@@ -44,6 +44,18 @@ export async function deleteProduct(id) {
     console.error("Error al eliminar producto:", error);
     throw new Error(
       `Error al eliminar producto: ${error.message || "Error desconocido"}`
+    );
+  }
+}
+
+export async function updateProduct(id, data) {
+  try {
+    const producto = await putFormData(`/api/productos/${id}`, data);
+    return producto;
+  } catch (error) {
+    console.error("Error al actualizar producto:", error);
+    throw new Error(
+      `Error al actualizar producto: ${error.message || "Error desconocido"}`
     );
   }
 }

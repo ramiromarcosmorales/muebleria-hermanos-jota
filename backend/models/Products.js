@@ -15,10 +15,6 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 0,
     },
-    imagenUrl: {
-      type: String,
-      required: true,
-    },
     altValue: {
       type: String,
       required: true,
@@ -58,6 +54,10 @@ const productSchema = new mongoose.Schema(
     color: {
       type: String,
       required: true,
+    },
+    imagen: {
+      data: Buffer,
+      contentType: String,
     },
   },
   { timestamps: true }

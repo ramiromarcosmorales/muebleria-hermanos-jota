@@ -27,15 +27,11 @@ if (process.env.NODE_ENV !== "test" && MONGO_URI) {
 // Inicialización de la app de Express
 export const app = express();
 
-// Servir las imágenes de la carpeta /uploads
-import { uploadPath } from "./routes/products.js";
-app.use("/uploads", express.static(uploadPath));
-
 // Middlewares globales
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
-    methods: "GET",
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use(express.json()); // Permite recibir JSON en las peticiones

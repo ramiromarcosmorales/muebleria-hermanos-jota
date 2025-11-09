@@ -1,9 +1,17 @@
-import { useState } from "react";
-import { createProduct } from "../services/productService";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import {
+  createProduct,
+  getProductById,
+  updateProduct,
+} from "../services/productService";
+import { useNavigate, useParams } from "react-router-dom";
 
 function ProductForm() {
   const navigate = useNavigate();
+
+  const { id } = useParams();
+  const isEditMode = Boolean(id);
+
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
@@ -19,7 +27,10 @@ function ProductForm() {
     origen: "",
     peso: "",
     color: "",
+    currentImageUrl: "",
   });
+
+  const fileInputRef = useRef(null);
 
   const STATUS_CLASSNAMES = {
     SUCCESS: "create-product-status success-status",
@@ -53,6 +64,47 @@ function ProductForm() {
   const ORIGIN_MAX_LENGTH = 100;
   const COLOR_MIN_LENGTH = 3;
   const COLOR_MAX_LENGTH = 100;
+
+  useEffect(() => {
+    if (isEditMode) {
+      getProductById(id)
+        .then((product) => {
+          setFormData({
+            ...product,
+            currentImageUrl: `${import.meta.env.VITE_API_BASE}/api/productos/${product._id}/imagen`,
+            imagen: null,
+          });
+        })
+        .catch((error) => {
+          console.error("Error al cargar datos para editar:", error);
+          setStatus({
+            className: STATUS_CLASSNAMES.ERROR,
+            errorMessages: ["No se pudieron cargar los datos del producto."],
+          });
+        });
+    } else {
+      setFormData({
+        nombre: "",
+        descripcion: "",
+        altValue: "",
+        precio: 0,
+        imagen: null,
+        destacado: false,
+        dimensiones: "",
+        capacidad: "",
+        estilo: "",
+        material: "",
+        garantia: "",
+        origen: "",
+        peso: "",
+        color: "",
+        currentImageUrl: "",
+      });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+  }, [id, isEditMode, STATUS_CLASSNAMES.ERROR]);
 
   function handleChange(e) {
     const { name, value, type, checked, files } = e.target;
@@ -205,7 +257,9 @@ function ProductForm() {
     validateDescripcion(errors);
     validateAltValue(errors);
     validatePrecio(errors);
-    validateImagen(errors);
+    if (!isEditMode || (isEditMode && formData.imagen)) {
+      validateImagen(errors);
+    }
     validateDimensiones(errors);
     validateCapacidad(errors);
     validateEstilo(errors);
@@ -236,8 +290,8 @@ function ProductForm() {
         className: STATUS_CLASSNAMES.NO_STATUS,
       }));
 
-      // Preparar los datos para enviar
-
+      // Siempre usamos FormData para enviar, ya que es la forma de enviar la imagen si existe.
+      // Si no hay imagen, los otros campos se envían de todos modos.
       const productData = new FormData();
 
       productData.append("nombre", formData.nombre);
@@ -253,23 +307,37 @@ function ProductForm() {
       productData.append("origen", formData.origen);
       productData.append("peso", parseFloat(formData.peso));
       productData.append("color", formData.color);
-      productData.append("imagen", formData.imagen);
 
-      await createProduct(productData);
+      if (formData.imagen) {
+        productData.append("imagen", formData.imagen);
+      }
 
-      setStatus({
-        className: STATUS_CLASSNAMES.SUCCESS,
-        errorMessages: [],
-      });
+      if (isEditMode) {
+        await updateProduct(id, productData);
 
-      // Opcional: redirigir después de un tiempo o dejar que el usuario vea el mensaje
-      setTimeout(() => {
-        navigate("/productos");
-      }, 2000);
+        setStatus({
+          className: STATUS_CLASSNAMES.SUCCESS,
+          errorMessages: [],
+        });
+
+        setTimeout(() => {
+          navigate(`/productos`);
+        }, 2000);
+      } else {
+        await createProduct(productData);
+        setStatus({
+          className: STATUS_CLASSNAMES.SUCCESS,
+          errorMessages: [],
+        });
+
+        setTimeout(() => {
+          navigate("/productos");
+        }, 2000);
+      }
     } catch (error) {
-      console.error("Error al crear producto:", error);
+      console.error("Error al enviar formulario:", error);
       setStatus({
-        errorMessages: [error.message || "Error al crear el producto"],
+        errorMessages: [error.message || "Error al enviar el formulario"],
         className: STATUS_CLASSNAMES.ERROR,
       });
     }
@@ -300,8 +368,12 @@ function ProductForm() {
     <section className="create-product">
       <div className="create-product-container">
         <header className="create-product-header">
-          <h1>Crear producto</h1>
-          <p>Rellena el formulario y pulsa enviar para añadir un producto.</p>
+          <h1>{isEditMode ? "Editar Producto" : "Crear Producto"}</h1>
+          <p>
+            {isEditMode
+              ? "Modifica los campos y pulsa guardar cambios. Si deseas cambiar la imagen, selecciona un nuevo archivo."
+              : "Rellena el formulario y pulsa enviar para añadir un producto."}
+          </p>
         </header>
 
         <form
@@ -367,12 +439,26 @@ function ProductForm() {
 
           <div className="create-product-field">
             <label htmlFor="imagenProducto">Imagen</label>
+            {isEditMode && formData.currentImageUrl && (
+              <div className="current-image-preview">
+                <img
+                  src={formData.currentImageUrl}
+                  alt="Imagen actual del producto"
+                  style={{
+                    maxWidth: "200px",
+                    maxHeight: "200px",
+                    marginBottom: "10px",
+                  }}
+                />
+              </div>
+            )}
             <input
               type="file"
               id="imagenProducto"
               name="imagen"
               accept="image/*"
               onChange={handleChange}
+              ref={fileInputRef}
             />
           </div>
 
