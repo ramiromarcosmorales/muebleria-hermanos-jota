@@ -3,13 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById, deleteProduct } from "../services/productService";
+import { useCartContext } from "../context/CartContext";
 
-const ProductDetail = ({ addToCart }) => {
+const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProducto] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { addToCart } = useCartContext();
 
   useEffect(() => {
     async function fetchProducto() {
