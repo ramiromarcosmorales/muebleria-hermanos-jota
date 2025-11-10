@@ -32,7 +32,9 @@ describe("API de Productos", () => {
     ];
 
     // Mock de Product.find() para devolver productos
-    mockProduct.find.mockResolvedValue(mockProducts);
+    mockProduct.find.mockReturnValue({
+      select: jest.fn().mockResolvedValue(mockProducts),
+    });
 
     const res = await request(app)
       .get("/api/productos")

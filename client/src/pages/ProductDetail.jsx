@@ -3,13 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById, deleteProduct } from "../services/productService";
+import { useCartContext } from "../context/CartContext";
 
-const ProductDetail = ({ addToCart }) => {
+const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProducto] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const { addToCart } = useCartContext();
 
   useEffect(() => {
     async function fetchProducto() {
@@ -28,6 +31,8 @@ const ProductDetail = ({ addToCart }) => {
     fetchProducto();
   }, [id]);
 
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
   const characteristicLabels = {
     dimensiones: "DIMENSIONES",
     capacidad: "CAPACIDAD",
@@ -35,7 +40,7 @@ const ProductDetail = ({ addToCart }) => {
     material: "MATERIAL",
     garantia: "GARANTÍA",
     origen: "ORIGEN",
-    peso: "PESO",
+    peso: "PESO (KG)",
     color: "COLOR",
   };
 
@@ -85,7 +90,10 @@ const ProductDetail = ({ addToCart }) => {
       <section id="product-detail">
         <div className="product-detail-container">
           <div className="product-image">
-            <img src={product.imagenUrl} alt={product.altValue} />
+            <img
+              src={`${API_BASE}/api/productos/${product._id}/imagen`}
+              alt={product.altValue}
+            />
           </div>
           <div className="product-info">
             <h1 className="product-title">{product.nombre}</h1>
@@ -99,7 +107,6 @@ const ProductDetail = ({ addToCart }) => {
               data-id={product._id}
               data-name={product.nombre}
               data-price={product.precio}
-              data-image={product.imagenUrl}
               onClick={() => addToCart(product)}
               aria-label={`Añadir ${product?.nombre} al carrito`}
             >
@@ -107,6 +114,12 @@ const ProductDetail = ({ addToCart }) => {
             </button>
             <button className="btn-cart btn-delete" onClick={handleDelete}>
               Eliminar
+            </button>
+            <button
+              className="btn-cart btn-delete"
+              onClick={() => navigate(`/admin/editar-producto/${id}`)}
+            >
+              Editar
             </button>
           </div>
         </div>

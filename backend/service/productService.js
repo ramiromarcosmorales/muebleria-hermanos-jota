@@ -2,7 +2,7 @@ import { Product } from "../models/Products.js";
 import { validateProduct } from "../utils/validateProduct.js";
 
 export const getAll = async () => {
-  return await Product.find();
+  return await Product.find().select("-imagen");
 };
 
 export const getById = async (id) => {
@@ -10,7 +10,7 @@ export const getById = async (id) => {
 };
 
 export const create = async (productData) => {
-  const errors = validateProduct(productData);
+  const errors = validateProduct(productData, false);
   if (errors.length > 0) {
     const error = new Error("Error de validación");
     error.details = errors;
@@ -22,7 +22,7 @@ export const create = async (productData) => {
 };
 
 export const update = async (id, productData) => {
-  const errors = validateProduct(productData);
+  const errors = validateProduct(productData, true);
   if (errors.length > 0) {
     const error = new Error("Error de validación");
     error.details = errors;
