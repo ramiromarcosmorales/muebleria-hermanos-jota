@@ -28,3 +28,7 @@ export default async function registerUser(userData) {
 
   return await newUser.save();
 }
+
+export async function getUserByEmail(email) {
+  return await User.findOne({ correoElectronico: email });
+}

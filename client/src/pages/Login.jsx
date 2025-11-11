@@ -37,7 +37,25 @@ export default function Login() {
       return;
     }
 
-    setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
+    try {
+      const API_BASE = import.meta.env.VITE_API_BASE;
+      const response = await fetch(`${API_BASE}/api/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      console.log("Login exitoso, token:", data.token);
+      setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
+    } catch (error) {
+      setErrors([error.message]);
+      setStatus(STATUS_CLASSNAMES_ENUM.ERROR);
+    }
   }
 
   function displaySuccess() {
