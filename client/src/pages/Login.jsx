@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -50,8 +52,12 @@ export default function Login() {
         throw new Error(data.message);
       }
 
-      console.log("Login exitoso, token:", data.token);
+      localStorage.setItem("authToken", data.token);
       setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (error) {
       setErrors([error.message]);
       setStatus(STATUS_CLASSNAMES_ENUM.ERROR);
