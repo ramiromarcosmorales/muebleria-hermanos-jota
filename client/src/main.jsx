@@ -10,6 +10,7 @@ import ProductForm from "./pages/ProductForm";
 import NotFound from "./pages/NotFound";
 import "./styles/global.css";
 import Registration from "./pages/Registration";
+import Login from "./pages/Login";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,7 @@ const router = createBrowserRouter([
       { path: "admin/crear-producto", element: <ProductForm /> },
       { path: "admin/editar-producto/:id", element: <ProductForm /> },
       { path: "registro", element: <Registration /> },
+      { path: "login", element: <Login /> },
       { path: "*", element: <NotFound /> },
     ],
   },
