@@ -28,13 +28,11 @@ export default function Login() {
     setForm((f) => ({ ...f, [name]: value }));
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (!form.email || !isValidEmail(form.email) || !form.password) {
-      setErrors([
-        "Las credenciales ingresadas no son correctas. Por favor, intente de nuevo.",
-      ]);
+      setErrors(["Las credenciales ingresadas no son correctas."]);
       setStatus(STATUS_CLASSNAMES_ENUM.ERROR);
       return;
     }
@@ -49,7 +47,7 @@ export default function Login() {
   function displayErrors() {
     return (
       <>
-        <p>No se pudo enviar el formulario por los siguientes errores:</p>
+        <p>No se pudo iniciar sesión por los siguientes errores:</p>
         <ul>
           {errors.map((e, i) => (
             <li key={i}>{e}</li>
