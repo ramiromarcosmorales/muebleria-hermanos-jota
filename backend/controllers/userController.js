@@ -1,9 +1,11 @@
-import registerUser from "../service/authenticationService.js";
-import { getUserByEmail } from "../service/authenticationService.js";
+import {
+  registerUser,
+  getUserByEmail,
+} from "../service/authenticationService.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export default async function register(request, response) {
+export async function register(request, response) {
   try {
     const user = await registerUser(request.body);
     response.status(201).json({
