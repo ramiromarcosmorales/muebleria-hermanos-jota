@@ -16,9 +16,61 @@ export const ordersRouter = express.Router();
  *     tags: [Órdenes]
  *     security:
  *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - items
+ *               - direccionEnvio
+ *               - datosContacto
+ *             properties:
+ *               items:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     productoId:
+ *                       type: string
+ *                     nombre:
+ *                       type: string
+ *                     precio:
+ *                       type: number
+ *                     cantidad:
+ *                       type: number
+ *                     imagenUrl:
+ *                       type: string
+ *               direccionEnvio:
+ *                 type: object
+ *                 properties:
+ *                   calle:
+ *                     type: string
+ *                   numero:
+ *                     type: string
+ *                   ciudad:
+ *                     type: string
+ *                   codigoPostal:
+ *                     type: string
+ *                   provincia:
+ *                     type: string
+ *               datosContacto:
+ *                 type: object
+ *                 properties:
+ *                   nombre:
+ *                     type: string
+ *                   telefono:
+ *                     type: string
+ *                   email:
+ *                     type: string
  *     responses:
  *       201:
  *         description: Orden creada exitosamente
+ *       400:
+ *         description: Error de validación
+ *       500:
+ *         description: Error interno del servidor
  */
 ordersRouter.post("/", verifyToken, createOrder);
 
@@ -33,6 +85,16 @@ ordersRouter.post("/", verifyToken, createOrder);
  *     responses:
  *       200:
  *         description: Lista de órdenes del usuario
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       401:
+ *         description: No autenticado
+ *       500:
+ *         description: Error interno del servidor
  */
 ordersRouter.get("/usuario", verifyToken, getOrdersByUser);
 
@@ -54,7 +116,15 @@ ordersRouter.get("/usuario", verifyToken, getOrdersByUser);
  *     responses:
  *       200:
  *         description: Orden encontrada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       403:
+ *         description: No tienes permiso para ver esta orden
  *       404:
  *         description: Orden no encontrada
+ *       500:
+ *         description: Error interno del servidor
  */
 ordersRouter.get("/:id", verifyToken, getOrderById);
