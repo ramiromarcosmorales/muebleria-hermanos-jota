@@ -2,7 +2,7 @@ import { User } from "../models/Users.js";
 import { validateUser } from "../utils/validateUser.js";
 import bcrypt from "bcrypt";
 
-export default async function registerUser(userData) {
+export async function registerUser(userData) {
   const errors = validateUser(userData);
   if (errors.length > 0) {
     const error = new Error("Error de validación");
@@ -27,4 +27,8 @@ export default async function registerUser(userData) {
   const newUser = new User(userData);
 
   return await newUser.save();
+}
+
+export async function getUserByEmail(email) {
+  return await User.findOne({ correoElectronico: email });
 }
