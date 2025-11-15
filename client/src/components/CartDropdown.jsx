@@ -1,7 +1,11 @@
 import { formatPrice } from "../utils/format-price";
 import { useCartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 const CartDropdown = () => {
+  const navigate = useNavigate();
+  const { currentUser } = useAuthContext();
   const {
     cart,
     removeFromCart,
@@ -13,6 +17,15 @@ const CartDropdown = () => {
     (sum, item) => sum + item.precio * item.quantity,
     0
   );
+
+  const handleCheckout = (e) => {
+    e.stopPropagation();
+    if (!currentUser) {
+      navigate("/login", { state: { from: "/checkout" } });
+    } else {
+      navigate("/checkout");
+    }
+  };
 
   return (
     <div className="cart-dropdown" onClick={(e) => e.stopPropagation()}>
@@ -89,26 +102,42 @@ const CartDropdown = () => {
 
       {cart.length > 0 && (
         <div className="cart-total">
+          <div className="cart-total-top">
+            <button
+              className="btn-clean-cart"
+              onClick={(e) => {
+                e.stopPropagation();
+                clearCart();
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  clearCart();
+                }
+              }}
+              aria-label="Vaciar carrito"
+            >
+              Vaciar Carrito
+            </button>
+            <p>
+              Total: <span>{formatPrice(total)}</span>
+            </p>
+          </div>
           <button
-            className="btn-clean-cart"
-            onClick={(e) => {
-              e.stopPropagation();
-              clearCart();
-            }}
+            className="btn-checkout"
+            onClick={handleCheckout}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 e.preventDefault();
                 e.stopPropagation();
-                clearCart();
+                handleCheckout(e);
               }
             }}
-            aria-label="Vaciar carrito"
+            aria-label="Finalizar compra"
           >
-            Vaciar Carrito
+            Finalizar Compra
           </button>
-          <p>
-            Total: <span>{formatPrice(total)}</span>
-          </p>
         </div>
       )}
     </div>

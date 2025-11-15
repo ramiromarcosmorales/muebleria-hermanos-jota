@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFound";
 import "./styles/global.css";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
+import Checkout from "./pages/Checkout";
+import Confirmation from "./pages/Confirmation";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
       { path: "admin/editar-producto/:id", element: <ProductForm /> },
       { path: "registro", element: <Registration /> },
       { path: "login", element: <Login /> },
+      { path: "checkout", element: <Checkout /> },
+      { path: "confirmacion/:id", element: <Confirmation /> },
       { path: "*", element: <NotFound /> },
     ],
   },
