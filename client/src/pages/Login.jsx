@@ -88,43 +88,52 @@ export default function Login() {
   }
 
   return (
-    <section>
-      <header>
-        <h1>Iniciar sesión</h1>
-      </header>
+    <section className="auth">
+      <div className="auth-container">
+        <header className="auth-header">
+          <h1>Iniciar sesión</h1>
+          <p>
+            Ingresa tus credenciales para acceder a tu cuenta y disfrutar de
+            nuestros productos exclusivos.
+          </p>
+        </header>
 
-      <form noValidate onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="correoUsuario">Correo electrónico</label>
-          <input
-            type="email"
-            id="correoUsuario"
-            name="email"
-            placeholder="correode@ejemplo.com"
-            value={form.email}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="passwordUsuario">Contraseña</label>
-          <input
-            type="password"
-            id="passwordUsuario"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
+        <form noValidate onSubmit={handleSubmit} className="auth-form">
+          <div className="auth-field">
+            <label htmlFor="correoUsuario">Correo electrónico</label>
+            <input
+              type="email"
+              id="correoUsuario"
+              name="email"
+              placeholder="correode@ejemplo.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="auth-field">
+            <label htmlFor="passwordUsuario">Contraseña</label>
+            <input
+              type="password"
+              id="passwordUsuario"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className={status}>
-          {status === STATUS_CLASSNAMES_ENUM.ERROR && displayErrors()}
-          {status === STATUS_CLASSNAMES_ENUM.SUCCESS && displaySuccess()}
-        </div>
+          <div className={status} role="status" aria-live="polite">
+            {status === STATUS_CLASSNAMES_ENUM.ERROR && displayErrors()}
+            {status === STATUS_CLASSNAMES_ENUM.SUCCESS && displaySuccess()}
+          </div>
 
-        <button type="submit">Iniciar sesión</button>
-      </form>
+          <button type="submit" className="auth-button">
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
     </section>
   );
 }
