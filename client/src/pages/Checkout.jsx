@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../context/CartContext";
-import { useAuthContext } from "../context/AuthContext";
 import { createOrder } from "../services/orderService";
 import { formatPrice } from "../utils/format-price";
 
@@ -11,8 +10,7 @@ const EMAIL_REGEX =
 
 const Checkout = () => {
   const navigate = useNavigate();
-  const { cart, clearCart } = useCartContext();
-  const { currentUser } = useAuthContext();
+  const { cart } = useCartContext();
 
   const [form, setForm] = useState({
     nombre: "",
@@ -30,18 +28,12 @@ const Checkout = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    // Si no hay usuario logueado, redirigir a login
-    if (!currentUser) {
-      navigate("/login", { state: { from: "/checkout" } });
-      return;
-    }
-
     // Si el carrito está vacío, redirigir al catálogo
     if (cart.length === 0) {
       navigate("/productos");
       return;
     }
-  }, [currentUser, cart, navigate]);
+  }, [cart, navigate]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -144,11 +136,7 @@ const Checkout = () => {
     0
   );
 
-  // Solo redirigir si no hay usuario o carrito vacío, pero no si estamos procesando una orden
-  if (!currentUser) {
-    return null; // Se está redirigiendo al login
-  }
-
+  // Solo redirigir si el carrito está vacío, pero no si estamos procesando una orden
   if (cart.length === 0 && !isSubmitting) {
     return null; // Se está redirigiendo al catálogo
   }

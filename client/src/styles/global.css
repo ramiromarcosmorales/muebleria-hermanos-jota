@@ -2050,7 +2050,7 @@ input:checked + .slider:before {
 }
 
 .btn-checkout {
-  background: var(--color-secundario);
+  background: var(--color-primario);
   border: none;
   border-radius: 8px;
   padding: 0.7rem 1.2rem;
@@ -2059,13 +2059,16 @@ input:checked + .slider:before {
   cursor: pointer;
   width: 100%;
   margin-top: 0.5rem;
-  transition: background 0.3s ease;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
   font-family: var(--fuente-cta);
   font-size: var(--tamaño-cta);
 }
 
 .btn-checkout:hover {
-  background: var(--color-primario);
+  background: var(--color-acento);
+  transform: translateY(-1px);
 }
 
 /* === CONFIRMACIÓN === */

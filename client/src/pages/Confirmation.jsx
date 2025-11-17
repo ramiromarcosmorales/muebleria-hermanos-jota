@@ -1,14 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getOrderById } from "../services/orderService";
 import { formatPrice } from "../utils/format-price";
-import { useAuthContext } from "../context/AuthContext";
 import { useCartContext } from "../context/CartContext";
 
 const Confirmation = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const { currentUser } = useAuthContext();
   const { clearCart } = useCartContext();
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -16,12 +13,6 @@ const Confirmation = () => {
   const cartClearedRef = useRef(false);
 
   useEffect(() => {
-    // Si no hay usuario logueado, redirigir a login
-    if (!currentUser) {
-      navigate("/login");
-      return;
-    }
-
     const fetchOrder = async () => {
       try {
         const orderData = await getOrderById(id);
@@ -51,7 +42,7 @@ const Confirmation = () => {
       setError("ID de orden no válido.");
       setLoading(false);
     }
-  }, [id, currentUser, navigate, clearCart]);
+  }, [id, clearCart]);
 
   if (loading) {
     return (
