@@ -90,13 +90,13 @@ export default function Login() {
   return (
     <section className="auth">
       <div className="auth-container">
-        <header className="auth-header">
+        <div className="auth-header">
           <h1>Iniciar sesión</h1>
           <p>
             Ingresa tus credenciales para acceder a tu cuenta y disfrutar de
             nuestros productos exclusivos.
           </p>
-        </header>
+        </div>
 
         <form noValidate onSubmit={handleSubmit} className="auth-form">
           <div className="auth-field">
