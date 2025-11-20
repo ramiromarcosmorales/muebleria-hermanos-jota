@@ -111,13 +111,13 @@ export default function Registration() {
   return (
     <section className="auth">
       <div className="auth-container">
-        <header className="auth-header">
+        <div className="auth-header">
           <h1>Registro</h1>
           <p>
             Crea tu cuenta para acceder a ofertas exclusivas y gestionar tus
             pedidos de manera sencilla.
           </p>
-        </header>
+        </div>
 
         <form noValidate onSubmit={handleSubmit} className="auth-form">
           <div className="auth-field">
@@ -157,11 +157,7 @@ export default function Registration() {
             />
           </div>
 
-          <div
-            className={status}
-            role="status"
-            aria-live="polite"
-          >
+          <div className={status} role="status" aria-live="polite">
             {status === STATUS_CLASSNAMES_ENUM.ERROR && displayErrors()}
             {status === STATUS_CLASSNAMES_ENUM.SUCCESS && displaySuccess()}
           </div>

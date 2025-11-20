@@ -144,10 +144,10 @@ const Checkout = () => {
   return (
     <section className="checkout">
       <div className="checkout-container">
-        <header className="checkout-header">
+        <div className="checkout-header">
           <h1>Finalizar Compra</h1>
           <p>Completa tus datos para finalizar tu pedido</p>
-        </header>
+        </div>
 
         <div className="checkout-content">
           <div className="checkout-form-container">
