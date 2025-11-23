@@ -67,6 +67,7 @@ const Navbar = () => {
   useEffect(() => {
     setMenuOpen(false);
     setUserMenuOpen(false);
+    setCartOpen(false);
   }, [location]);
 
   const cartCount = cart.reduce((acc, i) => acc + i.quantity, 0);

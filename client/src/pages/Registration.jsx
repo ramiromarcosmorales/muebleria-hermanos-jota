@@ -1,9 +1,10 @@
 import { useState } from "react";
 import registerUser from "../services/userService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export default function Registration() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -65,7 +66,6 @@ export default function Registration() {
     }
 
     try {
-      // Preparar los datos para enviar
       const userData = {
         nombreDeUsuario: form.username,
         correoElectronico: form.email,
@@ -76,9 +76,13 @@ export default function Registration() {
 
       setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
 
+      const from = location.state?.from || "/";
       setTimeout(() => {
-        navigate("/");
-      }, 2000);
+        navigate("/login", {
+          state: { email: form.email, from },
+          replace: true,
+        });
+      }, 800);
     } catch (error) {
       console.error("Error al crear el usuario:", error);
       setErrors([error.message || "Error al crear el usuario."]);
@@ -100,7 +104,7 @@ export default function Registration() {
   }
 
   function displaySuccess() {
-    return <p>Formulario enviado exitosamente.</p>;
+    return <p>Formulario enviado exitosamente. Redirigiendo al login...</p>;
   }
 
   function handleChange(event) {
@@ -165,6 +169,20 @@ export default function Registration() {
           <button type="submit" className="auth-button">
             Finalizar registro
           </button>
+
+          {/* FOOTER: link a login */}
+          <div className="auth-footer">
+            <p>
+              ¿Ya tenés cuenta?{" "}
+              <Link
+                to="/login"
+                state={{ from: location.state?.from || "/", email: form.email }}
+                className="link-inline"
+              >
+                Ingresar
+              </Link>
+            </p>
+          </div>
         </form>
       </div>
     </section>

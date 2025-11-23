@@ -2252,6 +2252,24 @@ input:checked + .slider:before {
   }
 }
 
+.auth-footer {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--color-texto);
+}
+
+.auth-footer .link-inline {
+  color: var(--color-primario);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.auth-footer .link-inline:hover,
+.auth-footer .link-inline:focus {
+  text-decoration: underline;
+}
+
 /* === CHECKOUT === */
 .checkout {
   min-height: 100vh;
