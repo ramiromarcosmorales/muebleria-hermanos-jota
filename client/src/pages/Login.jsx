@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useAuthContext } from "../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuthContext();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -52,11 +55,14 @@ export default function Login() {
         throw new Error(data.message);
       }
 
-      localStorage.setItem("authToken", data.token);
+      // Usar el método login del contexto para actualizar el estado
+      login(data.token);
       setStatus(STATUS_CLASSNAMES_ENUM.SUCCESS);
 
+      // Redirigir a la página de origen o al home
+      const from = location.state?.from || "/";
       setTimeout(() => {
-        navigate("/");
+        navigate(from, { replace: true });
       }, 2000);
     } catch (error) {
       setErrors([error.message]);
@@ -82,43 +88,52 @@ export default function Login() {
   }
 
   return (
-    <section>
-      <header>
-        <h1>Iniciar sesión</h1>
-      </header>
-
-      <form noValidate onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="correoUsuario">Correo electrónico</label>
-          <input
-            type="email"
-            id="correoUsuario"
-            name="email"
-            placeholder="correode@ejemplo.com"
-            value={form.email}
-            onChange={handleChange}
-            required
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="passwordUsuario">Contraseña</label>
-          <input
-            type="password"
-            id="passwordUsuario"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          ></input>
+    <section className="auth">
+      <div className="auth-container">
+        <div className="auth-header">
+          <h1>Iniciar sesión</h1>
+          <p>
+            Ingresa tus credenciales para acceder a tu cuenta y disfrutar de
+            nuestros productos exclusivos.
+          </p>
         </div>
 
-        <div className={status}>
-          {status === STATUS_CLASSNAMES_ENUM.ERROR && displayErrors()}
-          {status === STATUS_CLASSNAMES_ENUM.SUCCESS && displaySuccess()}
-        </div>
+        <form noValidate onSubmit={handleSubmit} className="auth-form">
+          <div className="auth-field">
+            <label htmlFor="correoUsuario">Correo electrónico</label>
+            <input
+              type="email"
+              id="correoUsuario"
+              name="email"
+              placeholder="correode@ejemplo.com"
+              value={form.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="auth-field">
+            <label htmlFor="passwordUsuario">Contraseña</label>
+            <input
+              type="password"
+              id="passwordUsuario"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              value={form.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <button type="submit">Iniciar sesión</button>
-      </form>
+          <div className={status} role="status" aria-live="polite">
+            {status === STATUS_CLASSNAMES_ENUM.ERROR && displayErrors()}
+            {status === STATUS_CLASSNAMES_ENUM.SUCCESS && displaySuccess()}
+          </div>
+
+          <button type="submit" className="auth-button">
+            Iniciar sesión
+          </button>
+        </form>
+      </div>
     </section>
   );
 }

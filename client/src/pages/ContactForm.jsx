@@ -74,13 +74,13 @@ const ContactForm = () => {
   return (
     <section className="contact">
       <div className="contact-container">
-        <header className="contact-header">
+        <div className="contact-header">
           <h1>Ponte en contacto con nosotros</h1>
           <p>
             ¡Estaremos encantados de ayudarte! Rellena el siguiente formulario y
             nos pondremos en contacto contigo lo antes posible.
           </p>
-        </header>
+        </div>
 
         <form
           id="contact-form"

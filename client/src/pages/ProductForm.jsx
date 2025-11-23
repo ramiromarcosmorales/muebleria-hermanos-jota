@@ -367,14 +367,14 @@ function ProductForm() {
   return (
     <section className="create-product">
       <div className="create-product-container">
-        <header className="create-product-header">
+        <div className="create-product-header">
           <h1>{isEditMode ? "Editar Producto" : "Crear Producto"}</h1>
           <p>
             {isEditMode
               ? "Modifica los campos y pulsa guardar cambios. Si deseas cambiar la imagen, selecciona un nuevo archivo."
               : "Rellena el formulario y pulsa enviar para añadir un producto."}
           </p>
-        </header>
+        </div>
 
         <form
           className="create-product-form"

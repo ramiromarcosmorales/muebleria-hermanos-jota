@@ -57,6 +57,9 @@ app.use("/api/status", statusRouter);
 import { authenticationRouter } from "./routes/authentication.js";
 app.use("/api/auth", authenticationRouter);
 
+import { ordersRouter } from "./routes/orders.js";
+app.use("/api/ordenes", ordersRouter);
+
 //404 handler
 app.use(notFound);
 
