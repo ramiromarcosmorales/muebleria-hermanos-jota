@@ -13,7 +13,9 @@ import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Checkout from "./pages/Checkout";
 import Confirmation from "./pages/Confirmation";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/RouteProtection/ProtectedRoute";
+import AuthRoute from "./components/RouteProtection/AuthRoute";
+import AdminRoute from "./components/RouteProtection/AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -24,10 +26,38 @@ const router = createBrowserRouter([
       { path: "productos", element: <Catalog /> },
       { path: "contacto", element: <ContactForm /> },
       { path: "producto/:id", element: <ProductDetail /> },
-      { path: "admin/crear-producto", element: <ProductForm /> },
-      { path: "admin/editar-producto/:id", element: <ProductForm /> },
-      { path: "registro", element: <Registration /> },
-      { path: "login", element: <Login /> },
+      {
+        path: "admin/crear-producto",
+        element: (
+          <AdminRoute>
+            <ProductForm />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin/editar-producto/:id",
+        element: (
+          <AdminRoute>
+            <ProductForm />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "registro",
+        element: (
+          <AuthRoute>
+            <Registration />
+          </AuthRoute>
+        ),
+      },
+      {
+        path: "login",
+        element: (
+          <AuthRoute>
+            <Login />
+          </AuthRoute>
+        ),
+      },
       {
         path: "checkout",
         element: (

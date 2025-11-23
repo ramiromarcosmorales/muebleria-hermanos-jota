@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
       const decodedUser = validateToken(token);
       if (decodedUser) {
         setCurrentUser(decodedUser);
-        console.log(decodedUser);
       } else {
         localStorage.removeItem("authToken");
         setCurrentUser(null);
