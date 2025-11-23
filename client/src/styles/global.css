@@ -353,6 +353,242 @@ video {
   }
 }
 
+/* --- ESTILOS BASE (Desktop First) --- */
+
+/* Contenedor de Auth */
+.auth-guest {
+  display: flex;
+  align-items: center;
+}
+
+/* Versión Desktop: Visible por defecto */
+.desktop-auth {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Versión Mobile: Oculta por defecto */
+.mobile-auth-icon {
+  display: none;
+  font-size: 1.2rem;
+  color: #333;
+  padding: 0.3rem;
+  margin-left: 0.2rem;
+  transition: color 0.2s;
+}
+
+.mobile-auth-icon:hover {
+  color: var(--color-primario, #000);
+}
+
+/* --- MEDIA QUERY (Mobile / Tablet < 1100px) --- */
+@media (max-width: 1100px) {
+  .desktop-auth {
+    display: none;
+  }
+
+  .mobile-auth-icon {
+    display: block;
+  }
+
+  .username-text,
+  .user-trigger .fa-chevron-down {
+    display: none;
+  }
+
+  .user-trigger {
+    padding: 0;
+    background: none !important;
+  }
+
+  .nav-actions {
+    gap: 0.8rem;
+  }
+}
+
+.btn-text {
+  color: #555;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.btn-text:hover {
+  background-color: #f5f5f5;
+  color: #111;
+}
+
+.btn-primary {
+  background-color: var(--color-primario, #333);
+  color: #fff !important;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* --- USER MENU (Logueado) --- */
+.user-menu-container {
+  position: relative;
+}
+
+.user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 20px; /* Pill shape */
+  transition: background 0.2s;
+}
+.user-trigger:hover {
+  background-color: #f0f0f0;
+}
+
+/* Círculo con inicial */
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-primario, #333);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.username-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-trigger i {
+  font-size: 0.7rem;
+  color: #777;
+  transition: transform 0.2s;
+}
+.user-trigger i.rotate {
+  transform: rotate(180deg);
+}
+
+/* --- DROPDOWN MENU --- */
+.user-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border: 1px solid #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 200px;
+  z-index: 210;
+  overflow: hidden;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-header {
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+.u-name {
+  margin: 0;
+  font-weight: 700;
+  color: #333;
+}
+.u-role {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.user-dropdown hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+.dropdown-list {
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0;
+}
+
+.dropdown-list li a,
+.dropdown-list li button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s;
+}
+.dropdown-list li a:hover,
+.dropdown-list li button:hover {
+  background-color: #f0f0f0;
+  color: var(--color-primario, #000);
+}
+
+.logout-btn {
+  color: #d32f2f !important; /* Color rojo para peligro/salir */
+}
+.logout-btn:hover {
+  background-color: #fff1f1 !important;
+}
+
+/* --- RESPONSIVE (Mobile) --- */
+@media (max-width: 768px) {
+  /* En móvil ocultamos el nombre, solo dejamos el avatar */
+  .username-text,
+  .user-trigger i.fa-chevron-down {
+    display: none;
+  }
+
+  .btn-text {
+    display: none; /* En móvil muy chico quizás ocultar "Ingresar" y dejar solo icon o CTA */
+  }
+  /* Opcional: Hacer el botón de registro más compacto */
+  .btn-primary {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
 /* Hero */
 .hero {
   display: flex;
@@ -1446,6 +1682,16 @@ input:checked + .slider:before {
 
 .cart-actions button:hover {
   background: var(--color-primario);
+}
+
+@media (max-width: 600px) {
+  .cart-dropdown {
+    width: 90vw;
+    right: 5px;
+    left: auto;
+    max-width: 360px;
+    padding: 0.8rem;
+  }
 }
 
 /* Detalle del Producto */

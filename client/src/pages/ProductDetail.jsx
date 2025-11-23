@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById, deleteProduct } from "../services/productService";
 import { useCartContext } from "../context/CartContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ const ProductDetail = () => {
   const [product, setProducto] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { currentUser } = useAuthContext();
 
   const { addToCart } = useCartContext();
 
@@ -112,15 +114,19 @@ const ProductDetail = () => {
             >
               Añadir al carrito
             </button>
-            <button className="btn-cart btn-delete" onClick={handleDelete}>
-              Eliminar
-            </button>
-            <button
-              className="btn-cart btn-delete"
-              onClick={() => navigate(`/admin/editar-producto/${id}`)}
-            >
-              Editar
-            </button>
+            {currentUser?.isAdmin && (
+              <>
+                <button className="btn-cart btn-delete" onClick={handleDelete}>
+                  Eliminar
+                </button>
+                <button
+                  className="btn-cart btn-delete"
+                  onClick={() => navigate(`/admin/editar-producto/${id}`)}
+                >
+                  Editar
+                </button>
+              </>
+            )}
           </div>
         </div>
       </section>
