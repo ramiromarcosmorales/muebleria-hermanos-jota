@@ -19,7 +19,7 @@ const AuthRoute = ({ children }) => {
     );
   }
 
-  if (!currentUser.isAdmin) {
+  if (!currentUser || !currentUser.isAdmin) {
     return <Navigate to="/" replace />;
   }
 
