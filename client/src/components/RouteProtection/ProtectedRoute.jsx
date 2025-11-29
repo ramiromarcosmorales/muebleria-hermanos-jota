@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 
 const ProtectedRoute = ({ children, requireCart = false }) => {
   const { currentUser, isLoading } = useAuthContext();

@@ -14,7 +14,9 @@ import { swaggerSpec } from "./swagger.js";
 
 // Conexión con MongoDB usando Mongoose
 import { connectToDB } from "./config/db.js";
-connectToDB();
+if (process.env.NODE_ENV !== "test") {
+  connectToDB();
+}
 
 // Inicialización de la app de Express
 export const app = express();
@@ -65,3 +67,14 @@ app.use(notFound);
 
 //Error handler
 app.use(errorHandler);
+
+const PORT = process.env.PORT || 3001;
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Servidor local en http://localhost:${PORT}`);
+  });
+}
+
+export default function handler(req, res) {
+  return app(req, res);
+}

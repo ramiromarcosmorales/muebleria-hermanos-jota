@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Función para verificar si el token es válido y no está expirado
   const validateToken = (token) => {
@@ -52,6 +54,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem("authToken");
     setCurrentUser(null);
+    navigate("/");
   };
 
   const value = { currentUser, login, logout, isLoading };

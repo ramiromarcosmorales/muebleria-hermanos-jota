@@ -49,9 +49,23 @@ El proyecto está dividido en dos directorios principales:
    - `npm run dev`: Inicializa el proyecto en modo desarrollo.
    - `npm run start`: Inicializa el proyecto en modo producción.
 
+## 🗄️ Base de Datos - MongoDB Atlas
+
+El proyecto utiliza **MongoDB Atlas** como servicio de base de datos en la nube.  
+Para que el backend pueda conectarse correctamente, es necesario contar con una **URI de conexión** y configurarla en el archivo `.env`.
+
+### 🔧 Configuración de la conexión
+
+1. Dentro de la carpeta `backend`, ir al archivo `.env`
+2. En ese archivo, agregar la variable `MONGODB_URI` con el valor proporcionado por el equipo del proyecto:
+
+   ```env
+   MONGODB_URI=mongodb+srv://muebleria-jota:<PASSWORD>@cluster0.xxx.mongodb.net/muebleriaDB?retryWrites=true&w=majority
+   ```
+
 ### 🌐 Backend desplegado
 
-API pública: [https://muebleria-hermanos-jota.onrender.com/api/docs/](https://muebleria-hermanos-jota.onrender.com/api/docs/)
+API pública: [https://muebleria-hermanos-jota-backend.vercel.app/api/docs/](https://muebleria-hermanos-jota-backend.vercel.app/api/docs/)
 
 ## ⚛️ Como levantar el Frontend - Vite + React
 
