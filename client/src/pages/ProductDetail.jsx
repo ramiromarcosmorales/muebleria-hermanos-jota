@@ -8,6 +8,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { useProductsContext } from "../context/ProductsContext";
 
 const ProductDetail = () => {
+const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProducto] = useState(null);
