@@ -5,12 +5,15 @@ import {
   updateProduct,
 } from "../services/productService";
 import { useNavigate, useParams } from "react-router-dom";
+import { useProductsContext } from "../context/ProductsContext";
 
 function ProductForm() {
   const navigate = useNavigate();
 
   const { id } = useParams();
   const isEditMode = Boolean(id);
+
+  const { refetch } = useProductsContext();
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -321,6 +324,7 @@ function ProductForm() {
         });
 
         setTimeout(() => {
+          refetch();
           navigate(`/productos`);
         }, 2000);
       } else {
@@ -331,6 +335,7 @@ function ProductForm() {
         });
 
         setTimeout(() => {
+          refetch();
           navigate("/productos");
         }, 2000);
       }
