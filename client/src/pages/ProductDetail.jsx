@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getProductById, deleteProduct } from "../services/productService";
 import { useCartContext } from "../context/CartContext";
 import { useAuthContext } from "../context/AuthContext";
+import { useProductsContext } from "../context/ProductsContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { currentUser } = useAuthContext();
+  const { refetch } = useProductsContext();
 
   const { addToCart } = useCartContext();
 
@@ -54,6 +56,7 @@ const ProductDetail = () => {
       try {
         await deleteProduct(id);
         alert("Producto Eliminado");
+        refetch();
         navigate("/productos");
       } catch (error) {
         console.error("Error al eliminar producto:", error);

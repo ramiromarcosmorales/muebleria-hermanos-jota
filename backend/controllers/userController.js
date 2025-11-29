@@ -1,6 +1,7 @@
 import {
   registerUser,
   getUserByEmail,
+  getUserById,
 } from "../service/authenticationService.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -54,9 +55,31 @@ export async function login(request, response) {
         id: user._id,
         username: user.nombreDeUsuario,
         email: user.correoElectronico,
+        isAdmin: user.esAdmin,
       },
     });
   } catch (error) {
+    response.status(500).json({ message: "Error interno del servidor" });
+  }
+}
+
+export async function verifySession(request, response) {
+  try {
+    // request.user.id viene del middleware verifyToken
+    const user = await getUserById(request.user.id);
+
+    if (!user) {
+      return response.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    response.status(200).json({
+      id: user._id,
+      username: user.nombreDeUsuario,
+      email: user.correoElectronico,
+      isAdmin: user.esAdmin,
+    });
+  } catch (error) {
+    console.error("Error verificando sesión:", error);
     response.status(500).json({ message: "Error interno del servidor" });
   }
 }

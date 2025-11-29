@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { verifyTokenBackend } from "../services/userService";
 
 const AuthContext = createContext(null);
 
@@ -27,17 +28,30 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    if (token) {
-      const decodedUser = validateToken(token);
-      if (decodedUser) {
-        setCurrentUser(decodedUser);
-      } else {
-        localStorage.removeItem("authToken");
-        setCurrentUser(null);
+    async function checkSession() {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+        const decodedUser = validateToken(token);
+
+        if (decodedUser) {
+          try {
+            // Verificación contra el backend para evitar sesiones zombie
+            const verifiedUser = await verifyTokenBackend(token);
+            setCurrentUser(verifiedUser);
+          } catch (error) {
+            console.warn("Sesión inválida en backend, cerrando sesión local.");
+            localStorage.removeItem("authToken");
+            setCurrentUser(null);
+          }
+        } else {
+          localStorage.removeItem("authToken");
+          setCurrentUser(null);
+        }
       }
+      setIsLoading(false);
     }
-    setIsLoading(false);
+
+    checkSession();
   }, []);
 
   const login = (token) => {

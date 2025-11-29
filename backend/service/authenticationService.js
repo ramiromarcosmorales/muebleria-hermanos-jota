@@ -32,3 +32,7 @@ export async function registerUser(userData) {
 export async function getUserByEmail(email) {
   return await User.findOne({ correoElectronico: email });
 }
+
+export async function getUserById(id) {
+  return await User.findById(id).select("-passwordUsuario");
+}
