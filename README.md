@@ -40,10 +40,11 @@ El repositorio sigue una estrategia de monorepo:
    npm install
    ```
 3. Configurar variables de entorno:
-   Renombrar `.env.example` a `.env` y configurar `MONGO_URI` y `JWT_SECRET`.
+   Renombrar `.env.example` a `.env` y configurar `MONGO_URI`, `JWT_SECRET` y `PORT`.
    ```env
    MONGO_URI=mongodb+srv://...
    JWT_SECRET=mi_clave_secreta
+   PORT=3000
    ```
 4. Iniciar servidor:
    ```sh
@@ -60,7 +61,12 @@ El repositorio sigue una estrategia de monorepo:
    ```sh
    npm install
    ```
-3. Iniciar cliente:
+3. Configurar variables de entorno:
+   Renombrar `.env.example` a `.env` y configurar `VITE_API_BASE` apuntando al backend (local o desplegado).
+   ```env
+   VITE_API_BASE=http://localhost:3000
+   ```
+4. Iniciar cliente:
    ```sh
    npm run dev
    ```
@@ -71,9 +77,10 @@ El proyecto utiliza **MongoDB Atlas**.
 
 - **Imágenes:** Las imágenes de los productos se almacenan directamente en la base de datos como datos binarios (Buffer) y se sirven a través de la API (`/api/productos/:id/imagen`). No se requiere almacenamiento externo ni rutas de archivos estáticos para los productos.
 
-### 🌐 Backend desplegado
+### 🌐 Despliegue
 
-API pública: [https://muebleria-hermanos-jota-backend.vercel.app/api/docs/](https://muebleria-hermanos-jota-backend.vercel.app/api/docs/)
+- **Frontend desplegado:** [https://muebleria-hermanos-jota.vercel.app/](https://muebleria-hermanos-jota.vercel.app/)
+- **Backend desplegado (API Docs):** [https://muebleria-hermanos-jota-backend.vercel.app/api/docs/](https://muebleria-hermanos-jota-backend.vercel.app/api/docs/)
 
 ## 🧪 Testing
 
