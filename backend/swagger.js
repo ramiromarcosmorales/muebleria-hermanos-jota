@@ -19,10 +19,22 @@ const options = {
         description: "Producción",
       },
     ],
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+          description: "Ingresa el token JWT obtenido al hacer login",
+        },
+      },
+    },
   },
   apis: [
     path.join(__dirname, "routes", "products.js"),
     path.join(__dirname, "routes", "status.js"),
+    path.join(__dirname, "routes", "orders.js"),
+    path.join(__dirname, "routes", "authentication.js"),
   ],
 };
 

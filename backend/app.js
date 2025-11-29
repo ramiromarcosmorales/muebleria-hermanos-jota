@@ -13,15 +13,9 @@ import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./swagger.js";
 
 // Conexión con MongoDB usando Mongoose
-import mongoose from "mongoose";
-
-const MONGO_URI = process.env.MONGO_URI;
-
-if (process.env.NODE_ENV !== "test" && MONGO_URI) {
-  mongoose
-    .connect(MONGO_URI)
-    .then(() => console.log("¡Conexión exitosa a MongoDB!"))
-    .catch((err) => console.error("Error al conectar a MongoDB:", err));
+import { connectToDB } from "./config/db.js";
+if (process.env.NODE_ENV !== "test") {
+  connectToDB();
 }
 
 // Inicialización de la app de Express
@@ -31,7 +25,7 @@ export const app = express();
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
-    methods: "GET",
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 app.use(express.json()); // Permite recibir JSON en las peticiones
@@ -62,6 +56,12 @@ app.use("/api/productos", productsRouter);
 import { statusRouter } from "./routes/status.js";
 app.use("/api/status", statusRouter);
 
+import { authenticationRouter } from "./routes/authentication.js";
+app.use("/api/auth", authenticationRouter);
+
+import { ordersRouter } from "./routes/orders.js";
+app.use("/api/ordenes", ordersRouter);
+
 //404 handler
 app.use(notFound);
 
@@ -69,7 +69,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
-if (!process.env.VERCEL) {
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`Servidor local en http://localhost:${PORT}`);
   });

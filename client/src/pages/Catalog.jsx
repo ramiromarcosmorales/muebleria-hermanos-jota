@@ -32,7 +32,7 @@ const Catalog = () => {
         {!loading &&
           !error &&
           productos.map((producto) => (
-            <ProductCard key={producto.id} product={producto} />
+            <ProductCard key={producto._id} product={producto} />
           ))}
       </section>
     </section>

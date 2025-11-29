@@ -58,7 +58,7 @@ const Home = () => {
             {destacados.length > 0 ? (
               destacados.map((producto) => (
                 <ProductCard
-                  key={producto.id}
+                  key={producto._id}
                   product={producto}
                   variant="home"
                 />

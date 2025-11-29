@@ -8,6 +8,8 @@ const normalizeText = (text) =>
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase();
 
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 const SearchBox = ({ productos }) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -108,7 +110,7 @@ const SearchBox = ({ productos }) => {
                 tabIndex={-1}
               >
                 <img
-                  src={p.imagenUrl}
+                  src={`${API_BASE}/api/productos/${p._id}/imagen`}
                   alt={p.nombre}
                   className="search-result-img"
                 />
