@@ -2,170 +2,99 @@
 
 ## 📌 Descripción
 
-Proyecto académico de desarrollo de un sitio de e-commerce para la Mueblería Hermanos Jota, con el objetivo de crear una vidriera digital y simular la experiencia de compra online. Durante los primeros sprints se construye la fachada y la interactividad básica del cliente utilizando **HTML, CSS y JavaScript**.
+Proyecto académico de desarrollo de un sitio de e-commerce para la Mueblería Hermanos Jota, con el objetivo de crear una vidriera digital y simular la experiencia de compra online. El sistema permite la gestión de usuarios, productos, carrito de compras y órdenes.
 
 ## 👥 Integrantes
 
 - Ramiro Marcos Morales ([@ramiromarcosmorales](https://github.com/ramiromarcosmorales))
 - Fernando David Medvedovsky ([@fmedvedovsky](https://github.com/fmedvedovsky))
 - Sebastian Pallero Oria ([@Sebaspallero](https://github.com/Sebaspallero))
-- Lautaro Omar Portugau ([@PortugauLau](https://github.com/PortugauLau))
-- Petersen Federico Olaf ([@OlafPetersen](https://github.com/OlafPetersen))
 
 ## 🛠️ Tecnologías utilizadas
 
-- **React.js** - Interfaz de usuario
-- **CSS3** - diseño responsivo
-- **JavaScript** - lógica de interacción y manipulación del DOM
-- **Git & Github** - control de versión y colaboración
-- **Node.js** - entorno de ejecución de JavaScript del lado del servidor
-- **Express.js** - framework web
+- **React.js** - Biblioteca para la interfaz de usuario (Frontend)
+- **Node.js & Express.js** - Entorno y framework para el servidor (Backend)
+- **MongoDB & Mongoose** - Base de datos NoSQL y modelado de objetos
+- **JWT (JSON Web Tokens)** - Autenticación y manejo de sesiones seguras
+- **Jest & Supertest** - Testing unitario y de integración
+- **Swagger** - Documentación de API
+- **CSS3** - Diseño responsivo
 
 ## Estructura del Proyecto
 
-El repositorio del proyecto sigue una estrategia de monorepo, lo que significa que el código del frontend y del backend reside en el mismo lugar. Esta organización simplifica la colaboración y la gestión de dependencias entre ambas partes del proyecto.
+El repositorio sigue una estrategia de monorepo:
 
-El proyecto está dividido en dos directorios principales:
+- **backend/**: Código del servidor (API, Modelos, Controladores).
+- **client/**: Código del cliente (React, Vite, Context).
 
-- **backend/**: Contiene todo el código del lado del servidor.
+## 🚀 Guía de Inicio Rápido
 
-- **client/**: Contiene el código del lado del cliente.
+### 1. Backend (Servidor)
 
-### Como levantar el servidor
-
-1. Al hacer clone del repositorio, moverse a la carpeta backend:
+1. Moverse a la carpeta `backend`:
    ```sh
-      cd backend
+   cd backend
    ```
-2. Una vez en la carpeta backend, instalar las dependencias necesarias para el proyecto:
+2. Instalar dependencias:
    ```sh
-      npm i
+   npm install
    ```
-3. Instaladas las dependencias, hay que crear el archivo .env en la raíz de la carpeta backend, para ello renombrar el archivo de referencia .env.example con la guía de variables de entorno:
-   ```sh
-      mv .env.example .env
-   ```
-4. Existen dos comandos configurados en el package.json:
-   - `npm run dev`: Inicializa el proyecto en modo desarrollo.
-   - `npm run start`: Inicializa el proyecto en modo producción.
-
-## 🗄️ Base de Datos - MongoDB Atlas
-
-El proyecto utiliza **MongoDB Atlas** como servicio de base de datos en la nube.  
-Para que el backend pueda conectarse correctamente, es necesario contar con una **URI de conexión** y configurarla en el archivo `.env`.
-
-### 🔧 Configuración de la conexión
-
-1. Dentro de la carpeta `backend`, ir al archivo `.env`
-2. En ese archivo, agregar la variable `MONGODB_URI` con el valor proporcionado por el equipo del proyecto:
-
+3. Configurar variables de entorno:
+   Renombrar `.env.example` a `.env` y configurar `MONGO_URI` y `JWT_SECRET`.
    ```env
-   MONGODB_URI=mongodb+srv://muebleria-jota:<PASSWORD>@cluster0.xxx.mongodb.net/muebleriaDB?retryWrites=true&w=majority
+   MONGO_URI=mongodb+srv://...
+   JWT_SECRET=mi_clave_secreta
    ```
+4. Iniciar servidor:
+   ```sh
+   npm run dev
+   ```
+
+### 2. Frontend (Cliente)
+
+1. Moverse a la carpeta `client`:
+   ```sh
+   cd client
+   ```
+2. Instalar dependencias:
+   ```sh
+   npm install
+   ```
+3. Iniciar cliente:
+   ```sh
+   npm run dev
+   ```
+
+## 🗄️ Base de Datos y Almacenamiento
+
+El proyecto utiliza **MongoDB Atlas**.
+
+- **Imágenes:** Las imágenes de los productos se almacenan directamente en la base de datos como datos binarios (Buffer) y se sirven a través de la API (`/api/productos/:id/imagen`). No se requiere almacenamiento externo ni rutas de archivos estáticos para los productos.
 
 ### 🌐 Backend desplegado
 
 API pública: [https://muebleria-hermanos-jota-backend.vercel.app/api/docs/](https://muebleria-hermanos-jota-backend.vercel.app/api/docs/)
 
-## ⚛️ Como levantar el Frontend - Vite + React
+## 🧪 Testing
 
-Una vez hecho `git clone` del proyecto, moverse a la carpeta ./client y ejecutar el comando `npm install` para instalar las dependencias necesarias. Luego correr el comando `npm run dev` para levantar el proyecto.
+El backend cuenta con una suite de tests automatizados que cubren:
 
-**_Nota:_** Prettier y Eslint estan configurados para ejecutarse automaticamente al guardar el archivo, solo es necesario descargarse las extensiones desde el marketplace.
+- **Productos:** CRUD completo y validación de imágenes.
+- **Autenticación:** Registro, Login y persistencia de sesión.
+- **Órdenes:** Creación y consulta de pedidos.
 
-## Scripts disponibles
+Para correr los tests:
 
-Dentro de la carpeta `/client`:
-
-```bash
-npm install     # Instala las dependencias del proyecto
-npm run dev     # Ejecuta la app en modo desarrollo
-npm run build   # Genera build de producción
-npm run lint    # Corre ESLint
-npm run format  # Corre Prettier
+```sh
+cd backend
+npm test
 ```
 
-## Configuración de variables de entorno
+## 📦 Integración Continua (CI)
 
-El proyecto utiliza variables de entorno definidas en archivos `.env`.
+Utilizamos **GitHub Actions** para:
 
-### Variables principales
+1. Ejecutar tests del backend en cada push/PR.
+2. Verificar el build del frontend.
 
-- `VITE_API_BASE`: URL base del backend.
-
-  ```env
-  VITE_API_BASE=http://localhost:3001
-  ```
-
-## 📦 Integración Continua (CI) con GitHub Actions
-
-Este proyecto utiliza **GitHub Actions** para automatizar la ejecución de tests del backend y la construcción del frontend en cada push o pull request hacia las ramas principales. Esto permite garantizar que los cambios introducidos no rompan la aplicación antes de ser mergeados.
-
-### Flujo del pipeline
-
-- **Trigger del workflow:**
-
-  - Se ejecuta en **push** a cualquier rama.
-  - Se ejecuta en **pull requests** hacia `main` o `develop`.
-
-- **Jobs definidos:**
-
-  1. **Backend Tests**
-
-     - Directorio: `backend/`
-     - Node.js 20
-     - Instalación de dependencias con `npm ci`
-     - Ejecución de tests con `npm test` (Jest + Supertest)
-     - Caché de dependencias para acelerar ejecuciones futuras (`package-lock.json`)
-
-  2. **Frontend Build**
-     - Directorio: `client/`
-     - Node.js 20
-     - Instalación de dependencias con `npm ci`
-     - Build de producción con `npm run build`
-     - Caché de dependencias para acelerar ejecuciones futuras (`package-lock.json`)
-
-### Ejemplo del workflow (`.github/workflows/ci.yml`)
-
-```yaml
-name: CI
-
-on:
-  push:
-    branches: "**"
-  pull_request:
-    branches: [main, develop]
-
-jobs:
-  backend:
-    name: Backend Tests
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: backend
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-          cache-dependency-path: backend/package-lock.json
-      - run: npm ci
-      - run: npm test
-
-  frontend:
-    name: Frontend Build
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: client
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-          cache-dependency-path: client/package-lock.json
-      - run: npm ci
-      - run: npm run build
-```
+El flujo asegura que no se integren cambios que rompan la funcionalidad principal.
