@@ -1,60 +1,82 @@
-// Setup para tests - Mock de mongoose antes de que se importe app.js
 import mongoose from "mongoose";
 import { jest } from "@jest/globals";
 
-// Mock de los métodos de mongoose que se usan en el código
 const mockFind = jest.fn();
+const mockFindOne = jest.fn();
 const mockFindById = jest.fn();
 const mockFindByIdAndUpdate = jest.fn();
 const mockFindByIdAndDelete = jest.fn();
 const mockSave = jest.fn().mockResolvedValue(true);
 const mockConnect = jest.fn().mockResolvedValue(true);
 
-// Mock del modelo Product
-const mockProduct = function (data) {
-  const instance = {
+const createMockInstance = (data) => ({
+  ...data,
+  save: mockSave,
+  toObject: jest.fn(() => ({
     ...data,
-    save: mockSave,
-    toObject: jest.fn(() => ({
-      ...data,
-      _id: data._id || "507f1f77bcf86cd799439011",
-    })),
+    _id: data._id || "507f1f77bcf86cd799439011",
+  })),
+});
+
+const createQueryMock = (returnValue) => {
+  const query = {
+    populate: jest.fn().mockReturnThis(),
+    sort: jest.fn().mockReturnThis(),
+    select: jest.fn().mockReturnThis(),
+    limit: jest.fn().mockReturnThis(),
+    skip: jest.fn().mockReturnThis(),
+    exec: jest.fn().mockResolvedValue(returnValue),
+    then: (resolve, reject) =>
+      Promise.resolve(returnValue).then(resolve, reject),
+    catch: (reject) => Promise.resolve(returnValue).catch(reject),
   };
-  return instance;
+  return query;
 };
 
-// Asignar métodos estáticos al constructor mock
-// Estos métodos devuelven directamente las promesas mockeadas
+// Mock del modelo Product
+const mockProduct = function (data) {
+  return createMockInstance(data);
+};
 mockProduct.find = jest.fn();
 mockProduct.findById = jest.fn();
 mockProduct.findByIdAndUpdate = jest.fn();
 mockProduct.findByIdAndDelete = jest.fn();
 
-// Mock de mongoose.model - debe retornar el mismo constructor mock siempre
+// Mock del modelo User
+const mockUser = function (data) {
+  return createMockInstance(data);
+};
+mockUser.find = jest.fn();
+mockUser.findOne = jest.fn();
+mockUser.findById = jest.fn();
+mockUser.findByIdAndUpdate = jest.fn();
+
+// Mock del modelo Order
+const mockOrder = function (data) {
+  return createMockInstance(data);
+};
+mockOrder.find = jest.fn();
+mockOrder.findOne = jest.fn();
+mockOrder.findById = jest.fn();
+mockOrder.create = jest.fn();
+
+// Mock de mongoose.model
 const originalModel = mongoose.model;
 mongoose.model = jest.fn((name, schema) => {
-  // Si ya existe un mock para este modelo, devolverlo
-  if (name === "Product") {
-    return mockProduct;
-  }
-  // Para otros modelos, usar el comportamiento original
+  if (name === "Product") return mockProduct;
+  if (name === "User") return mockUser;
+  if (name === "Order") return mockOrder;
   return originalModel.call(mongoose, name, schema);
 });
 
 // Mock de mongoose.connect
 mongoose.connect = mockConnect;
 
-// Mock de mongoose.Types.ObjectId para crear ObjectIds válidos en tests
+// Mock de mongoose.Types.ObjectId
 mongoose.Types = {
   ObjectId: jest.fn((id) => {
-    if (!id) {
-      // Generar un ObjectId válido de 24 caracteres
-      return "507f1f77bcf86cd799439011";
-    }
-    // Validar que el id tenga 24 caracteres hexadecimales
-    if (typeof id === "string" && /^[0-9a-fA-F]{24}$/.test(id)) {
-      return id;
-    }
+    if (!id) return "507f1f77bcf86cd799439011";
+    if (typeof id === "string" && /^[0-9a-fA-F]{24}$/.test(id)) return id;
     throw new Error("Invalid ObjectId");
   }),
   isValidObjectId: jest.fn((id) => {
@@ -64,9 +86,13 @@ mongoose.Types = {
 
 export {
   mockFind,
+  mockFindOne,
   mockFindById,
   mockFindByIdAndUpdate,
   mockFindByIdAndDelete,
   mockSave,
   mockProduct,
+  mockUser,
+  mockOrder,
+  createQueryMock,
 };
