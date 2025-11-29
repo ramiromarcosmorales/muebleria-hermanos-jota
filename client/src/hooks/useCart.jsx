@@ -28,7 +28,8 @@ const useCart = () => {
         nombre: product.nombre,
         precio: product.precio,
         altValue: product.altValue || "Imagen del producto",
-        imagenUrl: `${API_BASE}/api/productos/${product._id}/imagen`,
+        imagenUrl:
+          product.srcImg || `${API_BASE}/api/productos/${product._id}/imagen`,
         quantity: 1,
       };
       return [...prev, cartItem];

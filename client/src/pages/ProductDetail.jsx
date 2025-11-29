@@ -93,7 +93,10 @@ const ProductDetail = () => {
         <div className="product-detail-container">
           <div className="product-image">
             <img
-              src={`${API_BASE}/api/productos/${product._id}/imagen`}
+              src={
+                product.srcImg ||
+                `${API_BASE}/api/productos/${product._id}/imagen`
+              }
               alt={product.altValue}
             />
           </div>

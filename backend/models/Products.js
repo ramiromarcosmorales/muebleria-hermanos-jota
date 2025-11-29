@@ -55,6 +55,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    srcImg: {
+      type: String,
+      required: false,
+    },
     imagen: {
       data: Buffer,
       contentType: String,

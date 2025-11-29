@@ -46,6 +46,7 @@ export const createProduct = async (req, res) => {
       origen,
       peso,
       color,
+      srcImg,
     } = req.body;
 
     const producto = {
@@ -62,6 +63,7 @@ export const createProduct = async (req, res) => {
       origen: origen,
       peso: peso,
       color: color,
+      srcImg: srcImg,
     };
 
     if (req.file) {

@@ -12,7 +12,9 @@ const ProductCard = ({ product, variant = "catalog" }) => {
     return (
       <div className="products-card">
         <img
-          src={`${API_BASE}/api/productos/${product._id}/imagen`}
+          src={
+            product.srcImg || `${API_BASE}/api/productos/${product._id}/imagen`
+          }
           alt={product.altValue}
         />
         <p>{product.nombre}</p>
@@ -33,7 +35,9 @@ const ProductCard = ({ product, variant = "catalog" }) => {
     <article>
       <h2>{product.nombre}</h2>
       <img
-        src={`${API_BASE}/api/productos/${product._id}/imagen`}
+        src={
+          product.srcImg || `${API_BASE}/api/productos/${product._id}/imagen`
+        }
         alt={product.altValue}
       />
       <p>Precio: {formatPrice(product.precio)}</p>

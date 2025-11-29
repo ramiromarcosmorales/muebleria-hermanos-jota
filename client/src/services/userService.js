@@ -11,3 +11,25 @@ export default async function registerUser(userData) {
     );
   }
 }
+
+export async function verifyTokenBackend(token) {
+  try {
+    const API_BASE = import.meta.env.VITE_API_BASE;
+    const response = await fetch(`${API_BASE}/api/auth/verify`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Token inválido o expirado");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error al verificar token:", error);
+    throw error;
+  }
+}
