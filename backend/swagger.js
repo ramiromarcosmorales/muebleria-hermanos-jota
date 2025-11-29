@@ -34,6 +34,7 @@ const options = {
     path.join(__dirname, "routes", "products.js"),
     path.join(__dirname, "routes", "status.js"),
     path.join(__dirname, "routes", "orders.js"),
+    path.join(__dirname, "routes", "authentication.js"),
   ],
 };
 

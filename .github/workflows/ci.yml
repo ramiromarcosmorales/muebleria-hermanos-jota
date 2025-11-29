@@ -30,8 +30,6 @@ jobs:
         run: npm ci
 
       - name: Ejecutar tests backend
-        env:
-          NODE_ENV: test
         run: npm test
 
   frontend:
