@@ -74,9 +74,7 @@ function ProductForm() {
         .then((product) => {
           setFormData({
             ...product,
-            currentImageUrl:
-              product.srcImg ||
-              `${import.meta.env.VITE_API_BASE}/api/productos/${product._id}/imagen`,
+            currentImageUrl: `${import.meta.env.VITE_API_BASE}/api/productos/${product._id}/imagen`,
             imagen: null,
           });
         })

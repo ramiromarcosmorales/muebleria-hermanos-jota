@@ -57,7 +57,7 @@ export function validateProduct(product, isUpdate = false) {
     errors.push("El precio debe ser un número mayor a 0.");
   }
 
-  if (!isUpdate && !product.imagen && !product.srcImg) {
+  if (!isUpdate && !product.imagen) {
     errors.push("El producto debe tener adjunta una imagen.");
   }
 
