@@ -324,6 +324,7 @@ function ProductForm() {
         });
 
         setTimeout(() => {
+          refetch();
           navigate(`/productos`);
         }, 2000);
       } else {
