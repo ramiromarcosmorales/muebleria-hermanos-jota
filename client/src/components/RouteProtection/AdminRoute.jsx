@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../../context/AuthContext";
 
-const AuthRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
   const { currentUser, isLoading } = useAuthContext();
 
   if (isLoading) {
@@ -26,4 +26,4 @@ const AuthRoute = ({ children }) => {
   return children;
 };
 
-export default AuthRoute;
+export default AdminRoute;

@@ -59,7 +59,7 @@ export async function putFormData(path, data) {
     body: data,
   });
   if (!res.ok) {
-    throw new Error(`Error en la request: ${res.status}}`);
+    throw new Error(`Error en la request: ${res.status}`);
   }
   return res.json();
 }
