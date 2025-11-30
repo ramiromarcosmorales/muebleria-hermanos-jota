@@ -4,17 +4,23 @@ import SearchBox from "./SearchBox";
 import CartDropdown from "./CartDropdown";
 import { useCartContext } from "../context/CartContext";
 import { useProductsContext } from "../context/ProductsContext";
+import { useAuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
   const headerRef = useRef(null);
   const menuRef = useRef(null);
   const cartRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   const { cart } = useCartContext();
   const { productos } = useProductsContext();
   const location = useLocation();
+
+  const { currentUser, logout } = useAuthContext();
 
   // Ajusta variable CSS --header-h
   useEffect(() => {
@@ -33,6 +39,7 @@ const Navbar = () => {
       if (e.key === "Escape") {
         setMenuOpen(false);
         setCartOpen(false);
+        setUserMenuOpen(false);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -48,6 +55,9 @@ const Navbar = () => {
       if (cartRef.current && !cartRef.current.contains(e.target)) {
         setCartOpen(false);
       }
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -56,6 +66,8 @@ const Navbar = () => {
   // Cierra menú automáticamente al cambiar de ruta
   useEffect(() => {
     setMenuOpen(false);
+    setUserMenuOpen(false);
+    setCartOpen(false);
   }, [location]);
 
   const cartCount = cart.reduce((acc, i) => acc + i.quantity, 0);
@@ -129,6 +141,73 @@ const Navbar = () => {
             </div>
 
             {cartOpen && <CartDropdown cart={cart} />}
+          </div>
+          <div className="nav-auth">
+            {!currentUser ? (
+              <div className="auth-guest">
+                {/* VERSION DESKTOP: Botones con texto */}
+                <div className="desktop-auth">
+                  <Link to="/login" className="btn-text">
+                    Ingresar
+                  </Link>
+                  <Link to="/registro" className="btn-primary">
+                    Registrarse
+                  </Link>
+                </div>
+
+                {/* VERSION MOBILE: Solo ícono de usuario */}
+                <Link
+                  to="/login"
+                  className="mobile-auth-icon"
+                  aria-label="Ingresar a mi cuenta"
+                >
+                  <i className="fa-regular fa-user"></i>
+                </Link>
+              </div>
+            ) : (
+              <div className="user-menu-container" ref={userMenuRef}>
+                <button
+                  className="user-trigger"
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                >
+                  <div className="avatar-circle">
+                    {currentUser.username.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="username-text">{currentUser.username}</span>
+                  <i
+                    className={`fa-solid fa-chevron-down ${userMenuOpen ? "rotate" : ""}`}
+                  ></i>
+                </button>
+
+                {/* Dropdown de Usuario */}
+                {userMenuOpen && (
+                  <div className="user-dropdown">
+                    <div className="dropdown-header">
+                      <p className="u-name">{currentUser?.username}</p>
+                      <p className="u-role">
+                        {currentUser?.isAdmin ? "Admin" : "Cliente"}
+                      </p>
+                    </div>
+                    <hr />
+                    <ul className="dropdown-list">
+                      {currentUser?.isAdmin && (
+                        <li>
+                          <Link to="/admin/crear-producto">
+                            <i className="fa-solid fa-gear"></i> Panel Admin
+                          </Link>
+                        </li>
+                      )}
+                      <li>
+                        <button onClick={logout} className="logout-btn">
+                          <i className="fa-solid fa-arrow-right-from-bracket"></i>{" "}
+                          Cerrar sesión
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </nav>

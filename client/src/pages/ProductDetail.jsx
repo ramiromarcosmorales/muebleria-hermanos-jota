@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductById, deleteProduct } from "../services/productService";
 import { useCartContext } from "../context/CartContext";
+import { useAuthContext } from "../context/AuthContext";
+import { useProductsContext } from "../context/ProductsContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -11,6 +13,9 @@ const ProductDetail = () => {
   const [product, setProducto] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { currentUser } = useAuthContext();
+  const { refetch } = useProductsContext();
+
   const { addToCart } = useCartContext();
 
   useEffect(() => {
@@ -30,6 +35,8 @@ const ProductDetail = () => {
     fetchProducto();
   }, [id]);
 
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
   const characteristicLabels = {
     dimensiones: "DIMENSIONES",
     capacidad: "CAPACIDAD",
@@ -37,7 +44,7 @@ const ProductDetail = () => {
     material: "MATERIAL",
     garantia: "GARANTÍA",
     origen: "ORIGEN",
-    peso: "PESO",
+    peso: "PESO (KG)",
     color: "COLOR",
   };
 
@@ -49,6 +56,7 @@ const ProductDetail = () => {
       try {
         await deleteProduct(id);
         alert("Producto Eliminado");
+        refetch();
         navigate("/productos");
       } catch (error) {
         console.error("Error al eliminar producto:", error);
@@ -87,7 +95,10 @@ const ProductDetail = () => {
       <section id="product-detail">
         <div className="product-detail-container">
           <div className="product-image">
-            <img src={product.imagenUrl} alt={product.altValue} />
+            <img
+              src={`${API_BASE}/api/productos/${product._id}/imagen`}
+              alt={product.altValue}
+            />
           </div>
           <div className="product-info">
             <h1 className="product-title">{product.nombre}</h1>
@@ -101,15 +112,24 @@ const ProductDetail = () => {
               data-id={product._id}
               data-name={product.nombre}
               data-price={product.precio}
-              data-image={product.imagenUrl}
               onClick={() => addToCart(product)}
               aria-label={`Añadir ${product?.nombre} al carrito`}
             >
               Añadir al carrito
             </button>
-            <button className="btn-cart btn-delete" onClick={handleDelete}>
-              Eliminar
-            </button>
+            {currentUser?.isAdmin && (
+              <>
+                <button className="btn-cart btn-delete" onClick={handleDelete}>
+                  Eliminar
+                </button>
+                <button
+                  className="btn-cart btn-delete"
+                  onClick={() => navigate(`/admin/editar-producto/${id}`)}
+                >
+                  Editar
+                </button>
+              </>
+            )}
           </div>
         </div>
       </section>

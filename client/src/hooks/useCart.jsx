@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
 const useCart = () => {
+  const API_BASE = import.meta.env.VITE_API_BASE;
+
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem("cart");
     return saved ? JSON.parse(saved) : [];
@@ -20,7 +22,16 @@ const useCart = () => {
             : item
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+
+      const cartItem = {
+        _id: product._id,
+        nombre: product.nombre,
+        precio: product.precio,
+        altValue: product.altValue || "Imagen del producto",
+        imagenUrl: `${API_BASE}/api/productos/${product._id}/imagen`,
+        quantity: 1,
+      };
+      return [...prev, cartItem];
     });
   };
 
