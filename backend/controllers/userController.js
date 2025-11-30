@@ -21,7 +21,7 @@ export async function register(request, response) {
         .status(400)
         .json({ message: error.message, errors: error.details });
     } else {
-      response.status.json({
+      response.status(500).json({
         error: "Error interno del servidor al crear el usuario",
       });
     }
